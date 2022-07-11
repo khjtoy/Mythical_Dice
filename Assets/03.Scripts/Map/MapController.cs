@@ -25,10 +25,15 @@ public class MapController : MonoBehaviour
 
 	private GameObject[][] map;
 
+	[SerializeField]
+	private float wait;
+
 	public bool isDual;
 	public bool XAxis;
 	public bool isDown;
 	public bool isLeft;
+
+	private Vector2 condition;
 
 	private void Awake()
 	{
@@ -70,31 +75,65 @@ public class MapController : MonoBehaviour
 		if (isDown && !isfirst)
 		{
 			y = height - 1;
+			condition = new Vector2(condition.x, 0);
 		}
+
+		if (!isDown && !isfirst)
+			condition = new Vector2(condition.x, height - 1);
+
 		if (isLeft && !isfirst)
 		{
 			x = width - 1;
+			condition = new Vector2(0, condition.y);
 		}
 
-		if (y < 0 || y >= height || x < 0 || x >= width && isDual)
+		if (!isLeft && !isfirst)
+			condition = new Vector2(width-1, condition.y);
+
+		if ((y < 0 || y >= height || x < 0 || x >= width) && isDual)
 		{
 			return;
 		}
 
 		if (!isDual)
 		{
-			y = x < 0 ? y + 1 : y;
-			x = x < 0 ? 0 : x;
-			x = y < 0 ? x + 1 : x;
-			y = y < 0 ? 0 : y;
+			if (isDown && y < 0)
+			{
+				y = 0;
+				x += 1;
+				isDown = false;
+			}
+			else
+			{
+				if (y >= height)
+				{
+					y = height - 1;
+					x += 1;
+					isDown = true;
+				}
+			}
 
-			y = x >= width ? y + 1 : y;
-			x = x >= width ? width - 1 : x;
-			x = y >= height ? x + 1 : x;
-			y = y >= height ? height - 1 : y;
+			if (isLeft && x < 0)
+			{
+				x = 0;
+				y += isDown ? -1 : 1;
+				isLeft = false;
+			}
+			else
+			{
+				if (x >= width)
+				{
+					x = width - 1;
+					y += isDown ? -1 : 1;
+					isLeft = true;
+				}
+			}
 		}
 
-		map[y][x].transform.GetChild(2).localRotation = Quaternion.Euler(0,0,0);
+		Debug.Log(x);
+		Debug.Log(y);
+
+		map[y][x].transform.GetChild(2).localRotation = Quaternion.Euler(0, 0, 0);
 		map[y][x].transform.GetChild(2).GetComponent<DiceDirecting>().isDiceDirecting = true;
 
 
@@ -104,12 +143,16 @@ public class MapController : MonoBehaviour
 
 	private IEnumerator WaitFloor(int x, int y, bool isfirst)
 	{
-		yield return new WaitForSeconds(1f);
+		yield return new WaitForSeconds(wait);
 
 		map[y][x].transform.GetChild(2).GetComponent<DiceDirecting>().DiceNumSelect();
 
+
 		if (!isDual)
 		{
+			if (x == condition.x && y == condition.y)
+				yield break;
+
 			if (XAxis)
 				x += isLeft == true ? -1 : 1;
 			else
