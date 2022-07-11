@@ -16,7 +16,8 @@ public class MapController : MonoSingleton<MapController>
 
     private Vector2 min;
 
-    private GameObject[][] map;
+    public GameObject[][] map;
+    public DiceDirecting[][] dices;
 	private int[][] mapCost;
 
     private GameManager gameManager;
@@ -40,6 +41,7 @@ public class MapController : MonoSingleton<MapController>
 
         min = new Vector2(GameManager.Instance.Size / 2, GameManager.Instance.Size / 2) * -1.5f;
         map = new GameObject[gameManager.Height][];
+        dices = new DiceDirecting[gameManager.Height][];
 		mapCost = new int[gameManager.Height][];
     }
     private void Start()
@@ -59,6 +61,7 @@ public class MapController : MonoSingleton<MapController>
         for (int y = 0; y < gameManager.Height; y++)
         {
             map[y] = new GameObject[gameManager.Width];
+            dices[y] = new DiceDirecting[gameManager.Width];
 			mapCost[y] = new int[gameManager.Width];
             for (int x = 0; x < gameManager.Width; x++)
             {
@@ -68,6 +71,7 @@ public class MapController : MonoSingleton<MapController>
                 map[y][x].transform.localPosition = new Vector3(min.x+ (1.5f * x), min.y + (1.5f * y), 0);
                 map[y][x].transform.localRotation = Quaternion.Euler(180, 0, 0);
                 map[y][x].transform.localScale = new Vector3(1, 1, 1);
+				dices[y][x] = map[y][x].transform.GetChild(2).GetComponent<DiceDirecting>();
             }
         }
 		FloorDirect();

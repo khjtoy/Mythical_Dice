@@ -39,4 +39,19 @@ public class DiceDirecting : MonoBehaviour
 			diceParticel[i].Play();
 		}
 	}
+
+	public void DiceNumSelect(int value)
+	{
+		randoms = value;
+		DiceObjet.transform.localRotation = Quaternion.Euler(DiceRotationVector[randoms - 1]);
+		isDiceDirecting = false;
+		for (int i = 0; i < diceParticel.Length; i++)
+		{
+			diceParticel[i].Clear();
+		}
+		for (int i = 0; i < diceParticel.Length; i++)
+		{
+			diceParticel[i].Play();
+		}
+	}
 }
