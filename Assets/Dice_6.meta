@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<< HEAD
 guid: fcc83c0fb0567344cb850c2b38e74189
+=======
+guid: 36bb42b17b31eec4987753c57a1481f2
+>>>>>>> origin/kdh
 folderAsset: yes
 DefaultImporter:
   externalObjects: {}
