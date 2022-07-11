@@ -44,13 +44,13 @@ public class PlayerController : Character
 
         Vector3 targetPos = Vector3.zero;
 
-        if (Input.GetKeyDown(KeyCode.D))
+        if (Input.GetKeyDown(KeyCode.RightArrow))
             targetPos = transform.localPosition + dir[0];
-        else if (Input.GetKeyDown(KeyCode.A))
+        else if (Input.GetKeyDown(KeyCode.LeftArrow))
             targetPos = transform.localPosition + dir[1];
-        else if (Input.GetKeyDown(KeyCode.W))
+        else if (Input.GetKeyDown(KeyCode.UpArrow))
             targetPos = transform.localPosition + dir[2];
-        else if (Input.GetKeyDown(KeyCode.S))
+        else if (Input.GetKeyDown(KeyCode.DownArrow))
             targetPos = transform.localPosition + dir[3];
 
         x = PosToArray(targetPos.x);

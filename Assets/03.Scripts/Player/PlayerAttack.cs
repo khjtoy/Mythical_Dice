@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static DefineCS;
 
 public class PlayerAttack : MonoBehaviour
 {
@@ -18,12 +19,14 @@ public class PlayerAttack : MonoBehaviour
         float add = Mathf.Abs(difX) + Mathf.Abs(difY);
 
         if (add == 1)
-            Debug.Log("АјАн");
+            AttackAction(enemy.transform);
     }
 
-    private void AttackAction()
+    private void AttackAction(Transform enemyPos)
     {
-
+        GameObject paritcle = PoolManager.Instance.GetPooledObject((int)PooledObject.AttackParticle);
+        paritcle.transform.localPosition = new Vector3(enemyPos.localPosition.x, enemyPos.localPosition.y + 0.5f, -2);
+        paritcle.SetActive(true);
     }
 
     private float PosToArray(float pos)
