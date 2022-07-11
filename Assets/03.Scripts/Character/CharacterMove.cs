@@ -12,6 +12,8 @@ public class CharacterMove : MonoBehaviour
 
     private Character character;
 
+    public bool IsMove { get; private set; }
+
     private void Start()
     {
         character = GetComponent<Character>();
@@ -21,6 +23,8 @@ public class CharacterMove : MonoBehaviour
 
     public void CharacterMovement(Vector2 target)
     {
+        IsMove = true;
+
         target.x -= transform.localPosition.x;
         target.y -= transform.localPosition.y;
 
@@ -48,5 +52,6 @@ public class CharacterMove : MonoBehaviour
 
         //Ä³¸¯ÅÍ ÁÂÇ¥ -> Å¸ÄÏ ÁÂÇ¥
         transform.localPosition = targetPos;
+        IsMove = false;
     }
 }

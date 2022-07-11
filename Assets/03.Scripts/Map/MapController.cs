@@ -9,27 +9,24 @@ public class MapController : MonoBehaviour
     [SerializeField]
     private Transform root;
 
-    [Header("크기 지정 변수")]
-    [SerializeField]
-    private int width;
-    [SerializeField]
-    private int height;
 
     [SerializeField]
     private float distance;
 
-    [SerializeField]
-    private int size;
 
     private Vector2 min;
 
     private GameObject[][] map;
 
+    private GameManager gameManager;
+
 
     private void Awake()
     {
-        min = new Vector2(size / 2, size / 2) * -1.5f;
-        map = new GameObject[height][];
+        gameManager = GameManager.Instance;
+
+        min = new Vector2(GameManager.Instance.Size / 2, GameManager.Instance.Size / 2) * -1.5f;
+        map = new GameObject[gameManager.Height][];
     }
     private void Start()
     {
@@ -39,10 +36,10 @@ public class MapController : MonoBehaviour
 
     private void SpawnMap()
     {
-        for (int y = 0; y < height; y++)
+        for (int y = 0; y < gameManager.Height; y++)
         {
-            map[y] = new GameObject[width];
-            for (int x = 0; x < width; x++)
+            map[y] = new GameObject[gameManager.Width];
+            for (int x = 0; x < gameManager.Width; x++)
             {
                 map[y][x] = Instantiate(dicePrefabs, new Vector3(0,0,0), Quaternion.identity);
                 map[y][x].transform.SetParent(root);
