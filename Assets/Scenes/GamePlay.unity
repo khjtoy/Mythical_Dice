@@ -344,6 +344,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 71d74fdb55dfeb349b4cf10512c8b41d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  attackDelay: 2
 --- !u!1 &580793701
 GameObject:
   m_ObjectHideFlags: 0
@@ -875,6 +876,7 @@ MonoBehaviour:
     type: 3}
   root: {fileID: 661690975}
   distance: 1.5
+  wait: 0
   isDual: 0
   XAxis: 0
   isDown: 0

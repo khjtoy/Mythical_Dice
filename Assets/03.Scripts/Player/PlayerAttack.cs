@@ -5,8 +5,16 @@ using static DefineCS;
 
 public class PlayerAttack : MonoBehaviour
 {
+    [SerializeField]
+    private float attackDelay;
+
+    private float timer;
     private void Update()
     {
+        if(timer > 0)
+        {
+            timer -= Time.deltaTime;
+        }
             // 1.상하좌우 체크(몬스터 1명이니 위치로 체크?)
             // 2.범위에 들면 밑에 값 가져오기
             // 3. 해당 값 만큼 데미지
@@ -14,23 +22,28 @@ public class PlayerAttack : MonoBehaviour
 
     public void CheckPos(GameObject enemy)
     {
-        float difX = PosToArray(enemy.transform.localPosition.x) - PosToArray(transform.localPosition.x);
-        float difY = PosToArray(enemy.transform.localPosition.y) - PosToArray(transform.localPosition.y);
+        int difX = MapController.PosToArray(enemy.transform.localPosition.x) - MapController.PosToArray(transform.localPosition.x);
+        int difY = MapController.PosToArray(enemy.transform.localPosition.y) - MapController.PosToArray(transform.localPosition.y);
         float add = Mathf.Abs(difX) + Mathf.Abs(difY);
 
         if (add == 1)
-            AttackAction(enemy.transform);
+        {
+            Debug.Log("공격");
+            AttackAction(enemy.transform, MapController.PosToArray(transform.localPosition.x), MapController.PosToArray(transform.localPosition.y));
+        }
     }
 
-    private void AttackAction(Transform enemyPos)
+    private void AttackAction(Transform enemyPos, int x, int y)
     {
+        if (timer > 0) return;
+
         GameObject paritcle = PoolManager.Instance.GetPooledObject((int)PooledObject.AttackParticle);
         paritcle.transform.localPosition = new Vector3(enemyPos.localPosition.x, enemyPos.localPosition.y + 0.5f, -2);
         paritcle.SetActive(true);
-    }
+        Debug.Log($"X:{x}Y:{y}");
+        int damage = MapController.Instance.GetIndexCost(x, y);
+        Debug.Log($"Damage {damage}");
 
-    private float PosToArray(float pos)
-    {
-        return (pos - (GameManager.Instance.Size / 2 * -1.5f)) / 1.5f;
+        timer = attackDelay;
     }
 }

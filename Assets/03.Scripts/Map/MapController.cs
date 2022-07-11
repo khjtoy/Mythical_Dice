@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MapController : MonoBehaviour
+public class MapController : MonoSingleton<MapController>
 {
     [SerializeField]
     private GameObject dicePrefabs;
@@ -17,6 +17,7 @@ public class MapController : MonoBehaviour
     private Vector2 min;
 
     private GameObject[][] map;
+	private int[][] mapCost;
 
     private GameManager gameManager;
 
@@ -29,26 +30,39 @@ public class MapController : MonoBehaviour
 	public bool isLeft;
 	private Vector2 condition;
 
+    protected override void Init()
+    {
+       //DONDESTORY
+    }
     private void Awake()
     {
         gameManager = GameManager.Instance;
 
         min = new Vector2(GameManager.Instance.Size / 2, GameManager.Instance.Size / 2) * -1.5f;
         map = new GameObject[gameManager.Height][];
+		mapCost = new int[gameManager.Height][];
     }
     private void Start()
     {
-        if(root.childCount == 2)
+		if (root.childCount == 2)
             SpawnMap();
     }
+
+	public int GetIndexCost(int x, int y)
+    {
+		return mapCost[y][x];
+    }
+
 
     private void SpawnMap()
     {
         for (int y = 0; y < gameManager.Height; y++)
         {
             map[y] = new GameObject[gameManager.Width];
+			mapCost[y] = new int[gameManager.Width];
             for (int x = 0; x < gameManager.Width; x++)
             {
+				mapCost[y][x] = 0;
                 map[y][x] = Instantiate(dicePrefabs, new Vector3(0,0,0), Quaternion.identity);
                 map[y][x].transform.SetParent(root);
                 map[y][x].transform.localPosition = new Vector3(min.x+ (1.5f * x), min.y + (1.5f * y), 0);
@@ -56,13 +70,16 @@ public class MapController : MonoBehaviour
                 map[y][x].transform.localScale = new Vector3(1, 1, 1);
             }
         }
-    }
+		FloorDirect();
+	}
 	private void Update()
 	{
+		/*
 		if (Input.GetMouseButtonDown(0))
 		{
 			FloorDirect();
 		}
+		*/
 	}
 
 	private void FloorDirect(int x = 0, int y = 0, bool isfirst = false)
@@ -139,6 +156,7 @@ public class MapController : MonoBehaviour
 		yield return new WaitForSeconds(wait);
 
 		map[y][x].transform.GetChild(2).GetComponent<DiceDirecting>().DiceNumSelect();
+		mapCost[y][x] = map[y][x].transform.GetChild(2).GetComponent<DiceDirecting>().randoms;
 
 		if (!isDual)
 		{
@@ -163,5 +181,10 @@ public class MapController : MonoBehaviour
 			else
 				FloorDirect(x, y + 1, isfirst);
 		}
+	}
+
+	public static int PosToArray(float pos)
+	{
+		return Mathf.RoundToInt((pos - (GameManager.Instance.Size / 2 * -1.5f)) / 1.5f);
 	}
 }
