@@ -396,10 +396,11 @@ MonoBehaviour:
   height: 5
   distance: 1
   size: 1
+  wait: 0.1
   isDual: 0
   XAxis: 1
-  isDown: 0
-  isLeft: 0
+  isDown: 1
+  isLeft: 1
 --- !u!4 &1753551610
 Transform:
   m_ObjectHideFlags: 0
