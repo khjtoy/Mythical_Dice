@@ -27,8 +27,8 @@ public class MapController : MonoBehaviour
 	public bool XAxis;
 	public bool isDown;
 	public bool isLeft;
+	private Vector2 condition;
 
-<<<<<<< HEAD
     private void Awake()
     {
         gameManager = GameManager.Instance;
@@ -57,21 +57,6 @@ public class MapController : MonoBehaviour
             }
         }
     }
-=======
-	private Vector2 condition;
-
-	private void Awake()
-	{
-		min = new Vector2(size / 2, size / 2) * -1.5f;
-		map = new GameObject[height][];
-	}
-	private void Start()
-	{
-		if (root.childCount == 1)
-			SpawnMap();
-	}
->>>>>>> origin/kdh
-
 	private void Update()
 	{
 		if (Input.GetMouseButtonDown(0))
@@ -84,51 +69,30 @@ public class MapController : MonoBehaviour
 	{
 		if (isDown && !isfirst)
 		{
-<<<<<<< HEAD
 			y = GameManager.Instance.Height - 1;
-=======
-			y = height - 1;
 			condition = new Vector2(condition.x, 0);
->>>>>>> origin/kdh
 		}
 
 		if (!isDown && !isfirst)
-			condition = new Vector2(condition.x, height - 1);
+			condition = new Vector2(condition.x, GameManager.Instance.Height - 1);
 
 		if (isLeft && !isfirst)
 		{
-<<<<<<< HEAD
 			x = GameManager.Instance.Width - 1;
-		}
-
-		if (y < 0 || y >= GameManager.Instance.Height || x < 0 || x >= GameManager.Instance.Width && isDual)
-=======
-			x = width - 1;
 			condition = new Vector2(0, condition.y);
 		}
 
 		if (!isLeft && !isfirst)
-			condition = new Vector2(width-1, condition.y);
+			condition = new Vector2(GameManager.Instance.Width-1, condition.y);
 
-		if ((y < 0 || y >= height || x < 0 || x >= width) && isDual)
->>>>>>> origin/kdh
+
+		if ((y < 0 || y >= GameManager.Instance.Height || x < 0 || x >= GameManager.Instance.Width) && isDual)
 		{
 			return;
 		}
 
 		if (!isDual)
 		{
-<<<<<<< HEAD
-			y = x < 0 ? y + 1 : y;
-			x = x < 0 ? 0 : x;
-			x = y < 0 ? x + 1 : x;
-			y = y < 0 ? 0 : y;
-
-			y = x >= GameManager.Instance.Width ? y + 1 : y;
-			x = x >= GameManager.Instance.Width ? GameManager.Instance.Width - 1 : x;
-			x = y >= GameManager.Instance.Height ? x + 1 : x;
-			y = y >= GameManager.Instance.Height ? GameManager.Instance.Height - 1 : y;
-=======
 			if (isDown && y < 0)
 			{
 				y = 0;
@@ -137,9 +101,9 @@ public class MapController : MonoBehaviour
 			}
 			else
 			{
-				if (y >= height)
+				if (y >= GameManager.Instance.Height)
 				{
-					y = height - 1;
+					y = GameManager.Instance.Height - 1;
 					x += 1;
 					isDown = true;
 				}
@@ -153,14 +117,13 @@ public class MapController : MonoBehaviour
 			}
 			else
 			{
-				if (x >= width)
+				if (x >= GameManager.Instance.Width)
 				{
-					x = width - 1;
+					x = GameManager.Instance.Width - 1;
 					y += isDown ? -1 : 1;
 					isLeft = true;
 				}
 			}
->>>>>>> origin/kdh
 		}
 
 		Debug.Log(x);
