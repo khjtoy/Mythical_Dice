@@ -9,6 +9,7 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody))]
 public class Character : MonoBehaviour
 {
+<<<<<<< HEAD
     [Header("½ºÅÈ")]
     private int maxCost;
     [SerializeField]
@@ -19,6 +20,8 @@ public class Character : MonoBehaviour
     private int moveCost;
     [SerializeField]
     private int attackCost;
+=======
+>>>>>>> origin/csh
     [Header("°øÅë ÄÄÆ÷³ÍÆ®")]
     private Rigidbody rigidbody = null;
 

@@ -20,10 +20,13 @@ public class MapController : MonoBehaviour
 
     private GameManager gameManager;
 
+<<<<<<< HEAD
 	public bool isDual;
 	public bool XAxis;
 	public bool isDown;
 	public bool isLeft;
+=======
+>>>>>>> origin/csh
 
     private void Awake()
     {
@@ -53,6 +56,7 @@ public class MapController : MonoBehaviour
             }
         }
     }
+<<<<<<< HEAD
 
 	private void Update()
 	{
@@ -126,4 +130,6 @@ public class MapController : MonoBehaviour
 				FloorDirect(x, y + 1, isfirst);
 		}
 	}
+=======
+>>>>>>> origin/csh
 }
