@@ -3,20 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
 
-public class BoomMap : MonoBehaviour
+public class BoomMap : MonoSingleton<BoomMap>
 {
 	[Header("몇초 후 부서짐")]
 	public float wait;
 
-	private int brokeNum;
-
-	private void Update()
-	{
-		if (Input.GetMouseButtonDown(0))
-		{
-			Boom();
-		}
-	}
+	public int brokeNum;
 
 	public void Boom()
 	{
@@ -38,7 +30,7 @@ public class BoomMap : MonoBehaviour
 									if (MapController.Instance.MAP[i][j].transform.GetChild(2).GetComponent<DiceDirecting>().thisNum == brokeNum)
 									{
 										MapController.Instance.MAP[i][j].transform.GetChild(2).GetComponent<DiceDirecting>().isDiceDirecting = true;
-										MapController.Instance.MAP[i][j].transform.GetChild(2).GetComponent<DiceDirecting>().BasicDiceNumSelect();
+										MapController.Instance.MAP[i][j].transform.GetChild(2).GetComponent<DiceDirecting>().StartCoroutine(MapController.Instance.MAP[i][j].transform.GetChild(2).GetComponent<DiceDirecting>().BasicDiceNumSelect());
 									}
 								}
 							}
