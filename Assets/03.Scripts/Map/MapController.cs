@@ -23,10 +23,13 @@ public class MapController : MonoBehaviour
 
     private Vector2 min;
 
+    private GameObject[][] map;
+
 
     private void Awake()
     {
         min = new Vector2(size / 2, size / 2) * -1.5f;
+        map = new GameObject[height][];
     }
     private void Start()
     {
@@ -38,13 +41,14 @@ public class MapController : MonoBehaviour
     {
         for (int y = 0; y < height; y++)
         {
+            map[y] = new GameObject[width];
             for (int x = 0; x < width; x++)
             {
-                GameObject dice = Instantiate(dicePrefabs, new Vector3(0,0,0), Quaternion.identity);
-                dice.transform.SetParent(root);
-                dice.transform.localPosition = new Vector3(min.x+ (1.5f * x), min.y + (1.5f * y), 0);
-                dice.transform.localRotation = Quaternion.Euler(180, 0, 0);
-                dice.transform.localScale = new Vector3(1, 1, 1);
+                map[y][x] = Instantiate(dicePrefabs, new Vector3(0,0,0), Quaternion.identity);
+                map[y][x].transform.SetParent(root);
+                map[y][x].transform.localPosition = new Vector3(min.x+ (1.5f * x), min.y + (1.5f * y), 0);
+                map[y][x].transform.localRotation = Quaternion.Euler(180, 0, 0);
+                map[y][x].transform.localScale = new Vector3(1, 1, 1);
             }
         }
     }
