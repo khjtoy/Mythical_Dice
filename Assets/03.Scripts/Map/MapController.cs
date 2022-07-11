@@ -30,7 +30,7 @@ public class MapController : MonoBehaviour
     }
     private void Start()
     {
-        if(root.childCount == 1)
+        if(root.childCount == 2)
             SpawnMap();
     }
 

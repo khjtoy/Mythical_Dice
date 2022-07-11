@@ -29,7 +29,6 @@ public class CharacterMove : MonoBehaviour
         target.y -= transform.localPosition.y;
 
         Vector3 targetPos = transform.localPosition + new Vector3(target.x, target.y, 0);
-        Debug.Log(target);
         StartCoroutine(DoMove(targetPos));
     }
 
@@ -38,7 +37,6 @@ public class CharacterMove : MonoBehaviour
         Vector3 newPos = Vector3.zero;
         float sqrRemainingDistance = (transform.localPosition - targetPos).sqrMagnitude;
 
-        Debug.Log($"{transform.localPosition.z} == {targetPos.z}");
         //극한(거의 0)보다 큰 동안
         while(sqrRemainingDistance > double.Epsilon)
         {
