@@ -14,7 +14,6 @@ public class DiceDirecting : MonoBehaviour
 	public bool isDiceDirecting = false;
 
 	public float speed = 5f;
-
 	void Update()
 	{
 		if (isDiceDirecting)
@@ -25,8 +24,8 @@ public class DiceDirecting : MonoBehaviour
 
 	public void DiceNumSelect()
 	{
-		int Randoms = Random.Range(1, 6);
-		DiceObjet.transform.localRotation = Quaternion.Euler(DiceRotationVector[Randoms]);
+		int Randoms = Random.Range(1, 7);
+		DiceObjet.transform.localRotation = Quaternion.Euler(DiceRotationVector[Randoms-1]);
 		isDiceDirecting = false;
 		for (int i = 0; i < diceParticel.Length; i++)
 		{
