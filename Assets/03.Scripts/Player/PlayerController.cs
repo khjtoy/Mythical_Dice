@@ -32,20 +32,18 @@ public class PlayerController : Character
     private void PlayerMovement()
     {
         Vector3 targetPos = Vector3.zero;
-        int h = (int)Input.GetAxisRaw("Horizontal");
-        int v = (int)Input.GetAxisRaw("Vertical");
 
-        if (h != 0 || v != 0)
+        if (Input.GetKeyDown(KeyCode.D))
+            targetPos = transform.localPosition + dir[0];
+        else if (Input.GetKeyDown(KeyCode.A))
+            targetPos = transform.localPosition + dir[1];
+        else if (Input.GetKeyDown(KeyCode.W))
+            targetPos = transform.localPosition + dir[2];
+        else if (Input.GetKeyDown(KeyCode.S))
+            targetPos = transform.localPosition + dir[3];
+
+        if (targetPos != Vector3.zero)
         {
-            if (h == 1)
-                targetPos = dir[0];
-            else if (h == -1)
-                targetPos = dir[1];
-            else if (v == 1)
-                targetPos = dir[2];
-            else if (v == -1)
-                targetPos = dir[3];
-
             characterMove.CharacterMovement(targetPos);
         }
     }

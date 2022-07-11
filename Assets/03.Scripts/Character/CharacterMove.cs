@@ -19,33 +19,34 @@ public class CharacterMove : MonoBehaviour
         inverseMoveTime = 1f / moveTime;
     }
 
-    public void CharacterMovement(Vector3 target)
+    public void CharacterMovement(Vector2 target)
     {
-        target.x -= character.Rigidbody.position.x;
-        target.y -= character.Rigidbody.position.y;
+        target.x -= transform.localPosition.x;
+        target.y -= transform.localPosition.y;
 
-        Vector3 targetPos = character.Rigidbody.transform.localPosition + new Vector3(target.x, target.y, 0);
-        Debug.Log(targetPos);
+        Vector3 targetPos = transform.localPosition + new Vector3(target.x, target.y, 0);
+        Debug.Log(target);
         StartCoroutine(DoMove(targetPos));
     }
 
     private IEnumerator DoMove(Vector3 targetPos)
     {
         Vector3 newPos = Vector3.zero;
-        float sqrRemainingDistance = (transform.position - targetPos).sqrMagnitude;
+        float sqrRemainingDistance = (transform.localPosition - targetPos).sqrMagnitude;
 
+        Debug.Log($"{transform.localPosition.z} == {targetPos.z}");
         //극한(거의 0)보다 큰 동안
         while(sqrRemainingDistance > double.Epsilon)
         {
-            newPos = Vector3.MoveTowards(character.Rigidbody.position, targetPos, inverseMoveTime * Time.deltaTime);
-            character.Rigidbody.MovePosition(newPos);
+            newPos = Vector3.MoveTowards(transform.localPosition, targetPos, inverseMoveTime * Time.deltaTime);
+            transform.localPosition = newPos;
 
             // 이동 후 남은 거리를 재계산
-            sqrRemainingDistance = (transform.position - targetPos).sqrMagnitude;
+            sqrRemainingDistance = (transform.localPosition - targetPos).sqrMagnitude;
             yield return null;
         }
 
         //캐릭터 좌표 -> 타켓 좌표
-        character.Rigidbody.MovePosition(targetPos);
+        transform.localPosition = targetPos;
     }
 }
