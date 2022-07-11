@@ -9,8 +9,8 @@ public class PlayerController : Character
     private PlayerAttack playerAttack;
     private Vector3[] dir = new Vector3[4];
 
-    private int x, y;
-    private int monsterX, monsterY;
+    private float x, y;
+    private float monsterX, monsterY;
 
     private GameObject enemyObject;
 
@@ -68,11 +68,11 @@ public class PlayerController : Character
 
         if (isCheck)
         {
-            x = (int)PosToArray(targetPos.x);
-            y = (int)PosToArray(targetPos.y);
+            x = Mathf.Ceil(PosToArray(targetPos.x));
+            y = Mathf.Ceil(PosToArray(targetPos.y));
             Debug.Log($"Player x:{x}, y:{y}");
-            monsterX = (int)PosToArray(enemyObject.transform.localPosition.x);
-            monsterY = (int)PosToArray(enemyObject.transform.localPosition.y);
+            monsterX = Mathf.Ceil(PosToArray(enemyObject.transform.localPosition.x));
+            monsterY = Mathf.Ceil(PosToArray(enemyObject.transform.localPosition.y));
             Debug.Log($"Monster x:{monsterX}, y:{monsterY}");
 
             if (x < 0 || x >= GameManager.Instance.Width || y < 0 || y >= GameManager.Instance.Height
