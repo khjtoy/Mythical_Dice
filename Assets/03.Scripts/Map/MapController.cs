@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MapController : MonoBehaviour
+public class MapController : MonoSingleton<MapController>
 {
     [SerializeField]
     private GameObject dicePrefabs;
@@ -17,6 +17,8 @@ public class MapController : MonoBehaviour
     private Vector2 min;
 
     private GameObject[][] map;
+
+	public GameObject[][] MAP { get => map; }
 
     private GameManager gameManager;
 
@@ -40,7 +42,9 @@ public class MapController : MonoBehaviour
     {
         if(root.childCount == 2)
             SpawnMap();
-    }
+
+		FloorDirect();
+	}
 
     private void SpawnMap()
     {
@@ -57,13 +61,6 @@ public class MapController : MonoBehaviour
             }
         }
     }
-	private void Update()
-	{
-		if (Input.GetMouseButtonDown(0))
-		{
-			FloorDirect();
-		}
-	}
 
 	private void FloorDirect(int x = 0, int y = 0, bool isfirst = false)
 	{
