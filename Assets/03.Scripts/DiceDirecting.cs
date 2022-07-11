@@ -21,24 +21,20 @@ public class DiceDirecting : MonoBehaviour
 		{
 			DiceObjet.transform.localRotation = Quaternion.Euler(DiceObjet.transform.localEulerAngles + new Vector3(0, 1, 1) * Time.deltaTime * speed);
 		}
+	}
 
-		if (Input.GetMouseButtonDown(0) && !isDiceDirecting)
+	public void DiceNumSelect()
+	{
+		int Randoms = Random.Range(1, 6);
+		DiceObjet.transform.localRotation = Quaternion.Euler(DiceRotationVector[Randoms]);
+		isDiceDirecting = false;
+		for (int i = 0; i < diceParticel.Length; i++)
 		{
-			isDiceDirecting = true;
+			diceParticel[i].Clear();
 		}
-		else if (Input.GetMouseButtonDown(0) && isDiceDirecting)
+		for (int i = 0; i < diceParticel.Length; i++)
 		{
-			int Randoms = Random.Range(1, 6);
-			DiceObjet.transform.localRotation = Quaternion.Euler(DiceRotationVector[Randoms]);
-			isDiceDirecting = false;
-			for (int i = 0; i < diceParticel.Length; i++)
-			{
-				diceParticel[i].Clear();
-			}
-			for (int i = 0; i < diceParticel.Length; i++)
-			{
-				diceParticel[i].Play();
-			}
+			diceParticel[i].Play();
 		}
 	}
 }
