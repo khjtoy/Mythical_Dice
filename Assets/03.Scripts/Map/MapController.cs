@@ -96,7 +96,7 @@ public class MapController : MonoBehaviour
 			if (isDown && y < 0)
 			{
 				y = 0;
-				x += 1;
+				x += isLeft ? -1 : 1;
 				isDown = false;
 			}
 			else
@@ -104,7 +104,7 @@ public class MapController : MonoBehaviour
 				if (y >= GameManager.Instance.Height)
 				{
 					y = GameManager.Instance.Height - 1;
-					x += 1;
+					x += isLeft ? -1 : 1;
 					isDown = true;
 				}
 			}
@@ -126,9 +126,6 @@ public class MapController : MonoBehaviour
 			}
 		}
 
-		Debug.Log(x);
-		Debug.Log(y);
-
 		map[y][x].transform.GetChild(2).localRotation = Quaternion.Euler(0, 0, 0);
 		map[y][x].transform.GetChild(2).GetComponent<DiceDirecting>().isDiceDirecting = true;
 
@@ -142,7 +139,6 @@ public class MapController : MonoBehaviour
 		yield return new WaitForSeconds(wait);
 
 		map[y][x].transform.GetChild(2).GetComponent<DiceDirecting>().DiceNumSelect();
-
 
 		if (!isDual)
 		{
