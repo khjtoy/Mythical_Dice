@@ -1,21 +1,19 @@
 fileFormatVersion: 2
-guid: a50bd9a009c8dfc4ebd88cc8101225a7
+guid: 24123b2fcdc15c943bed44e0c6beeec7
 labels:
 - Tween
 - Tweening
 - Animation
 - HOTween
 - Paths
+- VisualScripting
+- VisualEditor
 - iTween
-- DFTween
 - LeanTween
+- DFTween
 - Ease
 - Easing
 - Shake
 - Punch
-- 2DToolkit
-- TextMeshPro
-- Text
-folderAsset: yes
-DefaultImporter:
+TextScriptImporter:
   userData: 
