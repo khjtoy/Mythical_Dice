@@ -13,39 +13,27 @@ public class CharacterMove : MonoBehaviour
     private Character character;
 
     public bool IsMove { get; private set; }
-<<<<<<< HEAD
-=======
     public Vector2 PlayerPos = Vector2.zero;
->>>>>>> origin/csh
 
     private void Start()
     {
         character = GetComponent<Character>();
         // 역수 변환
         inverseMoveTime = 1f / moveTime;
-<<<<<<< HEAD
     }
 
-    public void CharacterMovement(Vector2 target)
-    {
-=======
-        PlayerPos = transform.localPosition;
-    }
 
     public virtual void CharacterMovement(Vector2 target)
     {
         if (IsMove) return;
->>>>>>> origin/csh
-        IsMove = true;
+            IsMove = true;
 
+        PlayerPos = transform.localPosition;
         target.x -= transform.localPosition.x;
         target.y -= transform.localPosition.y;
 
         Vector3 targetPos = transform.localPosition + new Vector3(target.x, target.y, 0);
-<<<<<<< HEAD
-=======
         Debug.Log(target);
->>>>>>> origin/csh
         StartCoroutine(DoMove(targetPos));
     }
 
@@ -54,10 +42,6 @@ public class CharacterMove : MonoBehaviour
         Vector3 newPos = Vector3.zero;
         float sqrRemainingDistance = (transform.localPosition - targetPos).sqrMagnitude;
 
-<<<<<<< HEAD
-=======
-        Debug.Log($"{transform.localPosition.z} == {targetPos.z}");
->>>>>>> origin/csh
         //극한(거의 0)보다 큰 동안
         while(sqrRemainingDistance > double.Epsilon)
         {
@@ -71,10 +55,7 @@ public class CharacterMove : MonoBehaviour
 
         //캐릭터 좌표 -> 타켓 좌표
         transform.localPosition = targetPos;
-<<<<<<< HEAD
-=======
         PlayerPos = transform.localPosition;
->>>>>>> origin/csh
         IsMove = false;
     }
 }

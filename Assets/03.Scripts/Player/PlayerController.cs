@@ -5,22 +5,14 @@ using UnityEngine;
 
 public class PlayerController : Character
 {
-<<<<<<< HEAD
     private CharacterMove characterMove;
     private PlayerAttack playerAttack;
     private Vector3[] dir = new Vector3[4];
 
-    private float x, y;
-    private float monsterX, monsterY;
+    private int x, y;
+    private int monsterX, monsterY;
 
     private GameObject enemyObject;
-=======
-
-    private CharacterMove characterMove;
-    private Vector3[] dir = new Vector3[4];
-
-    private float x, y;
->>>>>>> origin/csh
 
     private void Awake()
     {
@@ -33,19 +25,14 @@ public class PlayerController : Character
     protected override void Start()
     {
         base.Start();
-<<<<<<< HEAD
         enemyObject = GameObject.FindGameObjectWithTag("ENEMY");
         characterMove = GetComponent<CharacterMove>();
         playerAttack = GetComponent<PlayerAttack>();
-=======
-        characterMove = GetComponent<CharacterMove>();
->>>>>>> origin/csh
     }
 
     private void Update()
     {
         PlayerMovement();
-<<<<<<< HEAD
         PressAttack();
     }
 
@@ -56,52 +43,45 @@ public class PlayerController : Character
 
 
         Vector3 targetPos = Vector3.zero;
+        bool isCheck = false;
 
         if (Input.GetKeyDown(KeyCode.RightArrow))
-            targetPos = transform.localPosition + dir[0];
-        else if (Input.GetKeyDown(KeyCode.LeftArrow))
-            targetPos = transform.localPosition + dir[1];
-        else if (Input.GetKeyDown(KeyCode.UpArrow))
-            targetPos = transform.localPosition + dir[2];
-        else if (Input.GetKeyDown(KeyCode.DownArrow))
-            targetPos = transform.localPosition + dir[3];
-
-        x = PosToArray(targetPos.x);
-        y = PosToArray(targetPos.y);
-        monsterX = PosToArray(enemyObject.transform.localPosition.x);
-        monsterY = PosToArray(enemyObject.transform.localPosition.y);
-
-        if (x < 0 || x >= GameManager.Instance.Width || y < 0 || y >= GameManager.Instance.Height
-            || (x == monsterX && y == monsterY))
-=======
-    }
-
-    private void PlayerMovement()
-    {
-
-        Vector3 targetPos = Vector3.zero;
-
-        if (Input.GetKeyDown(KeyCode.D))
-            targetPos = transform.localPosition + dir[0];
-        else if (Input.GetKeyDown(KeyCode.A))
-            targetPos = transform.localPosition + dir[1];
-        else if (Input.GetKeyDown(KeyCode.W))
-            targetPos = transform.localPosition + dir[2];
-        else if (Input.GetKeyDown(KeyCode.S))
-            targetPos = transform.localPosition + dir[3];
-
-        x = (targetPos.x - (GameManager.Instance.Size / 2 * -1.5f)) / 1.5f;
-        y = (targetPos.y - (GameManager.Instance.Size / 2 * -1.5f)) / 1.5f;
-        if (x < 0 || x >= GameManager.Instance.Width || y < 0 || y >= GameManager.Instance.Height)
->>>>>>> origin/csh
-            return;
-
-        if (targetPos != Vector3.zero)
         {
+            targetPos = transform.localPosition + dir[0];
+            isCheck = true;
+        }
+        else if (Input.GetKeyDown(KeyCode.LeftArrow))
+        {
+            targetPos = transform.localPosition + dir[1];
+            isCheck = true;
+        }
+        else if (Input.GetKeyDown(KeyCode.UpArrow))
+        {
+            targetPos = transform.localPosition + dir[2];
+            isCheck = true;
+        }
+        else if (Input.GetKeyDown(KeyCode.DownArrow))
+        {
+            targetPos = transform.localPosition + dir[3];
+            isCheck = true;
+        }
+
+        if (isCheck)
+        {
+            x = (int)PosToArray(targetPos.x);
+            y = (int)PosToArray(targetPos.y);
+            Debug.Log($"Player x:{x}, y:{y}");
+            monsterX = (int)PosToArray(enemyObject.transform.localPosition.x);
+            monsterY = (int)PosToArray(enemyObject.transform.localPosition.y);
+            Debug.Log($"Monster x:{monsterX}, y:{monsterY}");
+
+            if (x < 0 || x >= GameManager.Instance.Width || y < 0 || y >= GameManager.Instance.Height
+                || (x == monsterX && y == monsterY))
+                return;
             characterMove.CharacterMovement(targetPos);
         }
     }
-<<<<<<< HEAD
+
 
     private float PosToArray(float pos)
     {
@@ -115,6 +95,4 @@ public class PlayerController : Character
             playerAttack.CheckPos(enemyObject);
         }
     }
-=======
->>>>>>> origin/csh
 }

@@ -9,19 +9,6 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody))]
 public class Character : MonoBehaviour
 {
-<<<<<<< HEAD
-    [Header("½ºÅÈ")]
-    private int maxCost;
-    [SerializeField]
-    private int currentCost;
-    [SerializeField]
-    private int fastCost;
-    [SerializeField]
-    private int moveCost;
-    [SerializeField]
-    private int attackCost;
-=======
->>>>>>> origin/csh
     [Header("°øÅë ÄÄÆ÷³ÍÆ®")]
     private Rigidbody rigidbody = null;
 

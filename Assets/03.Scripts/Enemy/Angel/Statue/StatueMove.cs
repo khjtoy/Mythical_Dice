@@ -15,6 +15,6 @@ public class StatueMove : CharacterMove
         seq.Append(transform.DOLocalMoveZ(-3, 0.3f));
         seq.Append(transform.DOLocalMove(new Vector3(target.x, target.y, -3), 0.3f));
         seq.Append(transform.DOLocalMoveZ(-1, 0.1f).SetEase(Ease.InExpo));
-        seq.Kill();
+        seq.AppendCallback(() => seq.Kill());
     }
 }
