@@ -23,7 +23,6 @@ public class DiceDirecting : MonoBehaviour
 
 	public int randoms;
 
->>>>>>> main
 	void Update()
 	{
 		if (isDiceDirecting)
