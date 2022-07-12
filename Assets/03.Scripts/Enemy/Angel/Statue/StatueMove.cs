@@ -67,21 +67,9 @@ public class StatueMove : CharacterMove, IEnemyAttack
                     }
                 }
                 BoomMap.Instance.Boom();
-                yield return new WaitForSeconds(0.7f);
-                for (int i = -1; i < 2; i++)
-                {
-                    for (int j = -1; j < 2; j++)
-                    {
-                        if (Pos.y + i < 0 || Pos.y + i >= GameManager.Instance.Height || Pos.x + j < 0 || Pos.x + j >= GameManager.Instance.Width)
-                            continue;
-                        if (i == 0 && j == 0)
-                            continue;
-                        MapController.Instance.dices[Pos.y + i][Pos.x + j].DiceNumSelect(Random.Range(1, 7));
-                    }
-                }
                 break;
             case 1:
-                for (int i = 1; i < GameManager.Instance.Size; i++)
+				for (int i = 1; i < GameManager.Instance.Size; i++)
                 {
                     if (Pos.y + i < GameManager.Instance.Height)
                     {
@@ -118,18 +106,6 @@ public class StatueMove : CharacterMove, IEnemyAttack
                 }
 
                 BoomMap.Instance.Boom();
-                yield return new WaitForSeconds(0.7f);
-                for (int i = 1; i < GameManager.Instance.Size; i++)
-                {
-                    if (Pos.y + i < GameManager.Instance.Height)
-                        MapController.Instance.dices[Pos.y + i][Pos.x].DiceNumSelect(Random.Range(1, 7));
-                    if (Pos.x + i < GameManager.Instance.Width)
-                        MapController.Instance.dices[Pos.y][Pos.x + i].DiceNumSelect(Random.Range(1, 7));
-                    if (Pos.y - i >= 0)
-                        MapController.Instance.dices[Pos.y - i][Pos.x].DiceNumSelect(Random.Range(1, 7));
-                    if (Pos.x - i >= 0)
-                        MapController.Instance.dices[Pos.y][Pos.x - i].DiceNumSelect(Random.Range(1, 7));
-                }
                 break;
         }
 

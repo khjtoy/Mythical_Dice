@@ -39,22 +39,22 @@ public class PlayerAttack : MonoBehaviour
             transform.localScale = new Vector3(1, 1, 1);
         else if (enemy.transform.localPosition.x < transform.localPosition.x)
             transform.localScale = new Vector3(-1, 1, 1);
-            AttackAction(enemy.transform, MapController.PosToArray(transform.localPosition.x), MapController.PosToArray(transform.localPosition.y));
+            AttackAction(enemy, MapController.PosToArray(transform.localPosition.x), MapController.PosToArray(transform.localPosition.y));
         //}
     }
 
-    private void AttackAction(Transform enemyPos, int x, int y)
+    private void AttackAction(GameObject enemyPos, int x, int y)
     {
         if (timer > 0) return;
 
-        int difX = MapController.PosToArray(enemyPos.localPosition.x) - MapController.PosToArray(transform.localPosition.x);
+        int difX = MapController.PosToArray(enemyPos.transform.localPosition.x) - MapController.PosToArray(transform.localPosition.x);
         int difY = MapController.PosToArray(enemyPos.transform.localPosition.y) - MapController.PosToArray(transform.localPosition.y);
         float add = Mathf.Abs(difX) + Mathf.Abs(difY);
         if (add == 1)
         {
             character.Animator.SetTrigger("Attack");
             GameObject paritcle = PoolManager.Instance.GetPooledObject((int)PooledObject.AttackParticle);
-            paritcle.transform.localPosition = new Vector3(enemyPos.localPosition.x, enemyPos.localPosition.y + 1f, -9);
+            paritcle.transform.localPosition = new Vector3(enemyPos.transform.localPosition.x, enemyPos.transform.localPosition.y + 1f, -9);
             paritcle.SetActive(true);
             Debug.Log($"X:{x}Y:{y}");
 

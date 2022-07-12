@@ -8,7 +8,6 @@ public class BoomMap : MonoSingleton<BoomMap>
 	[Header("몇초 후 부서짐")]
 	public float wait;
 
-
 	public void Boom()
 	{
 		int brokeNum = GameManager.Instance.BossNum;
@@ -16,25 +15,20 @@ public class BoomMap : MonoSingleton<BoomMap>
 		{
 			for (int j = 0; j < GameManager.Instance.Width; j++)
 			{
-				if (MapController.Instance.dices[j][i].randoms == brokeNum)
+				if (MapController.Instance.dices[i][j].randoms == brokeNum)
 				{
-					MeshRenderer renderer = MapController.Instance.dices[j][i].GetComponent<MeshRenderer>();
-					renderer.material.DOColor(Color.red, 0.5f).OnComplete(() =>
+					MeshRenderer renderer = MapController.Instance.dices[i][j].GetComponent<MeshRenderer>();
+					Sequence seq = DOTween.Sequence();
+					seq.Append(renderer.material.DOColor(Color.red, 0.4f));
+					seq.Append(renderer.material.DOColor(Color.white, 0.3f));
+					int n = i;
+					int m = j;
+					seq.AppendCallback(() =>
 					{
-						renderer.material.DOColor(Color.white, 0.5f).OnComplete(() =>
-						{
-							for (int i = 0; i < GameManager.Instance.Height; i++)
-							{
-								for (int j = 0; j < GameManager.Instance.Width; j++)
-								{
-									if (MapController.Instance.dices[j][i].thisNum == brokeNum)
-									{
-										MapController.Instance.dices[j][i].isDiceDirecting = true;
-										MapController.Instance.dices[j][i].StartCoroutine(MapController.Instance.dices[j][i].BasicDiceNumSelect());
-									}
-								}
-							}
-						});
+						MapController.Instance.dices[n][m].transform.rotation = Quaternion.Euler(0, 0, 0);
+						MapController.Instance.dices[n][m].isDiceDirecting = true;
+						StartCoroutine(MapController.Instance.dices[n][m].BasicDiceNumSelect());
+						seq.Kill();
 					});
 				}
 			}

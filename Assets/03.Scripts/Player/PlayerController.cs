@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerController : Character
+public class PlayerController : Character, OnHit
 {
     private CharacterMove characterMove;
     private PlayerAttack playerAttack;
@@ -13,6 +13,20 @@ public class PlayerController : Character
     private float monsterX, monsterY;
 
     private GameObject enemyObject;
+
+    [Header("플레이어 HP")]
+    [SerializeField]
+    private int hp;
+
+    public void OnHits(int damage)
+    {
+        hp -= damage;
+        Debug.Log(hp);
+        if(hp <= 0)
+		{
+            //종료씬으로
+		}
+    }
 
     private void Awake()
     {

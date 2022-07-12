@@ -25,4 +25,16 @@ public class Define
             return _player.PlayerPos;
         }
     }
+
+    private static PlayerController _controller = null;
+
+    public static PlayerController Controller
+	{
+		get
+		{
+            if (_controller == null)
+                _controller = GameObject.Find("Player").GetComponent<PlayerController>();
+            return _controller;
+        }
+	}
 }
