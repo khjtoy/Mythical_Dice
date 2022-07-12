@@ -72,8 +72,8 @@ public class StatueMove : CharacterMove, IEnemyAttack
                         MapController.Instance.dices[Pos.y - i][Pos.x].isDiceDirecting = true;
                     if(Pos.x - i >= 0)
                         MapController.Instance.dices[Pos.y][Pos.x - i].isDiceDirecting = true;
-                    yield return new WaitForSeconds(0.05f);
                 }
+                yield return new WaitForSeconds(0.1f);
                 for(int i = 1; i < GameManager.Instance.Size; i++)
                 {
                     if (Pos.y + i < GameManager.Instance.Height)
@@ -84,8 +84,6 @@ public class StatueMove : CharacterMove, IEnemyAttack
                     MapController.Instance.dices[Pos.y - i][Pos.x].DiceNumSelect(1);
                     if (Pos.x - i >= 0)
                     MapController.Instance.dices[Pos.y][Pos.x - i].DiceNumSelect(1);
-
-                    yield return new WaitForSeconds(0.05f);
                 }
 
                 break;
