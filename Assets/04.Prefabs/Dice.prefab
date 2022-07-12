@@ -42,6 +42,16 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 5522710586317525921, guid: 0d2b9188252a78b4298fb8e34d9229ee,
         type: 3}
+      propertyPath: smokeObj
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 5522710586317525921, guid: 0d2b9188252a78b4298fb8e34d9229ee,
+        type: 3}
+      propertyPath: diceParticel.Array.size
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5522710586317525921, guid: 0d2b9188252a78b4298fb8e34d9229ee,
+        type: 3}
       propertyPath: diceParticel.Array.data[0]
       value: 
       objectReference: {fileID: 5648776996297846900}
@@ -184,6 +194,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: CFX_Firework_Trails_Gravity
       objectReference: {fileID: 0}
+    - target: {fileID: 1247311384876784, guid: 4adffb0018aeda44e9263f901167af1f, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4782282035096714, guid: 4adffb0018aeda44e9263f901167af1f, type: 3}
       propertyPath: m_RootOrder
       value: 1
@@ -263,6 +277,10 @@ PrefabInstance:
     - target: {fileID: 1247311384876784, guid: 4adffb0018aeda44e9263f901167af1f, type: 3}
       propertyPath: m_Name
       value: CFX_Firework_Trails_Gravity (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 1247311384876784, guid: 4adffb0018aeda44e9263f901167af1f, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4782282035096714, guid: 4adffb0018aeda44e9263f901167af1f, type: 3}
       propertyPath: m_RootOrder

@@ -12,10 +12,6 @@ public class EnemyController : Character, OnHit
     [SerializeField]
     private int hp;
 
-    [Header("적 공격력")]
-    [SerializeField]
-    private int damage;
-
     public void OnHits(int damage)
 	{
         hp -= damage;
