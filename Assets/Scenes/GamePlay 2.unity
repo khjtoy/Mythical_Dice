@@ -1380,6 +1380,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   attackDelay: 0.5
+  isSkill: 0
 --- !u!114 &1203299281
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1880,6 +1881,16 @@ PrefabInstance:
     - target: {fileID: 1741167905, guid: 5cccd9a28e7a3484f9202fb4c7cf0987, type: 3}
       propertyPath: originHp
       value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 3733637118433436019, guid: 5cccd9a28e7a3484f9202fb4c7cf0987,
+        type: 3}
+      propertyPath: hp
+      value: 60
+      objectReference: {fileID: 0}
+    - target: {fileID: 3733637118433436019, guid: 5cccd9a28e7a3484f9202fb4c7cf0987,
+        type: 3}
+      propertyPath: originHp
+      value: 60
       objectReference: {fileID: 0}
     - target: {fileID: 4786685462557824130, guid: 5cccd9a28e7a3484f9202fb4c7cf0987,
         type: 3}
