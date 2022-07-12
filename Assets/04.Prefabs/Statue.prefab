@@ -47,7 +47,7 @@ MonoBehaviour:
   <transitions>k__BackingField:
   - {fileID: 855313773}
   <IsLoop>k__BackingField: 0
-  move: {fileID: 1741167904}
+  move: {fileID: 0}
 --- !u!1 &228237167
 GameObject:
   m_ObjectHideFlags: 0
@@ -347,8 +347,8 @@ GameObject:
   m_Component:
   - component: {fileID: 4786685463340195255}
   - component: {fileID: 1741167906}
-  - component: {fileID: 1741167904}
-  - component: {fileID: 1741167905}
+  - component: {fileID: 4290333745825437585}
+  - component: {fileID: 3733637118433436019}
   m_Layer: 0
   m_Name: Statue
   m_TagString: ENEMY
@@ -388,7 +388,7 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &1741167904
+--- !u!114 &4290333745825437585
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -404,7 +404,7 @@ MonoBehaviour:
   PlayerPos: {x: 0, y: 0}
   Pos: {x: 0, y: 0}
   IsFoating: 0
---- !u!114 &1741167905
+--- !u!114 &3733637118433436019
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -417,4 +417,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _currentState: {fileID: 1062127838}
-  hp: 5
+  hp: 0
