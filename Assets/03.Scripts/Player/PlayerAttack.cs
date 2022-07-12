@@ -62,6 +62,7 @@ public class PlayerAttack : MonoBehaviour
                 paritcle.transform.position = new Vector3(enemyPos.transform.position.x, enemyPos.transform.position.y + 1f, enemyPos.transform.position.z);
                 paritcle.SetActive(true);
                 int damage = MapController.Instance.GetIndexCost(x, y);
+                enemyPos.GetComponent<EnemyController>().OnHits(damage);
                 camera.DOShakePosition(0.7f, 0.1f);
             }
             timer = attackDelay;
