@@ -62,7 +62,7 @@ public class StatueMove : CharacterMove, IEnemyAttack
                             continue;
                         MapController.Instance.dices[Pos.y + i][Pos.x + j].transform.rotation = Quaternion.Euler(0, 0, 0);
                         MapController.Instance.dices[Pos.y + i][Pos.x + j].isDiceDirecting = true;
-
+                        MapController.Instance.dices[Pos.y + i][Pos.x + j].transform.DOLocalMoveZ(1.5f, 0.1f);
                     }
 
                 }
@@ -75,6 +75,7 @@ public class StatueMove : CharacterMove, IEnemyAttack
                             continue;
                         if (i == 0 && j == 0)
                             continue;
+                        MapController.Instance.dices[Pos.y + i][Pos.x + j].transform.DOLocalMoveZ(0f, 0.1f);
                         MapController.Instance.dices[Pos.y + i][Pos.x + j].DiceNumSelect(GameManager.Instance.BossNum);
                     }
                 }
