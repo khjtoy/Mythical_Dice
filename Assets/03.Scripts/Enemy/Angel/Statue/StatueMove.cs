@@ -7,11 +7,13 @@ public class StatueMove : CharacterMove, IEnemyAttack
 {
     private Sequence seq;
     public Vector2Int Pos;
+    public bool IsFoating = false;
     private void Awake()
     {
     }
     public override void CharacterMovement(Vector2 target)
     {
+        IsFoating = true;
         seq = DOTween.Sequence();
         seq.Append(transform.DOLocalMoveZ(-3, 0.3f));
         seq.Append(transform.DOLocalMove(new Vector3(target.x, target.y, -3), 0.3f));
@@ -19,6 +21,7 @@ public class StatueMove : CharacterMove, IEnemyAttack
         seq.AppendCallback(() =>
         {
             seq.Kill();
+            IsFoating = false;
             DoAttack();
         });
     }
