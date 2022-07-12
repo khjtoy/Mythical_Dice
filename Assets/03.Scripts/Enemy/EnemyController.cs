@@ -25,7 +25,8 @@ public class EnemyController : Character, OnHit
         hp -= damage;
         float hpPer = (float)hp / originHp;
         _slider.amount = hpPer;
-        if (hp <= 0)
+		SoundManager.Instance.SetPlayerEffectClip((int)PlayerEffectEnm.ATTACK);
+		if (hp <= 0)
         {
             //Á¾·á¾ÀÀ¸·Î
         }

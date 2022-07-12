@@ -46,6 +46,7 @@ public class DiceDirecting : MonoBehaviour
 		{
 			diceParticel[i].Play();
 		}
+		SoundManager.Instance.SetEffectClip((int)EffectEnum.SNAP);
 	}
 
 	public void DiceNumSelect(int value)
@@ -61,6 +62,7 @@ public class DiceDirecting : MonoBehaviour
 		{
 			diceParticel[i].Play();
 		}
+		//SoundManager.Instance.SetEffectClip((int)EffectEnum.SNAP);
 	}
 	public IEnumerator BasicDiceNumSelect()
 	{
@@ -82,7 +84,7 @@ public class DiceDirecting : MonoBehaviour
 		{
 			diceParticel[i].Play();
 		}
-
+		SoundManager.Instance.SetEffectClip((int)EffectEnum.SNAP);
 		//if(MapController.PosToArray(this.transform.position.y) == MapController.PosToArray(Define.Player.y))
 		//{
 		//	Define.Controller.gameObject.GetComponent<OnHit>().OnHits(thisNum);

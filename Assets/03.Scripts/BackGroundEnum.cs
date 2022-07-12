@@ -9,11 +9,17 @@ public enum BackGroundEnum
 
 public enum EffectEnum
 {
-	SWORD,
 	STOMP,
 	STONESlIDE,
 	SLOT,
 	SNAP,
 	STONESHOWER,
-	BOOM
+	BOOM,
+}
+
+public enum PlayerEffectEnm
+{
+	SWORD,
+	ATTACK,
+	DASH
 }
