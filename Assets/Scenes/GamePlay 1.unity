@@ -421,8 +421,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children:
-  - {fileID: 44201247}
+  m_Children: [{fileID: 44201247}]
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -680,9 +679,10 @@ GameObject:
   - component: {fileID: 1203299282}
   - component: {fileID: 1203299281}
   - component: {fileID: 1203299280}
+  - component: {fileID: 1203299284}
   m_Layer: 0
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -758,6 +758,19 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!65 &1203299284
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1203299278}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 0.7766109, z: 1.823838}
+  m_Center: {x: 0, y: -0.21221806, z: -0.23659062}
 --- !u!1 &1530970158
 GameObject:
   m_ObjectHideFlags: 0
@@ -893,6 +906,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 90e0b556c44a4ac47ab23272d6677a46, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isCheck: 0
 --- !u!1001 &1780766406
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -900,6 +914,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 458400635}
     m_Modifications:
+    - target: {fileID: 984858307, guid: 5cccd9a28e7a3484f9202fb4c7cf0987, type: 3}
+      propertyPath: m_RootOrder
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 113879341, guid: 5cccd9a28e7a3484f9202fb4c7cf0987, type: 3}
       propertyPath: move
       value: 
@@ -1115,7 +1133,11 @@ MonoBehaviour:
     shouldExpand: 0
   - objectToPool: {fileID: 7057255917897634809, guid: 0e4907745e6374f4f9bc8a88685cbe7a,
       type: 3}
-    amountToPool: 50
+    amountToPool: 2
+    shouldExpand: 0
+  - objectToPool: {fileID: 8038344524183138613, guid: 0277167a12290af47801444830a2be97,
+      type: 3}
+    amountToPool: 10
     shouldExpand: 0
   pooledObjects: []
 --- !u!4 &2040271934
