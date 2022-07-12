@@ -61,7 +61,8 @@ public class StatueMove : CharacterMove, IEnemyAttack
 	public void DoAttack()
 	{
 		int random = Random.Range(0, 2);
-		int bossNum = Random.Range(1, 7);
+		int bossNum = MapController.Instance.dices[MapController.PosToArray(transform.localPosition.y)][MapController.PosToArray(transform.localPosition.x)].randoms;
+		Debug.Log(bossNum);
 		StartCoroutine(AttackCoroutine(random));
 		GameManager.Instance.BossNum = bossNum;
 	}
