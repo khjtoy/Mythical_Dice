@@ -153,9 +153,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 70b5dadf8ec41354493b673030fca698, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  width: 5
-  height: 5
+  width: 10
+  height: 10
   size: 5
+  <BossNum>k__BackingField: 0
 --- !u!4 &215596834
 Transform:
   m_ObjectHideFlags: 0
@@ -183,7 +184,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   wait: 1
-  brokeNum: 1
 --- !u!1 &407299196
 GameObject:
   m_ObjectHideFlags: 0
@@ -486,7 +486,7 @@ MonoBehaviour:
   root: {fileID: 1420875515}
   distance: 1
   wait: 0.1
-  isDual: 0
+  isDual: 1
   XAxis: 1
   isDown: 1
   isLeft: 1

@@ -29,20 +29,20 @@ public class PlayerAttack : MonoBehaviour
         if (add == 1)
         {
             Debug.Log("АјАн");
-            AttackAction(enemy.transform, MapController.PosToArray(transform.localPosition.x), MapController.PosToArray(transform.localPosition.y));
+            AttackAction(enemy, MapController.PosToArray(transform.localPosition.x), MapController.PosToArray(transform.localPosition.y));
         }
     }
 
-    private void AttackAction(Transform enemyPos, int x, int y)
+    private void AttackAction(GameObject enemyPos, int x, int y)
     {
         if (timer > 0) return;
 
         GameObject paritcle = PoolManager.Instance.GetPooledObject((int)PooledObject.AttackParticle);
-        paritcle.transform.localPosition = new Vector3(enemyPos.localPosition.x, enemyPos.localPosition.y + 0.5f, -2);
+        paritcle.transform.localPosition = new Vector3(enemyPos.transform.localPosition.x, enemyPos.transform.localPosition.y + 0.5f, -2);
         paritcle.SetActive(true);
         Debug.Log($"X:{x}Y:{y}");
         int damage = MapController.Instance.GetIndexCost(x, y);
-        Debug.Log($"Damage {damage}");
+        enemyPos.GetComponent<OnHit>().OnHits(damage);
 
         timer = attackDelay;
     }
