@@ -1,14 +1,27 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using DG.Tweening;
 using static DefineCS;
 
+[RequireComponent(typeof(Character))]
 public class PlayerAttack : MonoBehaviour
 {
     [SerializeField]
     private float attackDelay;
 
     private float timer;
+
+    private Character character;
+
+    private Transform camera;
+
+    private void Start()
+    {
+        character = GetComponent<Character>();
+        camera = Camera.main.transform;
+    }
+
     private void Update()
     {
         if(timer > 0)
@@ -22,29 +35,42 @@ public class PlayerAttack : MonoBehaviour
 
     public void CheckPos(GameObject enemy)
     {
-        int difX = MapController.PosToArray(enemy.transform.localPosition.x) - MapController.PosToArray(transform.localPosition.x);
-        int difY = MapController.PosToArray(enemy.transform.localPosition.y) - MapController.PosToArray(transform.localPosition.y);
-        float add = Mathf.Abs(difX) + Mathf.Abs(difY);
-
-        if (add == 1)
-        {
-            Debug.Log("АјАн");
+        if (enemy.transform.localPosition.x > transform.localPosition.x)
+            transform.localScale = new Vector3(1, 1, 1);
+        else if (enemy.transform.localPosition.x < transform.localPosition.x)
+            transform.localScale = new Vector3(-1, 1, 1);
             AttackAction(enemy, MapController.PosToArray(transform.localPosition.x), MapController.PosToArray(transform.localPosition.y));
-        }
+        //}
     }
 
     private void AttackAction(GameObject enemyPos, int x, int y)
     {
         if (timer > 0) return;
 
-        GameObject paritcle = PoolManager.Instance.GetPooledObject((int)PooledObject.AttackParticle);
-        paritcle.transform.localPosition = new Vector3(enemyPos.transform.localPosition.x, enemyPos.transform.localPosition.y + 0.5f, -2);
-        paritcle.SetActive(true);
-        Debug.Log($"X:{x}Y:{y}");
-        int damage = MapController.Instance.dices[y][x].randoms;
-        Debug.Log($"Damage : {damage}");
-        enemyPos.GetComponent<OnHit>().OnHits(damage);
+        int difX = MapController.PosToArray(enemyPos.transform.localPosition.x) - MapController.PosToArray(transform.localPosition.x);
+        int difY = MapController.PosToArray(enemyPos.transform.localPosition.y) - MapController.PosToArray(transform.localPosition.y);
+        float add = Mathf.Abs(difX) + Mathf.Abs(difY);
+        if (add == 1)
+        {
+            character.Animator.SetTrigger("Attack");
+            GameObject paritcle = PoolManager.Instance.GetPooledObject((int)PooledObject.AttackParticle);
+            paritcle.transform.localPosition = new Vector3(enemyPos.transform.localPosition.x, enemyPos.transform.localPosition.y + 1f, -9);
+            paritcle.SetActive(true);
+            Debug.Log($"X:{x}Y:{y}");
 
-        timer = attackDelay;
+            Debug.Log($"Damage");
+            if (!enemyPos.GetComponent<StatueMove>().IsFoating)
+            {
+                int damage = MapController.Instance.GetIndexCost(x, y);
+                camera.DOShakePosition(0.7f, 0.1f);
+            }
+            timer = attackDelay;
+        }
+    }
+
+    private void ChangeTime()
+    {
+        Time.timeScale = 1;
+        camera.DOShakePosition(0.7f, 0.1f);
     }
 }
