@@ -1345,9 +1345,10 @@ GameObject:
   - component: {fileID: 1203299282}
   - component: {fileID: 1203299281}
   - component: {fileID: 1203299280}
+  - component: {fileID: 1203299284}
   m_Layer: 0
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1380,6 +1381,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   attackDelay: 0.5
+  isSkill: 0
 --- !u!114 &1203299281
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1425,6 +1427,19 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!65 &1203299284
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1203299278}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 0.7766109, z: 1.823838}
+  m_Center: {x: 0, y: -0.21221806, z: -0.23659062}
 --- !u!1 &1261023057
 GameObject:
   m_ObjectHideFlags: 0
@@ -2379,6 +2394,10 @@ MonoBehaviour:
   - objectToPool: {fileID: 7057255917897634809, guid: 0e4907745e6374f4f9bc8a88685cbe7a,
       type: 3}
     amountToPool: 2
+    shouldExpand: 0
+  - objectToPool: {fileID: 4794043405585894037, guid: 37138c0c33167b04fa1fb90b7f5a794f,
+      type: 3}
+    amountToPool: 10
     shouldExpand: 0
   pooledObjects: []
 --- !u!4 &2040271934

@@ -209,4 +209,10 @@ public class MapController : MonoSingleton<MapController>
 	{
 		return Mathf.RoundToInt((pos - (GameManager.Instance.Size / 2 * -1.5f)) / 1.5f);
 	}
+
+	public static Vector3 ArrayToPos(int indexX, int indexY)
+    {
+		return new Vector3((GameManager.Instance.Size / 2 * -1.5f) + (1.5f * indexX), (GameManager.Instance.Size / 2 * -1.5f) + (1.5f * indexY), 0);
+	}
+
 }

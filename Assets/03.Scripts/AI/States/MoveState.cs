@@ -14,6 +14,6 @@ public class MoveState : AIState
 
     public override void DoAction()
     {
-        move.CharacterMovement(Define.Player);
+        move.CharacterMovement(Define.Player);  
     }
 }
