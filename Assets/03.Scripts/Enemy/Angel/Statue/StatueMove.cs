@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static DefineCS;
 using DG.Tweening;
 
 public class StatueMove : CharacterMove, IEnemyAttack
@@ -24,6 +25,12 @@ public class StatueMove : CharacterMove, IEnemyAttack
         {
             seq.Kill();
             IsFoating = false;
+
+            //아이템 생성
+            GameObject item = PoolManager.Instance.GetPooledObject((int)PooledObject.Item);
+            item.transform.localPosition = new Vector3(transform.localPosition.x, transform.localPosition.y, -1);
+            item.SetActive(true);
+
             DoAttack();
         });
     }

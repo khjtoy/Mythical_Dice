@@ -48,6 +48,8 @@ public class PoolManager : MonoSingleton<PoolManager>
         {
             positions.Add(0);
         }
+
+        transform.rotation = Quaternion.Euler(45, 0, 0);
     }
 
     public GameObject GetPooledObject(int index)
