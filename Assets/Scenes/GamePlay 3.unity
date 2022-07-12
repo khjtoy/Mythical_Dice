@@ -1855,7 +1855,7 @@ Rigidbody:
   m_CollisionDetection: 0
 --- !u!114 &1741167908 stripped
 MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 4290333745825437585, guid: 5cccd9a28e7a3484f9202fb4c7cf0987,
+  m_CorrespondingSourceObject: {fileID: 1741167904, guid: 5cccd9a28e7a3484f9202fb4c7cf0987,
     type: 3}
   m_PrefabInstance: {fileID: 1780766406}
   m_PrefabAsset: {fileID: 0}

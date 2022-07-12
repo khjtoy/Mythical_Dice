@@ -129,9 +129,10 @@ public class PlayerAttack : MonoBehaviour
     {
         Vector3 skillPos = MapController.ArrayToPos(x, y);
         skillPos.y += 1f;
-        Debug.Log($"POS{skillPos}");
+        //Debug.Log($"POS{skillPos}");
         GameObject effect = PoolManager.Instance.GetPooledObject((int)PooledObject.SkillEffect);
         effect.transform.localPosition = skillPos;
+        effect.GetComponent<EnemyCheck>().damage = MapController.Instance.GetIndexCost(x, y); 
         effect.SetActive(true);
     }
 }
