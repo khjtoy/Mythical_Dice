@@ -386,9 +386,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 580793701}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 501c25e08efd2744ea9ffa4176a8deb1, type: 3}
+  m_Script: {fileID: 11500000, guid: 8a8309d90cf9f7546961571ff32b6578, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  GoalTime: 2
 --- !u!114 &580793704
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -513,6 +514,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveTime: 0.1
   PlayerPos: {x: 0, y: 0}
+  Pos: {x: 0, y: 0}
 --- !u!114 &812013852
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -749,6 +751,7 @@ MonoBehaviour:
   width: 5
   height: 5
   size: 5
+  <BossNum>k__BackingField: 0
 --- !u!4 &1296369190
 Transform:
   m_ObjectHideFlags: 0
@@ -936,9 +939,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1942803110}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 501c25e08efd2744ea9ffa4176a8deb1, type: 3}
+  m_Script: {fileID: 11500000, guid: 8a8309d90cf9f7546961571ff32b6578, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  GoalTime: 2
 --- !u!114 &1942803113
 MonoBehaviour:
   m_ObjectHideFlags: 0
