@@ -72,6 +72,7 @@ public class MapController : MonoSingleton<MapController>
                 map[y][x].transform.localRotation = Quaternion.Euler(180, 0, 0);
                 map[y][x].transform.localScale = new Vector3(1, 1, 1);
 				dices[y][x] = map[y][x].transform.GetChild(2).GetComponent<DiceDirecting>();
+				dices[y][x].Pos = new Vector2Int(x, y);
             }
         }
 		FloorDirect();

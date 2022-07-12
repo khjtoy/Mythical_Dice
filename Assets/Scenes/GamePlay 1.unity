@@ -316,6 +316,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 682663622}
     m_Modifications:
+    - target: {fileID: 812013852, guid: 5cccd9a28e7a3484f9202fb4c7cf0987, type: 3}
+      propertyPath: hp
+      value: 20
+      objectReference: {fileID: 0}
     - target: {fileID: 4786685462557824130, guid: 5cccd9a28e7a3484f9202fb4c7cf0987,
         type: 3}
       propertyPath: m_Color.b
@@ -468,6 +472,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _currentState: {fileID: 1084351809}
+  hp: 0
+  damage: 0
 --- !u!54 &607270366
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -649,6 +655,7 @@ MonoBehaviour:
   width: 5
   height: 5
   size: 5
+  <BossNum>k__BackingField: 0
 --- !u!4 &895006227
 Transform:
   m_ObjectHideFlags: 0
@@ -972,6 +979,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 03ffbc46c88be0b4d9f35cea708bcbc7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  hp: 5
 --- !u!54 &1838813342
 Rigidbody:
   m_ObjectHideFlags: 0

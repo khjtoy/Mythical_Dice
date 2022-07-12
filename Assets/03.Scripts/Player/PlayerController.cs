@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerController : Character,OnHit
+public class PlayerController : Character, OnHit
 {
     private CharacterMove characterMove;
     private PlayerAttack playerAttack;

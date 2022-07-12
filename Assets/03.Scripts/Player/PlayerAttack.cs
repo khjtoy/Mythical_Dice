@@ -41,7 +41,8 @@ public class PlayerAttack : MonoBehaviour
         paritcle.transform.localPosition = new Vector3(enemyPos.transform.localPosition.x, enemyPos.transform.localPosition.y + 0.5f, -2);
         paritcle.SetActive(true);
         Debug.Log($"X:{x}Y:{y}");
-        int damage = MapController.Instance.GetIndexCost(x, y);
+        int damage = MapController.Instance.dices[y][x].randoms;
+        Debug.Log($"Damage : {damage}");
         enemyPos.GetComponent<OnHit>().OnHits(damage);
 
         timer = attackDelay;

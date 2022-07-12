@@ -23,6 +23,8 @@ public class DiceDirecting : MonoBehaviour
 
 	public int randoms;
 
+	public Vector2Int Pos = Vector2Int.zero;
+	public Vector2Int playerIndex;
 	void Update()
 	{
 		if (isDiceDirecting)
@@ -60,10 +62,14 @@ public class DiceDirecting : MonoBehaviour
 			diceParticel[i].Play();
 		}
 	}
-
 	public IEnumerator BasicDiceNumSelect()
 	{
 		yield return new WaitForSeconds(wait);
+		playerIndex = new Vector2Int(MapController.PosToArray(Define.Player.x), MapController.PosToArray(Define.Player.y));
+		if(playerIndex == Pos)
+        {
+			Define.Controller.OnHits(randoms);
+        }
 		randoms = Random.Range(1, 7);
 		thisNum = randoms;
 		DiceObjet.transform.localRotation = Quaternion.Euler(DiceRotationVector[randoms - 1]);
