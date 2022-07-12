@@ -15,6 +15,8 @@ public class PlayerController : Character, OnHit
 
     private GameObject enemyObject;
 
+    public int playerDir; // 0:Right 1:Left 2:Up 3:Down
+
     [Header("플레이어 HP")]
     [SerializeField]
     private int hp;
@@ -61,25 +63,26 @@ public class PlayerController : Character, OnHit
 
         if (Input.GetKeyDown(KeyCode.RightArrow))
         {
-            targetPos = transform.localPosition + dir[0];
+            playerDir = 0;
             isCheck = true;
         }
         else if (Input.GetKeyDown(KeyCode.LeftArrow))
         {
-            targetPos = transform.localPosition + dir[1];
+            playerDir = 1;
             isCheck = true;
         }
         else if (Input.GetKeyDown(KeyCode.UpArrow))
         {
-            targetPos = transform.localPosition + dir[2];
+            playerDir = 2;
             isCheck = true;
         }
         else if (Input.GetKeyDown(KeyCode.DownArrow))
         {
-            targetPos = transform.localPosition + dir[3];
+            playerDir = 3;
             isCheck = true;
         }
 
+        targetPos = transform.localPosition + dir[playerDir];
         if (isCheck)
         {
             x = MapController.PosToArray(targetPos.x);

@@ -50,9 +50,9 @@ public class PlayerAttack : MonoBehaviour
         int difX = MapController.PosToArray(enemyPos.transform.localPosition.x) - MapController.PosToArray(transform.localPosition.x);
         int difY = MapController.PosToArray(enemyPos.transform.localPosition.y) - MapController.PosToArray(transform.localPosition.y);
         float add = Mathf.Abs(difX) + Mathf.Abs(difY);
+        character.Animator.SetTrigger("Attack");
         if (add == 1)
         {
-            character.Animator.SetTrigger("Attack");
             Debug.Log($"X:{x}Y:{y}");
 
             Debug.Log($"Damage");
