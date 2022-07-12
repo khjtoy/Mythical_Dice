@@ -64,9 +64,9 @@ public class DiceDirecting : MonoBehaviour
 	public IEnumerator BasicDiceNumSelect()
 	{
 		yield return new WaitForSeconds(wait);
-		int Randoms = Random.Range(1, 7);
-		thisNum = Randoms;
-		DiceObjet.transform.localRotation = Quaternion.Euler(DiceRotationVector[Randoms - 1]);
+		randoms = Random.Range(1, 7);
+		thisNum = randoms;
+		DiceObjet.transform.localRotation = Quaternion.Euler(DiceRotationVector[randoms - 1]);
 		isDiceDirecting = false;
 		for (int i = 0; i < diceParticel.Length; i++)
 		{

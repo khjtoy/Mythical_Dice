@@ -33,6 +33,12 @@ public class CharacterMove : MonoBehaviour
         target.y -= transform.localPosition.y;
 
         Vector3 targetPos = transform.localPosition + new Vector3(target.x, target.y, 0);
+
+        if (targetPos.x < transform.localPosition.x)
+            transform.localScale = new Vector3(-1, 1, 1);
+        else if(targetPos.x > transform.localPosition.x)
+            transform.localScale = new Vector3(1, 1, 1);
+
         Debug.Log(target);
         StartCoroutine(DoMove(targetPos));
     }
@@ -42,6 +48,8 @@ public class CharacterMove : MonoBehaviour
         Vector3 newPos = Vector3.zero;
         float sqrRemainingDistance = (transform.localPosition - targetPos).sqrMagnitude;
 
+
+        character.Animator.SetTrigger("Move");
         //극한(거의 0)보다 큰 동안
         while(sqrRemainingDistance > double.Epsilon)
         {

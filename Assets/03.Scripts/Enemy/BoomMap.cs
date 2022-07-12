@@ -16,21 +16,22 @@ public class BoomMap : MonoSingleton<BoomMap>
 		{
 			for (int j = 0; j < GameManager.Instance.Width; j++)
 			{
-				if (MapController.Instance.dices[j][i].randoms == brokeNum)
+				if (MapController.Instance.dices[i][j].randoms == brokeNum)
 				{
-					MeshRenderer renderer = MapController.Instance.dices[j][i].GetComponent<MeshRenderer>();
-					renderer.material.DOColor(Color.red, 0.5f).OnComplete(() =>
+					MeshRenderer renderer = MapController.Instance.dices[i][j].GetComponent<MeshRenderer>();
+					renderer.material.DOColor(Color.red, 0.4f).OnComplete(() =>
 					{
-						renderer.material.DOColor(Color.white, 0.5f).OnComplete(() =>
+						renderer.material.DOColor(Color.white, 0.3f).OnComplete(() =>
 						{
 							for (int i = 0; i < GameManager.Instance.Height; i++)
 							{
 								for (int j = 0; j < GameManager.Instance.Width; j++)
 								{
-									if (MapController.Instance.dices[j][i].thisNum == brokeNum)
+									if (MapController.Instance.dices[i][j].randoms == brokeNum)
 									{
-										MapController.Instance.dices[j][i].isDiceDirecting = true;
-										MapController.Instance.dices[j][i].StartCoroutine(MapController.Instance.dices[j][i].BasicDiceNumSelect());
+										MapController.Instance.dices[i][j].transform.rotation = Quaternion.Euler(0, 0, 0);
+										MapController.Instance.dices[i][j].isDiceDirecting = true;
+										MapController.Instance.dices[i][j].StartCoroutine(MapController.Instance.dices[i][j].BasicDiceNumSelect());
 									}
 								}
 							}
