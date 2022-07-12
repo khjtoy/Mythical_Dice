@@ -26,7 +26,9 @@ public class StatueMove : CharacterMove, IEnemyAttack
     public void DoAttack()
     {
         int random = Random.Range(0, 2);
+        int bossNum = Random.Range(1, 7);
         StartCoroutine(AttackCoroutine(random));
+        GameManager.Instance.BossNum = bossNum;
     }
 
     private IEnumerator AttackCoroutine(int type)
@@ -43,6 +45,7 @@ public class StatueMove : CharacterMove, IEnemyAttack
                             continue;
                         if (i == 0 && j == 0)
                             continue;
+                        MapController.Instance.dices[Pos.y + i][Pos.x + j].transform.rotation = Quaternion.Euler(0, 0, 0);
                         MapController.Instance.dices[Pos.y + i][Pos.x + j].isDiceDirecting = true;
 
                     }
@@ -57,7 +60,20 @@ public class StatueMove : CharacterMove, IEnemyAttack
                             continue;
                         if (i == 0 && j == 0)
                             continue;
-                        MapController.Instance.dices[Pos.y + i][Pos.x + j].DiceNumSelect(1);
+                        MapController.Instance.dices[Pos.y + i][Pos.x + j].DiceNumSelect(GameManager.Instance.BossNum);
+                    }
+                }
+                BoomMap.Instance.Boom();
+                yield return new WaitForSeconds(0.7f);
+                for (int i = -1; i < 2; i++)
+                {
+                    for (int j = -1; j < 2; j++)
+                    {
+                        if (Pos.y + i < 0 || Pos.y + i >= GameManager.Instance.Height || Pos.x + j < 0 || Pos.x + j >= GameManager.Instance.Width)
+                            continue;
+                        if (i == 0 && j == 0)
+                            continue;
+                        MapController.Instance.dices[Pos.y + i][Pos.x + j].DiceNumSelect(Random.Range(1, 7));
                     }
                 }
                 break;
@@ -65,29 +81,54 @@ public class StatueMove : CharacterMove, IEnemyAttack
                 for (int i = 1; i < GameManager.Instance.Size; i++)
                 {
                     if (Pos.y + i < GameManager.Instance.Height)
+                    {
+                        MapController.Instance.dices[Pos.y + i][Pos.x].transform.rotation = Quaternion.Euler(0, 0, 0);
                         MapController.Instance.dices[Pos.y + i][Pos.x].isDiceDirecting = true;
+                    }
                     if (Pos.x + i < GameManager.Instance.Width)
+                    {
+                        MapController.Instance.dices[Pos.y][Pos.x + i].transform.rotation = Quaternion.Euler(0, 0, 0);
                         MapController.Instance.dices[Pos.y][Pos.x + i].isDiceDirecting = true;
+                    }
                     if(Pos.y - i >= 0)
+                    {
+                        MapController.Instance.dices[Pos.y - i][Pos.x].transform.rotation = Quaternion.Euler(0, 0, 0);
                         MapController.Instance.dices[Pos.y - i][Pos.x].isDiceDirecting = true;
+                    }
                     if(Pos.x - i >= 0)
+                    {   
+                        MapController.Instance.dices[Pos.y][Pos.x - i].transform.rotation = Quaternion.Euler(0, 0, 0);
                         MapController.Instance.dices[Pos.y][Pos.x - i].isDiceDirecting = true;
+                    }
                 }
                 yield return new WaitForSeconds(0.1f);
                 for(int i = 1; i < GameManager.Instance.Size; i++)
                 {
                     if (Pos.y + i < GameManager.Instance.Height)
-                    MapController.Instance.dices[Pos.y + i][Pos.x].DiceNumSelect(1);
+                    MapController.Instance.dices[Pos.y + i][Pos.x].DiceNumSelect(GameManager.Instance.BossNum);
                     if (Pos.x + i < GameManager.Instance.Width)
-                    MapController.Instance.dices[Pos.y][Pos.x + i].DiceNumSelect(1);
+                    MapController.Instance.dices[Pos.y][Pos.x + i].DiceNumSelect(GameManager.Instance.BossNum);
                     if (Pos.y - i >= 0)
-                    MapController.Instance.dices[Pos.y - i][Pos.x].DiceNumSelect(1);
+                    MapController.Instance.dices[Pos.y - i][Pos.x].DiceNumSelect(GameManager.Instance.BossNum);
                     if (Pos.x - i >= 0)
-                    MapController.Instance.dices[Pos.y][Pos.x - i].DiceNumSelect(1);
+                    MapController.Instance.dices[Pos.y][Pos.x - i].DiceNumSelect(GameManager.Instance.BossNum);
                 }
 
+                BoomMap.Instance.Boom();
+                yield return new WaitForSeconds(0.7f);
+                for (int i = 1; i < GameManager.Instance.Size; i++)
+                {
+                    if (Pos.y + i < GameManager.Instance.Height)
+                        MapController.Instance.dices[Pos.y + i][Pos.x].DiceNumSelect(Random.Range(1, 7));
+                    if (Pos.x + i < GameManager.Instance.Width)
+                        MapController.Instance.dices[Pos.y][Pos.x + i].DiceNumSelect(Random.Range(1, 7));
+                    if (Pos.y - i >= 0)
+                        MapController.Instance.dices[Pos.y - i][Pos.x].DiceNumSelect(Random.Range(1, 7));
+                    if (Pos.x - i >= 0)
+                        MapController.Instance.dices[Pos.y][Pos.x - i].DiceNumSelect(Random.Range(1, 7));
+                }
                 break;
         }
-        
+
     }
 }
