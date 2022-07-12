@@ -20,7 +20,7 @@ public class BoomMap : MonoSingleton<BoomMap>
 					MeshRenderer renderer = MapController.Instance.dices[i][j].GetComponent<MeshRenderer>();
 					Sequence seq = DOTween.Sequence();
 					seq.Append(renderer.material.DOColor(Color.red, 0.4f));
-					seq.Append(renderer.material.DOColor(Color.white, 0.3f));
+					seq.Append(renderer.material.DOColor(new Color(156, 146, 115) / 255, 0.3f));
 					int n = i;
 					int m = j;
 					seq.AppendCallback(() =>
