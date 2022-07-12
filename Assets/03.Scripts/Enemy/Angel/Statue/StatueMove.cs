@@ -18,12 +18,24 @@ public class StatueMove : CharacterMove, IEnemyAttack
         seq.Append(transform.DOLocalMoveZ(-3, 0.3f));
         seq.Append(transform.DOLocalMove(new Vector3(target.x, target.y, -3), 0.3f));
         seq.Append(transform.DOLocalMoveZ(-1, 0.1f).SetEase(Ease.InExpo));
+        Invoke("ZeroTime", 0.6f);
+        Invoke("ChangeTime", 0.62f);
         seq.AppendCallback(() =>
         {
             seq.Kill();
             IsFoating = false;
             DoAttack();
         });
+    }
+
+    private void ChangeTime()
+    {
+        Time.timeScale = 1f;
+    }
+
+    private void ZeroTime()
+    {
+        Time.timeScale = 0.2f;
     }
 
     public void DoAttack()
