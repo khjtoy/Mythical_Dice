@@ -5,16 +5,27 @@ using UnityEngine;
 public class EnemyController : Character, OnHit
 {
     [SerializeField] private AIState _currentState;
+    private HPSlider _slider;
     private bool _canMoveNext = false;
     private bool _canDoAgain = true;
 
     [Header("적 HP")]
     [SerializeField]
-    private int hp;
+    private int originHp = 0;
+    [SerializeField]
+    private int hp = 0;
+
+    private void Awake()
+    {
+        _slider = GameObject.Find("BossBar").GetComponent<HPSlider>();
+    }
 
     public void OnHits(int damage)
 	{
         hp -= damage;
+        float hpPer = (float)hp / originHp;
+        Debug.Log(hpPer);
+        _slider.amount = hpPer;
         if (hp <= 0)
         {
             //종료씬으로
