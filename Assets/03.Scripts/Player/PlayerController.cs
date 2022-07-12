@@ -68,24 +68,18 @@ public class PlayerController : Character
 
         if (isCheck)
         {
-            x = Mathf.Ceil(PosToArray(targetPos.x));
-            y = Mathf.Ceil(PosToArray(targetPos.y));
-            Debug.Log($"Player x:{x}, y:{y}");
-            monsterX = Mathf.Ceil(PosToArray(enemyObject.transform.localPosition.x));
-            monsterY = Mathf.Ceil(PosToArray(enemyObject.transform.localPosition.y));
-            Debug.Log($"Monster x:{monsterX}, y:{monsterY}");
+            x = MapController.PosToArray(targetPos.x);
+            y = MapController.PosToArray(targetPos.y);
+            //Debug.Log($"Player x:{x}, y:{y}");
+            monsterX = MapController.PosToArray(enemyObject.transform.localPosition.x);
+            monsterY = MapController.PosToArray(enemyObject.transform.localPosition.y);
+            //Debug.Log($"Monster x:{monsterX}, y:{monsterY}");
 
             if (x < 0 || x >= GameManager.Instance.Width || y < 0 || y >= GameManager.Instance.Height
                 || (x == monsterX && y == monsterY))
                 return;
             characterMove.CharacterMovement(targetPos);
         }
-    }
-
-
-    private float PosToArray(float pos)
-    {
-        return (pos - (GameManager.Instance.Size / 2 * -1.5f)) / 1.5f;
     }
 
     private void PressAttack()

@@ -15,9 +15,9 @@ public class MapController : MonoSingleton<MapController>
 
 
 	private Vector2 min;
-
 	private GameObject[][] map;
-
+    public DiceDirecting[][] dices;
+	private int[][] mapCost;
 	public GameObject[][] MAP { get => map; }
 
 	private GameManager gameManager;
@@ -31,21 +31,54 @@ public class MapController : MonoSingleton<MapController>
 	public bool isLeft;
 	private Vector2 condition;
 
-	private void Awake()
-	{
-		gameManager = GameManager.Instance;
+    protected override void Init()
+    {
+       //DONDESTORY
+    }
+    private void Awake()
+    {
+        gameManager = GameManager.Instance;
 
-		min = new Vector2(GameManager.Instance.Size / 2, GameManager.Instance.Size / 2) * -1.5f;
-		map = new GameObject[gameManager.Height][];
-	}
-	private void Start()
-	{
+        min = new Vector2(GameManager.Instance.Size / 2, GameManager.Instance.Size / 2) * -1.5f;
+        map = new GameObject[gameManager.Height][];
+        dices = new DiceDirecting[gameManager.Height][];
+		mapCost = new int[gameManager.Height][];
+    }
+    private void Start()
+    {
 		if (root.childCount == 2)
-			SpawnMap();
-	}
+            SpawnMap();
+    }
 
+	public int GetIndexCost(int x, int y)
+    {
+		return mapCost[y][x];
+    }
+
+
+    private void SpawnMap()
+    {
+        for (int y = 0; y < gameManager.Height; y++)
+        {
+            map[y] = new GameObject[gameManager.Width];
+            dices[y] = new DiceDirecting[gameManager.Width];
+			mapCost[y] = new int[gameManager.Width];
+            for (int x = 0; x < gameManager.Width; x++)
+            {
+				mapCost[y][x] = 0;
+                map[y][x] = Instantiate(dicePrefabs, new Vector3(0,0,0), Quaternion.identity);
+                map[y][x].transform.SetParent(root);
+                map[y][x].transform.localPosition = new Vector3(min.x+ (1.5f * x), min.y + (1.5f * y), 0);
+                map[y][x].transform.localRotation = Quaternion.Euler(180, 0, 0);
+                map[y][x].transform.localScale = new Vector3(1, 1, 1);
+				dices[y][x] = map[y][x].transform.GetChild(2).GetComponent<DiceDirecting>();
+            }
+        }
+		FloorDirect();
+	}
 	private void Update()
 	{
+		/*
 		if (Input.GetMouseButtonDown(0))
 			FloorDirect();
 	}
@@ -64,6 +97,7 @@ public class MapController : MonoSingleton<MapController>
 				map[y][x].transform.localScale = new Vector3(1, 1, 1);
 			}
 		}
+		*/
 	}
 
 	private void FloorDirect(int x = 0, int y = 0, bool isfirst = false)
@@ -140,6 +174,7 @@ public class MapController : MonoSingleton<MapController>
 		yield return new WaitForSeconds(wait);
 
 		map[y][x].transform.GetChild(2).GetComponent<DiceDirecting>().DiceNumSelect();
+		mapCost[y][x] = map[y][x].transform.GetChild(2).GetComponent<DiceDirecting>().randoms;
 
 		if (!isDual)
 		{
@@ -167,5 +202,10 @@ public class MapController : MonoSingleton<MapController>
 			else
 				FloorDirect(x, y + 1, isfirst);
 		}
+	}
+
+	public static int PosToArray(float pos)
+	{
+		return Mathf.RoundToInt((pos - (GameManager.Instance.Size / 2 * -1.5f)) / 1.5f);
 	}
 }

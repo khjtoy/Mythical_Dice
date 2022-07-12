@@ -18,8 +18,12 @@ public class DiceDirecting : MonoBehaviour
 
 	public float speed = 5f;
 
-	[Header("±â´Ù¸®´Â ±âº» ½Ã°£")]
+	[Header("ï¿½ï¿½Ù¸ï¿½ï¿½ï¿½ ï¿½âº» ï¿½Ã°ï¿½")]
 	public float wait;
+
+	public int randoms;
+
+>>>>>>> main
 	void Update()
 	{
 		if (isDiceDirecting)
@@ -30,9 +34,23 @@ public class DiceDirecting : MonoBehaviour
 
 	public void DiceNumSelect()
 	{
-		int Randoms = Random.Range(1, 7);
-		thisNum = Randoms;
-		DiceObjet.transform.localRotation = Quaternion.Euler(DiceRotationVector[Randoms-1]);
+		randoms = Random.Range(1, 7);
+		DiceObjet.transform.localRotation = Quaternion.Euler(DiceRotationVector[randoms-1]);
+		isDiceDirecting = false;
+		for (int i = 0; i < diceParticel.Length; i++)
+		{
+			diceParticel[i].Clear();
+		}
+		for (int i = 0; i < diceParticel.Length; i++)
+		{
+			diceParticel[i].Play();
+		}
+	}
+
+	public void DiceNumSelect(int value)
+	{
+		randoms = value;
+		DiceObjet.transform.localRotation = Quaternion.Euler(DiceRotationVector[randoms - 1]);
 		isDiceDirecting = false;
 		for (int i = 0; i < diceParticel.Length; i++)
 		{
