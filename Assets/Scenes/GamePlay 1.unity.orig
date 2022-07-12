@@ -421,7 +421,8 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: [{fileID: 44201247}]
+  m_Children:
+  - {fileID: 44201247}
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -906,7 +907,44 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 90e0b556c44a4ac47ab23272d6677a46, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+<<<<<<< HEAD
+=======
+  moveTime: 0.1
+  PlayerPos: {x: 0, y: 0}
+  Pos: {x: 0, y: 0}
+  IsFoating: 0
   isCheck: 0
+--- !u!114 &1741167905
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1741167902}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3d0b079f4bfae6040b1f4251bd4f12d3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _currentState: {fileID: 1062127838}
+  hp: 0
+--- !u!54 &1741167906
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1741167902}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
+>>>>>>> origin/KHJ
 --- !u!1001 &1780766406
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -914,12 +952,18 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 458400635}
     m_Modifications:
+<<<<<<< HEAD
+    - target: {fileID: 113879341, guid: 5cccd9a28e7a3484f9202fb4c7cf0987, type: 3}
+      propertyPath: move
+=======
     - target: {fileID: 984858307, guid: 5cccd9a28e7a3484f9202fb4c7cf0987, type: 3}
       propertyPath: m_RootOrder
       value: 2
       objectReference: {fileID: 0}
-    - target: {fileID: 113879341, guid: 5cccd9a28e7a3484f9202fb4c7cf0987, type: 3}
-      propertyPath: move
+    - target: {fileID: 4786685462557824130, guid: 5cccd9a28e7a3484f9202fb4c7cf0987,
+        type: 3}
+      propertyPath: m_Sprite
+>>>>>>> origin/KHJ
       value: 
       objectReference: {fileID: 1741167904}
     - target: {fileID: 4786685462557824130, guid: 5cccd9a28e7a3484f9202fb4c7cf0987,
