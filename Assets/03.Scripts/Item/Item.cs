@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static DefineCS;
 
 public class Item : MonoBehaviour
 {
@@ -9,12 +10,9 @@ public class Item : MonoBehaviour
     {
         if(other.CompareTag("Player"))
         {
-            gameObject.SetActive(false);
             EventManager.TriggerEvent("RESETCHECK", eventParam);
-
-            PlayerController playerController = other.GetComponent<PlayerController>();
-
-           // StartCoroutine(Skill(playerController.playerDir));
+            other.GetComponent<PlayerAttack>().isSkill = true;
+            gameObject.SetActive(false);
         }
     }
 }

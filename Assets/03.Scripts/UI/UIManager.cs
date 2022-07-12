@@ -9,7 +9,7 @@ public class UIManager : MonoBehaviour
     private GameObject InGameCanvas;
     private GameObject PausePanel;
     private GameObject OptionPanel;
-
+    private int uiOpen = 1;
     private void Awake()
     {
         InGameCanvas = GameObject.Find("InGameCanvas");
@@ -27,6 +27,7 @@ public class UIManager : MonoBehaviour
                 TogglePanel(InGameCanvas);
                 PausePanel.SetActive(true);
                 OptionPanel.SetActive(false);
+
             }
         }
     }
@@ -34,5 +35,7 @@ public class UIManager : MonoBehaviour
     public void TogglePanel(GameObject panel)
     {
         panel.SetActive(!panel.activeInHierarchy);
+        uiOpen++;
+        Time.timeScale = (uiOpen %= 2);
     }
 }

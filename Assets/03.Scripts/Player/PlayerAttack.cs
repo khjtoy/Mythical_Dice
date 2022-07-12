@@ -14,11 +14,16 @@ public class PlayerAttack : MonoBehaviour
 
     private Character character;
 
+    private PlayerController playerController;
+
     private Transform camera;
+
+    public bool isSkill = false;
 
     private void Start()
     {
         character = GetComponent<Character>();
+        playerController = GetComponent<PlayerController>();
         camera = Camera.main.transform;
     }
 
@@ -50,22 +55,27 @@ public class PlayerAttack : MonoBehaviour
         int difX = MapController.PosToArray(enemyPos.transform.localPosition.x) - MapController.PosToArray(transform.localPosition.x);
         int difY = MapController.PosToArray(enemyPos.transform.localPosition.y) - MapController.PosToArray(transform.localPosition.y);
         float add = Mathf.Abs(difX) + Mathf.Abs(difY);
-        character.Animator.SetTrigger("Attack");
-        if (add == 1)
+        if (isSkill)
+            StartCoroutine(Skill(playerController.playerDir));
+        else
         {
-            Debug.Log($"X:{x}Y:{y}");
-
-            Debug.Log($"Damage");
-            if (!enemyPos.GetComponent<StatueMove>().IsFoating)
+            character.Animator.SetTrigger("Attack");
+            if (add == 1)
             {
-                GameObject paritcle = PoolManager.Instance.GetPooledObject((int)PooledObject.AttackParticle);
-                paritcle.transform.position = new Vector3(enemyPos.transform.position.x, enemyPos.transform.position.y + 1f, enemyPos.transform.position.z);
-                paritcle.SetActive(true);
-                int damage = MapController.Instance.GetIndexCost(x, y);
-                enemyPos.GetComponent<EnemyController>().OnHits(damage);
-                camera.DOShakePosition(0.7f, 0.1f);
+                Debug.Log($"X:{x}Y:{y}");
+
+                Debug.Log($"Damage");
+                if (!enemyPos.GetComponent<StatueMove>().IsFoating)
+                {
+                    GameObject paritcle = PoolManager.Instance.GetPooledObject((int)PooledObject.AttackParticle);
+                    paritcle.transform.position = new Vector3(enemyPos.transform.position.x, enemyPos.transform.position.y + 1f, enemyPos.transform.position.z);
+                    paritcle.SetActive(true);
+                    int damage = MapController.Instance.GetIndexCost(x, y);
+                    enemyPos.GetComponent<EnemyController>().OnHits(damage);
+                    camera.DOShakePosition(0.7f, 0.1f);
+                }
+                timer = attackDelay;
             }
-            timer = attackDelay;
         }
     }
 
@@ -73,5 +83,55 @@ public class PlayerAttack : MonoBehaviour
     {
         Time.timeScale = 1;
         camera.DOShakePosition(0.7f, 0.1f);
+    }
+
+    private IEnumerator Skill(int dir)
+    {
+        int x = MapController.PosToArray(transform.localPosition.x);
+        int y = MapController.PosToArray(transform.localPosition.y);
+        if (dir == 0)
+        {
+            for (int i = x + 1; i < GameManager.Instance.Width; i++)
+            {
+                SkillAction(i,y);
+                yield return new WaitForSeconds(0.2f);
+            }
+        }
+        else if(dir == 1)
+        {
+            for(int i = x - 1; i >= 0; i--)
+            {
+                SkillAction(i,y);
+                yield return new WaitForSeconds(0.2f);
+            }
+        }
+        else if(dir == 2)
+        {
+            for(int i = y + 1; i < GameManager.Instance.Height; i++)
+            {
+                SkillAction(x, i);
+                yield return new WaitForSeconds(0.2f);
+            }
+        }
+        else if(dir == 3)
+        {
+            for (int i = y - 1; i >= 0; i--)
+            {
+                SkillAction(x, i);
+                yield return new WaitForSeconds(0.2f);
+            }
+        }
+        isSkill = false;
+        yield return null;
+    }
+
+    private void SkillAction(int x, int y)
+    {
+        Vector3 skillPos = MapController.ArrayToPos(x, y);
+        skillPos.y += 1f;
+        Debug.Log($"POS{skillPos}");
+        GameObject effect = PoolManager.Instance.GetPooledObject((int)PooledObject.SkillEffect);
+        effect.transform.localPosition = skillPos;
+        effect.SetActive(true);
     }
 }
