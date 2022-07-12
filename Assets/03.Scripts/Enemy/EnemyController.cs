@@ -2,12 +2,28 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyController : Character
+public class EnemyController : Character, OnHit
 {
     [SerializeField] private AIState _currentState;
     private bool _canMoveNext = false;
     private bool _canDoAgain = true;
 
+    [Header("적 HP")]
+    [SerializeField]
+    private int hp;
+
+    [Header("적 공격력")]
+    [SerializeField]
+    private int damage;
+
+    public void OnHits(int damage)
+	{
+        hp -= damage;
+        if (hp <= 0)
+        {
+            //종료씬으로
+        }
+    }
     protected virtual void Update()
     {
         if (_canDoAgain)
