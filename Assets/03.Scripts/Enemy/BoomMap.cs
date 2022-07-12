@@ -25,17 +25,13 @@ public class BoomMap : MonoSingleton<BoomMap>
 					int m = j;
 					seq.AppendCallback(() =>
 					{
-						a(n, m);
+						MapController.Instance.dices[n][m].transform.rotation = Quaternion.Euler(0, 0, 0);
+						MapController.Instance.dices[n][m].isDiceDirecting = true;
+						StartCoroutine(MapController.Instance.dices[n][m].BasicDiceNumSelect());
+						seq.Kill();
 					});
 				}
 			}
 		}
-	}
-
-	private void a(int i, int j)
-	{
-		MapController.Instance.dices[i][j].transform.rotation = Quaternion.Euler(0, 0, 0);
-		MapController.Instance.dices[i][j].isDiceDirecting = true;
-		StartCoroutine(MapController.Instance.dices[i][j].BasicDiceNumSelect());
 	}
 }
