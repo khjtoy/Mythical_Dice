@@ -9,6 +9,7 @@ public class PlayerController : Character, OnHit
     private CharacterMove characterMove;
     private PlayerAttack playerAttack;
     private Vector3[] dir = new Vector3[4];
+    private HPSlider _slider;
 
     private float x, y;
     private float monsterX, monsterY;
@@ -17,12 +18,16 @@ public class PlayerController : Character, OnHit
 
     [Header("플레이어 HP")]
     [SerializeField]
+    private int originHp = 0;
+    [SerializeField]
     private int hp;
 
     public void OnHits(int damage)
     {
         hp -= damage;
-        if(hp <= 0)
+        float hpPer = (float)hp / originHp;
+        _slider.amount = hpPer;
+        if (hp <= 0)
 		{
             SceneManager.LoadScene(1);
 		}
@@ -30,6 +35,8 @@ public class PlayerController : Character, OnHit
 
     private void Awake()
     {
+        _slider = GameObject.Find("PlayerBar").GetComponent<HPSlider>();
+        
         dir[0] = new Vector3(1.5f, 0, 0);
         dir[1] = new Vector3(-1.5f, 0, 0);
         dir[2] = new Vector3(0f, 1.5f, 0);
