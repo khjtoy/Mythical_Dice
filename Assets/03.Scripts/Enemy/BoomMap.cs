@@ -28,6 +28,7 @@ public class BoomMap : MonoSingleton<BoomMap>
 						MapController.Instance.dices[n][m].transform.rotation = Quaternion.Euler(0, 0, 0);
 						MapController.Instance.dices[n][m].isDiceDirecting = true;
 						StartCoroutine(MapController.Instance.dices[n][m].BasicDiceNumSelect());
+						SoundManager.Instance.SetEffectClip((int)EffectEnum.BOOM);
 						seq.Kill();
 					});
 				}
