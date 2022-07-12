@@ -380,6 +380,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 03ffbc46c88be0b4d9f35cea708bcbc7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  hp: 10
 --- !u!54 &419945008
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -456,7 +457,7 @@ MonoBehaviour:
   <transitions>k__BackingField:
   - {fileID: 45646603}
   <IsLoop>k__BackingField: 0
-  move: {fileID: 1091700921}
+  move: {fileID: 2041362678}
 --- !u!4 &594948392
 Transform:
   m_ObjectHideFlags: 0
@@ -614,21 +615,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
---- !u!114 &1091700921
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4786685461976271894}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 90e0b556c44a4ac47ab23272d6677a46, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  moveTime: 0.1
-  PlayerPos: {x: 0, y: 0}
-  Pos: {x: 0, y: 0}
 --- !u!114 &1091700926
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -642,6 +628,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _currentState: {fileID: 1406328840}
+  hp: 0
+  damage: 0
 --- !u!1 &1217993673
 GameObject:
   m_ObjectHideFlags: 0
@@ -652,6 +640,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1217993674}
   - component: {fileID: 1217993675}
+  - component: {fileID: 1217993676}
   m_Layer: 0
   m_Name: Player_Idle
   m_TagString: Untagged
@@ -724,6 +713,25 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!95 &1217993676
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1217993673}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 8fd2a559ee30b8048834d2c8d055816b, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &1296369188
 GameObject:
   m_ObjectHideFlags: 0
@@ -949,19 +957,6 @@ MonoBehaviour:
   moveTime: 0.1
   PlayerPos: {x: 0, y: 0}
   Pos: {x: 0, y: 0}
---- !u!114 &2041362679
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4786685461976271894}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3d0b079f4bfae6040b1f4251bd4f12d3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _currentState: {fileID: 1406328840}
 --- !u!54 &2041362680
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -1003,11 +998,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4786685461976271893}
-  - component: {fileID: 1091700921}
+  - component: {fileID: 2041362678}
   - component: {fileID: 1091700926}
   - component: {fileID: 2041362680}
-  - component: {fileID: 2041362678}
-  - component: {fileID: 2041362679}
   m_Layer: 0
   m_Name: Mino
   m_TagString: ENEMY

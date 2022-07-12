@@ -76,5 +76,10 @@ public class DiceDirecting : MonoBehaviour
 		{
 			diceParticel[i].Play();
 		}
+
+		//if(MapController.PosToArray(this.transform.position.y) == MapController.PosToArray(Define.Player.y))
+		//{
+		//	Define.Controller.gameObject.GetComponent<OnHit>().OnHits(thisNum);
+		//}
 	}
 }

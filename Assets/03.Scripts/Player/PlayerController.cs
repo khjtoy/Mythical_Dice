@@ -21,6 +21,7 @@ public class PlayerController : Character,OnHit
     public void OnHits(int damage)
     {
         hp -= damage;
+        Debug.Log(hp);
         if(hp <= 0)
 		{
             //Á¾·á¾ÀÀ¸·Î

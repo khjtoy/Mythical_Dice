@@ -66,7 +66,7 @@ public class StatueMove : CharacterMove, IEnemyAttack
                 BoomMap.Instance.Boom();
                 break;
             case 1:
-                for (int i = 1; i < GameManager.Instance.Size; i++)
+				for (int i = 1; i < GameManager.Instance.Size; i++)
                 {
                     if (Pos.y + i < GameManager.Instance.Height)
                     {
