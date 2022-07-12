@@ -11,6 +11,8 @@ public class Character : MonoBehaviour
 {
     [Header("공통 컴포넌트")]
     private Rigidbody rigidbody = null;
+    private Animator animator = null;
+    private SpriteRenderer spriteRenderer = null;
 
     public Rigidbody Rigidbody
     {
@@ -20,8 +22,26 @@ public class Character : MonoBehaviour
         }
     }
 
+    public Animator Animator
+    {
+        get
+        {
+            return animator;
+        }
+    }
+
+    public SpriteRenderer SpriteRenderer
+    {
+        get
+        {
+            return spriteRenderer;
+        }
+    }
+
     protected virtual void Start()
     { 
         rigidbody = GetComponent<Rigidbody>();
+        animator = transform.GetChild(0).GetComponent<Animator>();
+        spriteRenderer = transform.GetChild(0).GetComponent<SpriteRenderer>();
     }
 }

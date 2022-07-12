@@ -18,7 +18,7 @@ public class DiceDirecting : MonoBehaviour
 
 	public float speed = 5f;
 
-	[Header("��ٸ��� �⺻ �ð�")]
+	[Header("��ٸ���?�⺻ �ð�")]
 	public float wait;
 
 	public int randoms;
