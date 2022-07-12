@@ -30,10 +30,10 @@ public class PlayerController : Character, OnHit
 
     private void Awake()
     {
-        dir[0] = new Vector3(1.5f, 0, 0);
-        dir[1] = new Vector3(-1.5f, 0, 0);
-        dir[2] = new Vector3(0f, 1.5f, 0);
-        dir[3] = new Vector3(0f, -1.5f, 0);
+        dir[0] = new Vector3(1.3f, 0, 0);
+        dir[1] = new Vector3(-1.3f, 0, 0);
+        dir[2] = new Vector3(0f, 1.3f, 0);
+        dir[3] = new Vector3(0f, -1.3f, 0);
     }
 
     protected override void Start()

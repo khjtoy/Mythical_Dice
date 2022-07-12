@@ -53,14 +53,14 @@ public class PlayerAttack : MonoBehaviour
         if (add == 1)
         {
             character.Animator.SetTrigger("Attack");
-            GameObject paritcle = PoolManager.Instance.GetPooledObject((int)PooledObject.AttackParticle);
-            paritcle.transform.localPosition = new Vector3(enemyPos.transform.localPosition.x, enemyPos.transform.localPosition.y + 1f, -9);
-            paritcle.SetActive(true);
             Debug.Log($"X:{x}Y:{y}");
 
             Debug.Log($"Damage");
             if (!enemyPos.GetComponent<StatueMove>().IsFoating)
             {
+                GameObject paritcle = PoolManager.Instance.GetPooledObject((int)PooledObject.AttackParticle);
+                paritcle.transform.position = new Vector3(enemyPos.transform.position.x, enemyPos.transform.position.y + 1f, enemyPos.transform.position.z);
+                paritcle.SetActive(true);
                 int damage = MapController.Instance.GetIndexCost(x, y);
                 camera.DOShakePosition(0.7f, 0.1f);
             }
