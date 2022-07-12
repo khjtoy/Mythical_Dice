@@ -24,7 +24,6 @@ public class EnemyController : Character, OnHit
 	{
         hp -= damage;
         float hpPer = (float)hp / originHp;
-        Debug.Log(hpPer);
         _slider.amount = hpPer;
         if (hp <= 0)
         {
