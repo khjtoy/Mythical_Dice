@@ -410,6 +410,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   IsInGame: 1
+  playerHpSlider: {fileID: 0}
+  whiteSlider: {fileID: 0}
+  sliderSpeed: 0
+  isDamage: 1
 --- !u!4 &160620983
 Transform:
   m_ObjectHideFlags: 0

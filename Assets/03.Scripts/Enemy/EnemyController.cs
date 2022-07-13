@@ -1,99 +1,129 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class EnemyController : Character, OnHit
 {
-    [SerializeField] private AIState _currentState;
-    private HPSlider _slider;
-    private bool _canMoveNext = true;
-    private bool _canDoAgain = true;
+	[Header("HP ½½¶óÀÌ´õ")]
+	[SerializeField]
+	Image playerHpSlider;
+	[SerializeField]
+	Image whiteSlider;
 
-    [Header("ï¿½ï¿½ HP")]
-    [SerializeField]
-    private int originHp = 0;
-    [SerializeField]
-    private int hp = 0;
+	[SerializeField]
+	private float sliderSpeed;
 
-    private void Awake()
-    {
-        _slider = GameObject.Find("BossBar").GetComponent<HPSlider>();
-    }
+	[SerializeField] private AIState _currentState;
+	private HPSlider _slider;
+	private bool _canMoveNext = true;
+	private bool _canDoAgain = true;
 
-    public void OnHits(int damage)
-    {
-        hp -= damage;
-        float hpPer = (float)hp / originHp;
-        _slider.amount = hpPer;
-        GameObject obj = PoolManager.Instance.GetPooledObject((int)DefineCS.PooledObject.NumText);
-        obj.SetActive(true);
-        obj.GetComponent<NumText>().DamageText(damage, this.transform.position);
+	[Header("ï¿½ï¿½ HP")]
+	[SerializeField]
+	private int originHp = 0;
+	[SerializeField]
+	private int hp = 0;
+
+	public bool isDamage = false;
+
+	private void Awake()
+	{
+		_slider = GameObject.Find("BossBar").GetComponent<HPSlider>();
+	}
+
+	public void OnHits(int damage)
+	{
+		hp -= damage;
+		float hpPer = (float)hp / originHp;
+		_slider.UpdateAmount(hpPer);
+		GameObject obj = PoolManager.Instance.GetPooledObject((int)DefineCS.PooledObject.NumText);
+		obj.SetActive(true);
+		obj.GetComponent<NumText>().DamageText(damage, this.transform.position);
 		SoundManager.Instance.SetEnemyEffectClip((int)EnemyEffectEnum.Hit);
+		isDamage = true;
 		if (hp <= 0)
-        {
-            //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿?
-        }
-    }
-    protected virtual void Update()
-    {
-        if (!GameManager.Instance.StageStart)
-            return;
+		{
+			//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿?
+		}
+	}
 
-        if (_canDoAgain)
-        {
-            _currentState.DoAction();
-            if (!_currentState.IsLoop)
-                _canDoAgain = false;
-        }
+	void UpdateSlider()
+	{
+		if (isDamage)
+		{
+			whiteSlider.transform.localScale = Vector3.Lerp(whiteSlider.transform.localScale, playerHpSlider.transform.localScale, Time.deltaTime * sliderSpeed);
+			Debug.Log(whiteSlider.transform.localScale);
+			Debug.Log(playerHpSlider.transform.localScale);
+			if (playerHpSlider.transform.localScale.x >= whiteSlider.transform.localScale.x - 0.01f)
+			{
+				isDamage = false;
+				whiteSlider.transform.localScale = playerHpSlider.transform.localScale;
+			}
+		}
 
-        foreach (var transition in _currentState.transitions)
-        {
-            if (transition.PositiveCondition.Count == 0)
-                _canMoveNext = true;
-            else
-            if (transition.IsPositiveAnd)
-            {
-                _canMoveNext = true;
-                foreach (var conditon in transition.PositiveCondition)
-                {
-                    _canMoveNext &= conditon.Result();
-                }
-            }
-            else
-            {
-                _canMoveNext = false;
-                foreach (var conditon in transition.PositiveCondition)
-                {
-                    _canMoveNext |= conditon.Result();
-                }
-            }
+	}
 
-            if (transition.NegativeCondition.Count == 0)
-                _canMoveNext &= true;
-            else
-            if (transition.IsNegativeAnd)
-            {
-                _canMoveNext &= true;
-                foreach (var conditon in transition.NegativeCondition)
-                {
-                    _canMoveNext &= !conditon.Result();
-                }
-            }
-            else
-            {
-                _canMoveNext = false;
-                foreach (var conditon in transition.NegativeCondition)
-                {
-                    _canMoveNext |= !conditon.Result();
-                }
-            }
+	protected virtual void Update()
+	{
+		if (!GameManager.Instance.StageStart)
+			return;
+		UpdateSlider();
+		if (_canDoAgain)
+		{
+			_currentState.DoAction();
+			if (!_currentState.IsLoop)
+				_canDoAgain = false;
+		}
 
-            if (_canMoveNext)
-            {
-                Debug.Log($"Current State Has Changed To {transition.goalState}");
-                _currentState = transition.goalState;
-                _canDoAgain = true;
-            }
-        }
-    }
+		foreach (var transition in _currentState.transitions)
+		{
+			if (transition.PositiveCondition.Count == 0)
+				_canMoveNext = true;
+			else
+			if (transition.IsPositiveAnd)
+			{
+				_canMoveNext = true;
+				foreach (var conditon in transition.PositiveCondition)
+				{
+					_canMoveNext &= conditon.Result();
+				}
+			}
+			else
+			{
+				_canMoveNext = false;
+				foreach (var conditon in transition.PositiveCondition)
+				{
+					_canMoveNext |= conditon.Result();
+				}
+			}
+
+			if (transition.NegativeCondition.Count == 0)
+				_canMoveNext &= true;
+			else
+			if (transition.IsNegativeAnd)
+			{
+				_canMoveNext &= true;
+				foreach (var conditon in transition.NegativeCondition)
+				{
+					_canMoveNext &= !conditon.Result();
+				}
+			}
+			else
+			{
+				_canMoveNext = false;
+				foreach (var conditon in transition.NegativeCondition)
+				{
+					_canMoveNext |= !conditon.Result();
+				}
+			}
+
+			if (_canMoveNext)
+			{
+				Debug.Log($"Current State Has Changed To {transition.goalState}");
+				_currentState = transition.goalState;
+				_canDoAgain = true;
+			}
+		}
+	}
 }
