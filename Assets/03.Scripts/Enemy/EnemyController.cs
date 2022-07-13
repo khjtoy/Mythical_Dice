@@ -70,7 +70,7 @@ public class EnemyController : Character, OnHit
             else
             if (transition.IsNegativeAnd)
             {
-                _canMoveNext = true;
+                _canMoveNext &= true;
                 foreach (var conditon in transition.NegativeCondition)
                 {
                     _canMoveNext &= !conditon.Result();
@@ -87,7 +87,7 @@ public class EnemyController : Character, OnHit
 
             if (_canMoveNext)
             {
-                //Debug.Log($"Current State Has Changed To {transition.goalState}");
+                Debug.Log($"Current State Has Changed To {transition.goalState}");
                 _currentState = transition.goalState;
                 _canDoAgain = true;
             }

@@ -34,4 +34,25 @@ public class BoomMap : MonoSingleton<BoomMap>
 			}
 		}
 	}
+
+	public void Boom(int x, int y)
+    {
+		int brokeNum = GameManager.Instance.BossNum;
+		if (MapController.Instance.dices[y][x].randoms == brokeNum)
+		{
+			MeshRenderer renderer = MapController.Instance.dices[y][x].GetComponent<MeshRenderer>();
+			Sequence seq = DOTween.Sequence();
+			seq.Append(renderer.material.DOColor(Color.red, 0.4f));
+			seq.Append(renderer.material.DOColor(new Color(156, 146, 115) / 255, 0.3f));
+			int n = y;
+			int m = x;
+			seq.AppendCallback(() =>
+			{
+				MapController.Instance.dices[n][m].transform.rotation = Quaternion.Euler(0, 0, 0);
+				MapController.Instance.dices[n][m].isDiceDirecting = true;
+				StartCoroutine(MapController.Instance.dices[n][m].BasicDiceNumSelect());
+				seq.Kill();
+			});
+		}
+	}
 }
