@@ -6,6 +6,8 @@ public static class DefineCS
         AttackParticle,
         Item,
         SkillEffect,
-        NumText
+        NumText,
+        Statue,
+        Mino
     }
 }
