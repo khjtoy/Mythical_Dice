@@ -4,19 +4,43 @@ using UnityEngine;
 
 public class SoundManager : MonoSingleton<SoundManager>
 {
+	#region 클립
+	[Header("플레이어 효과음 클립")]
+    public AudioClip[] PlayerEffectClip;
+    [Header("적 효과음 클립")]
+    public AudioClip[] EnemyEffectClip;
+
+    [Header("배경음 클립")]
+    public AudioClip[] BackgroundClips;
+    [Header("효과음 클립")]
+    public AudioClip[] EffectClips;
+	#endregion
+
+	#region 오디오 소스
+	[Header("배경음 오디오 소스")]
     [SerializeField]
     private AudioSource BackgroundSource;
+
+    [Header("효과음 오디오 소스")]
     [SerializeField]
     private AudioSource EffectSource;
+
+    [Header("플레이어 오디오 소스")]
     [SerializeField]
     private AudioSource PlayerEffectSource;
 
+    [Header("적 오디오 소스")]
     [SerializeField]
-    private AudioClip[] PlayerEffectClip;
+    private AudioSource EnemyEffectSource;
+
+    [Header("플레이어 대쉬 오디오 소스")]
     [SerializeField]
-    private AudioClip[] BackgroundClips;
+    private AudioSource PlayerDashEffectSource;
+
+    [Header("플레이어 공격 소스")]
     [SerializeField]
-    private AudioClip[] EffectClips;
+    private AudioSource PlayerAttackEffectSource;
+	#endregion
 
 	private void Start()
 	{
@@ -37,10 +61,22 @@ public class SoundManager : MonoSingleton<SoundManager>
         EffectSource.Play();
     }
 
-    public void SetPlayerEffectClip(int index)
+    public void SetPlayerAttackEffectClip(int index)
 	{
-        PlayerEffectSource.Stop();
-        PlayerEffectSource.clip = PlayerEffectClip[index];
-        PlayerEffectSource.Play();
+        PlayerAttackEffectSource.Stop();
+        PlayerAttackEffectSource.clip = PlayerEffectClip[index];
+        PlayerAttackEffectSource.Play();
     }
+    public void SetPlayerDashEffectClip(int index)
+    {
+        PlayerDashEffectSource.Stop();
+        PlayerDashEffectSource.clip = PlayerEffectClip[index];
+        PlayerDashEffectSource.Play();
+    }
+    public void SetEnemyEffectClip(int index)
+	{
+        EnemyEffectSource.Stop();
+        EnemyEffectSource.clip = EnemyEffectClip[index];
+        EnemyEffectSource.Play();
+	}
 }
