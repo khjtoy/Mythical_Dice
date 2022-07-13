@@ -207,7 +207,7 @@ public class MapController : MonoSingleton<MapController>
 
 	public static int PosToArray(float pos)
 	{
-		return Mathf.RoundToInt((pos - (GameManager.Instance.Size / 2 * -1.5f)) / 1.5f);
+		return Mathf.RoundToInt(pos / 1.5f + GameManager.Instance.Size / 2);
 	}
 
 	public static Vector3 ArrayToPos(int indexX, int indexY)

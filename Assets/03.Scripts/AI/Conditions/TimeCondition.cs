@@ -9,12 +9,16 @@ public class TimeCondition : AICondition
     private float GoalTime = 0;
     public override bool Result()
     {
-        time += Time.deltaTime;
-        if(time >= GoalTime)
+        time -= Time.deltaTime;
+        if(time <= 0)
         {
-            time = 0;
+            time = GoalTime;
             return true;
         }
         return false;
+    }
+    private void Awake()
+    {
+        time = GoalTime;
     }
 }
