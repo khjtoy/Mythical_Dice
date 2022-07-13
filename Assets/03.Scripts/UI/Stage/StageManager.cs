@@ -15,8 +15,8 @@ public class StageManager : MonoBehaviour
 
     private void Awake()
     {
-        PlayerPrefs.SetInt("STAGE", 2);
-        currentStage = PlayerPrefs.GetInt("STAGE");
+        PlayerPrefs.SetInt("CLEAR", 2);
+        currentStage = PlayerPrefs.GetInt("CLEAR");
     }
 
     private void Start()
@@ -40,6 +40,7 @@ public class StageManager : MonoBehaviour
 
     public void Stage(int stage)
     {
+        PlayerPrefs.SetInt("STAGE", stage);
         SceneManager.LoadScene("GamePlay 1");
     }
 }
