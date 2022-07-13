@@ -13,7 +13,7 @@ public class CharacterMove : MonoBehaviour
     private Character character;
 
     public bool IsMove { get; private set; }
-    public Vector2Int PlayerPos = Vector2Int.zero;
+    public Vector2 PlayerPos = Vector2.zero;
 
     private void Start()
     {
@@ -28,7 +28,7 @@ public class CharacterMove : MonoBehaviour
         if (IsMove) return;
         IsMove = true;
 
-        PlayerPos = new Vector2Int(Mathf.RoundToInt(transform.localPosition.x), Mathf.RoundToInt(transform.localPosition.y));
+        PlayerPos = new Vector2(transform.localPosition.x, transform.localPosition.y);
         target.x -= transform.localPosition.x;
         target.y -= transform.localPosition.y;
 
@@ -63,7 +63,7 @@ public class CharacterMove : MonoBehaviour
 
         //Ä³¸¯ÅÍ ÁÂÇ¥ -> Å¸ÄÏ ÁÂÇ¥
         transform.localPosition = targetPos;
-        PlayerPos = new Vector2Int(Mathf.RoundToInt(transform.localPosition.x), Mathf.RoundToInt(transform.localPosition.y));
+        PlayerPos = new Vector2(transform.localPosition.x, transform.localPosition.y);
         IsMove = false;
     }
 }

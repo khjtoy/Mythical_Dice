@@ -16,7 +16,7 @@ public class Define
     }
 
     private static CharacterMove _player = null;
-    public static Vector2Int Player
+    public static Vector2 Player
     {
         get
         {
