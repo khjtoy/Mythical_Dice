@@ -13,7 +13,7 @@ public class PlayerAttack : MonoBehaviour
     private float timer;
 
     private Character character;
-
+    
     private PlayerController playerController;
 
     private Transform camera;
@@ -79,9 +79,9 @@ public class PlayerAttack : MonoBehaviour
         {
             if (add == 1)
             {
-                Debug.Log($"X:{x}Y:{y}");
+                //Debug.Log($"X:{x}Y:{y}");
 
-                Debug.Log($"Damage");
+                //Debug.Log($"Damage");
                 if (!enemyPos.GetComponent<StatueMove>().IsFoating)
                 {
                     GameObject paritcle = PoolManager.Instance.GetPooledObject((int)PooledObject.AttackParticle);

@@ -27,7 +27,7 @@ public class StatueMove : CharacterMove, IEnemyAttack
 		seq.Append(transform.DOLocalMoveZ(-3, 0.3f));
 		seq.Append(transform.DOLocalMove(new Vector3(target.x, target.y, -3), 0.3f));
 		seq.Append(transform.DOLocalMoveZ(-1, 0.1f).SetEase(Ease.InExpo));
-		Debug.Log(1);
+		//Debug.Log(1);
 		Invoke("ZeroTime", 0.6f);
 		Invoke("ChangeTime", 0.62f);
 		seq.AppendCallback(() =>
@@ -38,10 +38,14 @@ public class StatueMove : CharacterMove, IEnemyAttack
 			//아이템 생성
 			if (!isCheck)
 			{
-				GameObject item = PoolManager.Instance.GetPooledObject((int)PooledObject.Item);
-				item.transform.localPosition = new Vector3(transform.localPosition.x, transform.localPosition.y, -1);
-				item.SetActive(true);
-				isCheck = true;
+				int random = Random.Range(0, 5);
+				if (random == 0)
+				{
+					GameObject item = PoolManager.Instance.GetPooledObject((int)PooledObject.Item);
+					item.transform.localPosition = new Vector3(transform.localPosition.x, transform.localPosition.y, -1);
+					item.SetActive(true);
+					isCheck = true;
+				}
 			}
 
 			DoAttack();

@@ -31,7 +31,7 @@ public class EnemyController : Character, OnHit
         SoundManager.Instance.SetEnemyEffectClip((int)EnemyEffectEnum.Hit);
 		if (hp <= 0)
         {
-            //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+            //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿?
         }
     }
     protected virtual void Update()
@@ -87,7 +87,7 @@ public class EnemyController : Character, OnHit
 
             if (_canMoveNext)
             {
-                Debug.Log($"Current State Has Changed To {transition.goalState}");
+                //Debug.Log($"Current State Has Changed To {transition.goalState}");
                 _currentState = transition.goalState;
                 _canDoAgain = true;
             }
