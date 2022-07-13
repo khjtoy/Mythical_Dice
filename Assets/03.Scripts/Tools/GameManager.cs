@@ -18,6 +18,8 @@ public class GameManager : MonoSingleton<GameManager>
     public int StageNum;
 
     public bool StageStart;
+
+    public bool thirdTutorial = false;
     public int Width
     {
         get
