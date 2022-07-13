@@ -11,6 +11,8 @@ public class StatueMove : EnemyMove, IEnemyAttack
 	public override bool IsFloating { get; set; } = false;
 	public bool isCheck = false;
 
+	private bool twoTutorial = false;
+
 	private GameObject dice;
 	private Animator diceAni;
 	private SetNumber setNumber;
@@ -51,6 +53,11 @@ public class StatueMove : EnemyMove, IEnemyAttack
 		{
 			seq.Kill();
 			IsFloating = false;
+			if(!twoTutorial)
+            {
+				twoTutorial = true;
+				TutorialAction.Instance.TuturialMode();
+			}
 			//setNumber.isSurple = false;
 
 			//아이템 생성

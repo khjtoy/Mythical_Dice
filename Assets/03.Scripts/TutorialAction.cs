@@ -43,7 +43,8 @@ public class TutorialAction : MonoSingleton<TutorialAction>
     public void OffTutorial()
     {
         panel.SetActive(false);
-        index++;
+        currentShow++;
+        index = 0;
         Time.timeScale = 1;
     }
 

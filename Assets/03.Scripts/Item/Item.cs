@@ -11,6 +11,11 @@ public class Item : MonoBehaviour
     {
         if(other.CompareTag("Player"))
         {
+            if (!GameManager.Instance.thirdTutorial)
+            {
+                GameManager.Instance.thirdTutorial = true;
+                TutorialAction.Instance.TuturialMode();
+            }
             swordParam.boolParam = true;
             EventManager.TriggerEvent("RESETCHECK", eventParam);
             EventManager.TriggerEvent("CHANGESWORD", swordParam);
