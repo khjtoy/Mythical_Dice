@@ -23,6 +23,8 @@ public class PlayerAttack : MonoBehaviour
     private bool isStop = false;
     private bool isKill = false;
 
+    private EventParam swordParam;
+
     private void Start()
     {
         character = GetComponent<Character>();
@@ -68,7 +70,11 @@ public class PlayerAttack : MonoBehaviour
         
         character.Animator.SetTrigger("Attack");
         if (isSkill)
+        {
+            swordParam.boolParam = false;
             StartCoroutine(Skill(playerController.playerDir));
+            EventManager.TriggerEvent("CHANGESWORD", swordParam);
+        }
         else
         {
             if (add == 1)
