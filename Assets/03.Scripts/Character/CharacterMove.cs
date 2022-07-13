@@ -13,7 +13,7 @@ public class CharacterMove : MonoBehaviour
     private Character character;
 
     public bool IsMove { get; private set; }
-    public Vector2 PlayerPos = Vector2.zero;
+    public Vector2Int PlayerPos = Vector2Int.zero;
 
     private void Start()
     {
@@ -26,9 +26,9 @@ public class CharacterMove : MonoBehaviour
     public virtual void CharacterMovement(Vector2 target)
     {
         if (IsMove) return;
-            IsMove = true;
+        IsMove = true;
 
-        PlayerPos = transform.localPosition;
+        PlayerPos = new Vector2Int(Mathf.RoundToInt(transform.localPosition.x), Mathf.RoundToInt(transform.localPosition.y));
         target.x -= transform.localPosition.x;
         target.y -= transform.localPosition.y;
 
@@ -36,10 +36,10 @@ public class CharacterMove : MonoBehaviour
 
         if (targetPos.x < transform.localPosition.x)
             transform.localScale = new Vector3(-1, 1, 1);
-        else if(targetPos.x > transform.localPosition.x)
+        else if (targetPos.x > transform.localPosition.x)
             transform.localScale = new Vector3(1, 1, 1);
 
-		Debug.Log(target);
+        Debug.Log(target);
         StartCoroutine(DoMove(targetPos));
     }
 
@@ -51,7 +51,7 @@ public class CharacterMove : MonoBehaviour
 
         character.Animator.SetTrigger("Move");
         //극한(거의 0)보다 큰 동안
-        while(sqrRemainingDistance > double.Epsilon)
+        while (sqrRemainingDistance > double.Epsilon)
         {
             newPos = Vector3.MoveTowards(transform.localPosition, targetPos, inverseMoveTime * Time.deltaTime);
             transform.localPosition = newPos;
@@ -63,7 +63,7 @@ public class CharacterMove : MonoBehaviour
 
         //캐릭터 좌표 -> 타켓 좌표
         transform.localPosition = targetPos;
-        PlayerPos = transform.localPosition;
+        PlayerPos = new Vector2Int(Mathf.RoundToInt(transform.localPosition.x), Mathf.RoundToInt(transform.localPosition.y));
         IsMove = false;
     }
 }

@@ -6,7 +6,7 @@ public class EnemyController : Character, OnHit
 {
     [SerializeField] private AIState _currentState;
     private HPSlider _slider;
-    private bool _canMoveNext = false;
+    private bool _canMoveNext = true;
     private bool _canDoAgain = true;
 
     [Header("적 HP")]
@@ -21,12 +21,11 @@ public class EnemyController : Character, OnHit
     }
 
     public void OnHits(int damage)
-	{
+    {
         hp -= damage;
         float hpPer = (float)hp / originHp;
         _slider.amount = hpPer;
-		SoundManager.Instance.SetEnemyEffectClip((int)EnemyEffectEnum.Hit);
-		if (hp <= 0)
+        if (hp <= 0)
         {
             //종료씬으로
         }
@@ -43,10 +42,11 @@ public class EnemyController : Character, OnHit
         foreach (var transition in _currentState.transitions)
         {
             if (transition.PositiveCondition.Count == 0)
-                _canMoveNext &= true;
+                _canMoveNext = true;
             else
             if (transition.IsPositiveAnd)
             {
+                _canMoveNext = true;
                 foreach (var conditon in transition.PositiveCondition)
                 {
                     _canMoveNext &= conditon.Result();
@@ -66,6 +66,7 @@ public class EnemyController : Character, OnHit
             else
             if (transition.IsNegativeAnd)
             {
+                _canMoveNext = true;
                 foreach (var conditon in transition.NegativeCondition)
                 {
                     _canMoveNext &= !conditon.Result();
