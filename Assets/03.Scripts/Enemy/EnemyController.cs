@@ -25,7 +25,10 @@ public class EnemyController : Character, OnHit
         hp -= damage;
         float hpPer = (float)hp / originHp;
         _slider.amount = hpPer;
-		SoundManager.Instance.SetEnemyEffectClip((int)EnemyEffectEnum.Hit);
+        GameObject obj = PoolManager.Instance.GetPooledObject((int)DefineCS.PooledObject.NumText);
+        obj.SetActive(true);
+        obj.GetComponent<NumText>().DamageText(damage, this.transform.position);
+        SoundManager.Instance.SetEnemyEffectClip((int)EnemyEffectEnum.Hit);
 		if (hp <= 0)
         {
             //Á¾·á¾ÀÀ¸·Î

@@ -1353,6 +1353,7 @@ MonoBehaviour:
   playerDir: 0
   originHp: 20
   hp: 20
+  text1: {fileID: 0}
 --- !u!54 &1203299283
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -2876,6 +2877,14 @@ MonoBehaviour:
       type: 3}
     amountToPool: 2
     shouldExpand: 0
+  - objectToPool: {fileID: 4794043405585894037, guid: 37138c0c33167b04fa1fb90b7f5a794f,
+      type: 3}
+    amountToPool: 10
+    shouldExpand: 1
+  - objectToPool: {fileID: 287274016122660348, guid: d8a7b67f5ed940d4b97c219385736796,
+      type: 3}
+    amountToPool: 10
+    shouldExpand: 1
   pooledObjects: []
 --- !u!4 &2040271934
 Transform:

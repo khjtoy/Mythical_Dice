@@ -5,6 +5,7 @@ public static class DefineCS
     {
         AttackParticle,
         Item,
-        SkillEffect
+        SkillEffect,
+        NumText
     }
 }
