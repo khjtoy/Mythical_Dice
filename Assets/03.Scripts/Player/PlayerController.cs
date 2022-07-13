@@ -42,33 +42,27 @@ public class PlayerController : Character, OnHit
         hp -= damage;
         float hpPer = (float)hp / originHp;
         _slider.amount = hpPer;
-<<<<<<< HEAD
         Animator.SetTrigger("Hit");
-=======
         Define.MainCam.transform.DOShakePosition(0.3f);
->>>>>>> 9ae52d2d9a056f9fd5da0095fd12220600be22d9
         if (hp <= 0)
-		{
+        {
             isStop = true;
             GetComponent<PlayerDie>().DieAction();
             //SceneManager.LoadScene(1);
-		}
-<<<<<<< HEAD
+        }
         else
         {
+            if ((float)hp / originHp * 100 <= 50)
+            {
+                Color a = image.color;
+                a.a = 0.5f - (0.5f * ((float)((float)hp / originHp * 100) / 100));
+                image.color = a;
+            }
             spriteMaterial.EnableKeyword("_SordColor");
             spriteMaterial.SetFloat("_SordColor", 0f);
             spriteMaterial.DisableKeyword("_SordColor");
-=======
-        else if((float)hp / originHp * 100 <= 50)
-		{
-            Color a = image.color;
-            a.a = 0.5f - (0.5f * ((float)((float)hp / originHp * 100) / 100));
-            image.color = a;
->>>>>>> 9ae52d2d9a056f9fd5da0095fd12220600be22d9
         }
     }
-
     private void Awake()
     {
         _slider = GameObject.Find("PlayerBar").GetComponent<HPSlider>();
