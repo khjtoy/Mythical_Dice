@@ -16,6 +16,7 @@ public class GameManager : MonoSingleton<GameManager>
     [field: SerializeField]
     public int BossNum { get; set; }
 
+    public int StageNum;
     public int Width
     {
         get

@@ -39,7 +39,6 @@ public class CharacterMove : MonoBehaviour
         else if(targetPos.x > transform.localPosition.x)
             transform.localScale = new Vector3(1, 1, 1);
 
-		SoundManager.Instance.SetPlayerEffectClip((int)PlayerEffectEnm.DASH);
 		Debug.Log(target);
         StartCoroutine(DoMove(targetPos));
     }

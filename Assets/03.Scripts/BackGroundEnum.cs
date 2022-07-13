@@ -17,9 +17,13 @@ public enum EffectEnum
 	BOOM,
 }
 
-public enum PlayerEffectEnm
+public enum PlayerEffectEunm
 {
 	SWORD,
-	ATTACK,
 	DASH
+}
+
+public enum EnemyEffectEnum
+{
+	Hit
 }
