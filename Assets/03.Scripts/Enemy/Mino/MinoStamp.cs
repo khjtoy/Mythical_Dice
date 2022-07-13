@@ -30,7 +30,7 @@ public class MinoStamp : EnemyMove
     private IEnumerator StapCoroutine()
     {
         Vector2Int pos = new Vector2Int(MapController.PosToArray(transform.localPosition.x), MapController.PosToArray(transform.localPosition.y));
-        GameManager.Instance.BossNum = 1;
+        GameManager.Instance.BossNum = 3;
         for (int i = 1; i <=  GameManager.Instance.Size; i++)
         {
             for (int j = -i; j <= i; j++)
@@ -42,7 +42,7 @@ public class MinoStamp : EnemyMove
                     if(pos.y + j == pos.y + i || pos.y + j == pos.y - i
                         || pos.x + k == pos.x + i || pos.x + k == pos.x - i)
                     {
-                        MapController.Instance.dices[pos.y + j][pos.x + k].DiceNumSelect(1);
+                        MapController.Instance.dices[pos.y + j][pos.x + k].DiceNumSelect(3);
                         BoomMap.Instance.Boom(pos.x + k, pos.y + j);
                     }
 
