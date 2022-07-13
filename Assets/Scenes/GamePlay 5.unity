@@ -453,7 +453,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8a8309d90cf9f7546961571ff32b6578, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GoalTime: 3
+  GoalTime: 1.5
 --- !u!1 &177742802 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 3095817779255461334, guid: 8e7661f135aa8cf4aaec5db74f03cc2b,
@@ -1694,6 +1694,11 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 3095817780479045869, guid: 8e7661f135aa8cf4aaec5db74f03cc2b,
+        type: 3}
+      propertyPath: GoalTime
+      value: 0.5
+      objectReference: {fileID: 0}
     - target: {fileID: 3095817780479045870, guid: 8e7661f135aa8cf4aaec5db74f03cc2b,
         type: 3}
       propertyPath: IsNegativeAnd
@@ -1857,7 +1862,7 @@ MonoBehaviour:
   PositiveCondition:
   - {fileID: 962397817}
   NegativeCondition: []
-  goalState: {fileID: 1854153450}
+  goalState: {fileID: 177742804}
   IsPositiveAnd: 0
   IsNegativeAnd: 0
 --- !u!1001 &1116729317
@@ -2939,9 +2944,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 70b5dadf8ec41354493b673030fca698, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  width: 5
-  height: 5
-  size: 5
+  width: 7
+  height: 7
+  size: 7
   <BossNum>k__BackingField: 10
   StageNum: 0
   StageStart: 0
@@ -3129,6 +3134,7 @@ GameObject:
   - component: {fileID: 1877788474}
   - component: {fileID: 1877788476}
   - component: {fileID: 1877788475}
+  - component: {fileID: 1877788477}
   m_Layer: 0
   m_Name: IdleToSwing
   m_TagString: Untagged
@@ -3179,10 +3185,24 @@ MonoBehaviour:
   StartState: {fileID: 1854153450}
   PositiveCondition:
   - {fileID: 1877788475}
+  - {fileID: 1877788477}
   NegativeCondition: []
   goalState: {fileID: 1575275778}
-  IsPositiveAnd: 0
+  IsPositiveAnd: 1
   IsNegativeAnd: 0
+--- !u!114 &1877788477
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1877788473}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8a8309d90cf9f7546961571ff32b6578, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  GoalTime: 0.5
 --- !u!1001 &1935291605
 PrefabInstance:
   m_ObjectHideFlags: 0
