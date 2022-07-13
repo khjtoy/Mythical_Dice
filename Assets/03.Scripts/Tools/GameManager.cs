@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static DefineCS;
 
 public class GameManager : MonoSingleton<GameManager>
 {
@@ -40,5 +41,35 @@ public class GameManager : MonoSingleton<GameManager>
         {
             return size;
         }
+    }
+
+    private void Awake()
+    {
+        GameObject BossObject = null;
+        switch (PlayerPrefs.GetInt("STAGE"))
+        {
+            case 0:
+                {
+                    width = 5;
+                    height = 5;
+                    size = 5;
+                    BossObject = PoolManager.Instance.GetPooledObject((int)PooledObject.Statue);
+                    break; 
+                }
+            case 1:
+                {
+                    width = 7;
+                    height = 7;
+                    size = 7;
+                    BossObject = PoolManager.Instance.GetPooledObject((int)PooledObject.Mino);
+                    break;
+                }
+        };
+
+        BossObject.SetActive(true);
+
+        BossObject.transform.SetParent(MapController.Instance.Root);
+        BossObject.transform.localPosition = MapController.ArrayToPos(width - 1, height - 1) - Vector3.forward;
+        BossObject.transform.localRotation = Quaternion.Euler(0, 0, 0);
     }
 }

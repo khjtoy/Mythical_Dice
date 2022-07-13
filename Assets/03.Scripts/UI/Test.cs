@@ -7,6 +7,6 @@ public class Test : MonoBehaviour
 {
     private void Awake()
     {
-        SceneManager.LoadScene(1, LoadSceneMode.Additive);
+        SceneManager.LoadScene("Setting", LoadSceneMode.Additive);
     }
 }

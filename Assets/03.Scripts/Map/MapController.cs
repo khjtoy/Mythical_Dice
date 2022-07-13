@@ -9,6 +9,7 @@ public class MapController : MonoSingleton<MapController>
 	[SerializeField]
 	private Transform root;
 
+	public Transform Root { get { return root; } }
 
 	[SerializeField]
 	private float distance;
@@ -35,20 +36,21 @@ public class MapController : MonoSingleton<MapController>
     {
        //DONDESTORY
     }
-    private void Awake()
-    {
-        gameManager = GameManager.Instance;
-
-        min = new Vector2(GameManager.Instance.Size / 2, GameManager.Instance.Size / 2) * -1.5f;
-        map = new GameObject[gameManager.Height][];
-        dices = new DiceDirecting[gameManager.Height][];
-		mapCost = new int[gameManager.Height][];
-    }
     private void Start()
     {
-		if (root.childCount == 2)
-            SpawnMap();
-    }
+		gameManager = GameManager.Instance;
+
+		min = new Vector2(GameManager.Instance.Size / 2, GameManager.Instance.Size / 2) * -1.5f;
+		map = new GameObject[gameManager.Height][];
+		dices = new DiceDirecting[gameManager.Height][];
+		mapCost = new int[gameManager.Height][];
+
+		SpawnMap();
+	}
+    public void InitMap()
+    {
+		SpawnMap();
+	}
 
 	public int GetIndexCost(int x, int y)
     {

@@ -41,6 +41,6 @@ public class StageManager : MonoBehaviour
     public void Stage(int stage)
     {
         PlayerPrefs.SetInt("STAGE", stage);
-        SceneManager.LoadScene("GamePlay 1");
+        SceneManager.LoadScene("GamePlay 6");
     }
 }
