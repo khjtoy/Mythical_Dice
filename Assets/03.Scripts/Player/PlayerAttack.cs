@@ -20,11 +20,22 @@ public class PlayerAttack : MonoBehaviour
 
     public bool isSkill = false;
 
+    private bool isStop = false;
+    private bool isKill = false;
+
+    private EventParam swordParam;
+
     private void Start()
     {
         character = GetComponent<Character>();
         playerController = GetComponent<PlayerController>();
         camera = Camera.main.transform;
+        EventManager.StartListening("CHANGESTOP", ChangeStop);
+    }
+
+    private void ChangeStop(EventParam eventParam)
+    {
+        isStop = eventParam.boolParam;
     }
 
     private void Update()
@@ -40,6 +51,7 @@ public class PlayerAttack : MonoBehaviour
 
     public void CheckPos(GameObject enemy)
     {
+        if (isStop || isKill) return;
         if (enemy.transform.localPosition.x > transform.localPosition.x)
             transform.localScale = new Vector3(1, 1, 1);
         else if (enemy.transform.localPosition.x < transform.localPosition.x)
@@ -55,11 +67,16 @@ public class PlayerAttack : MonoBehaviour
         int difX = MapController.PosToArray(enemyPos.transform.localPosition.x) - MapController.PosToArray(transform.localPosition.x);
         int difY = MapController.PosToArray(enemyPos.transform.localPosition.y) - MapController.PosToArray(transform.localPosition.y);
         float add = Mathf.Abs(difX) + Mathf.Abs(difY);
+        
+        character.Animator.SetTrigger("Attack");
         if (isSkill)
+        {
+            swordParam.boolParam = false;
             StartCoroutine(Skill(playerController.playerDir));
+            EventManager.TriggerEvent("CHANGESWORD", swordParam);
+        }
         else
         {
-            character.Animator.SetTrigger("Attack");
             if (add == 1)
             {
                 Debug.Log($"X:{x}Y:{y}");
@@ -89,6 +106,7 @@ public class PlayerAttack : MonoBehaviour
     {
         int x = MapController.PosToArray(transform.localPosition.x);
         int y = MapController.PosToArray(transform.localPosition.y);
+        isKill = true;
         if (dir == 0)
         {
             for (int i = x + 1; i < GameManager.Instance.Width; i++)
@@ -121,7 +139,9 @@ public class PlayerAttack : MonoBehaviour
                 yield return new WaitForSeconds(0.2f);
             }
         }
+
         isSkill = false;
+        isKill = false;
         yield return null;
     }
 

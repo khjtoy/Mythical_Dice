@@ -27,6 +27,8 @@ public class PlayerController : Character, OnHit
     [SerializeField]
     private int hp;
 
+    public bool isStop = false;
+
     public void OnHits(int damage)
     {
         hp -= damage;
@@ -34,7 +36,9 @@ public class PlayerController : Character, OnHit
         _slider.amount = hpPer;
         if (hp <= 0)
 		{
-            SceneManager.LoadScene(1);
+            isStop = true;
+            GetComponent<PlayerDie>().DieAction();
+            //SceneManager.LoadScene(1);
 		}
     }
 
@@ -58,6 +62,8 @@ public class PlayerController : Character, OnHit
 
     private void Update()
     {
+        if (isStop) return;
+
         PlayerMovement();
         PressAttack();
     }

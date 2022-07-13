@@ -38,8 +38,8 @@ public class StageManager : MonoBehaviour
 
     }
 
-    public void Stage(string name)
+    public void Stage(int stage)
     {
-        SceneManager.LoadScene(name);
+        SceneManager.LoadScene("GamePlay 1");
     }
 }
