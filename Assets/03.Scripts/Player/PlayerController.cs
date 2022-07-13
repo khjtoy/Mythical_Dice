@@ -110,7 +110,7 @@ public class PlayerController : Character, OnHit
     {
         if(Input.GetKeyDown(KeyCode.Z))
         {
-            SoundManager.Instance.SetEffectClip(0);
+            SoundManager.Instance.SetPlayerEffectClip((int)PlayerEffectEnm.SWORD);
             playerAttack.CheckPos(enemyObject);
         }
     }

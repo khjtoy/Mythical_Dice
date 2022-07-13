@@ -8,7 +8,11 @@ public class SoundManager : MonoSingleton<SoundManager>
     private AudioSource BackgroundSource;
     [SerializeField]
     private AudioSource EffectSource;
+    [SerializeField]
+    private AudioSource PlayerEffectSource;
 
+    [SerializeField]
+    private AudioClip[] PlayerEffectClip;
     [SerializeField]
     private AudioClip[] BackgroundClips;
     [SerializeField]
@@ -31,5 +35,12 @@ public class SoundManager : MonoSingleton<SoundManager>
         EffectSource.Stop();
         EffectSource.clip = EffectClips[index];
         EffectSource.Play();
+    }
+
+    public void SetPlayerEffectClip(int index)
+	{
+        PlayerEffectSource.Stop();
+        PlayerEffectSource.clip = PlayerEffectClip[index];
+        PlayerEffectSource.Play();
     }
 }

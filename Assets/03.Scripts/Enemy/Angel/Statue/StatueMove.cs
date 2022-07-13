@@ -70,7 +70,7 @@ public class StatueMove : CharacterMove, IEnemyAttack
 	private IEnumerator AttackCoroutine(int type)
 	{
 		Pos = new Vector2Int(MapController.PosToArray(transform.localPosition.x), MapController.PosToArray(transform.localPosition.y));
-		SoundManager.Instance.SetEffectClip((int)EffectEnum.STOMP);
+		SoundManager.Instance.SetEffectClip((int)EffectEnum.BOOM);
 		switch (type)
 		{
 			case 0:
