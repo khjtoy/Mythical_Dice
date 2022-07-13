@@ -3,9 +3,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using DG.Tweening;
-using TMPro;
-using UnityEngine.SceneManagement;
 
 public class PlayerController : Character, OnHit
 {
@@ -33,6 +30,9 @@ public class PlayerController : Character, OnHit
     [SerializeField]
     private float deleteMoveTime;
     Queue<int> moveDir;
+
+    [SerializeField]
+    private Image image;
     public void OnHits(int damage)
     {
         hp -= damage;
@@ -44,6 +44,12 @@ public class PlayerController : Character, OnHit
             GetComponent<PlayerDie>().DieAction();
             //SceneManager.LoadScene(1);
 		}
+        else if((float)hp / originHp * 100 <= 50)
+		{
+            Color a = image.color;
+            a.a = 0.5f - (0.5f * ((float)((float)hp / originHp * 100) / 100));
+            image.color = a;
+        }
     }
 
     private void Awake()
