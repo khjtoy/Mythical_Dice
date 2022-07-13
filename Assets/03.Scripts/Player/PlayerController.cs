@@ -31,7 +31,8 @@ public class PlayerController : Character, OnHit
         _slider.amount = hpPer;
         if (hp <= 0)
 		{
-            SceneManager.LoadScene(1);
+            GetComponent<PlayerDie>().DieAction();
+            //SceneManager.LoadScene(1);
 		}
     }
 
