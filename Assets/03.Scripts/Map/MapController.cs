@@ -29,6 +29,7 @@ public class MapController : MonoSingleton<MapController>
 	public bool XAxis;
 	public bool isDown;
 	public bool isLeft;
+	private bool firstTutorial = false;
 	private Vector2 condition;
 
     protected override void Init()
@@ -125,6 +126,11 @@ public class MapController : MonoSingleton<MapController>
 		if ((y < 0 || y >= GameManager.Instance.Height || x < 0 || x >= GameManager.Instance.Width) && isDual)
 		{
 			GameManager.Instance.StageStart = true;
+			if (!firstTutorial)
+			{
+				firstTutorial = true;
+				TutorialAction.Instance.TuturialMode();
+			}
 			return;
 		}
 
@@ -184,6 +190,11 @@ public class MapController : MonoSingleton<MapController>
 			{
 				BoomMap.Instance.Boom();
 				GameManager.Instance.StageStart = true;
+				if (!firstTutorial)
+				{
+					firstTutorial = true;
+					TutorialAction.Instance.TuturialMode();
+				}
 				yield break;
 			}
 
