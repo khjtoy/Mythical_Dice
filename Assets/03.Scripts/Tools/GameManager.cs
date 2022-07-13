@@ -12,11 +12,12 @@ public class GameManager : MonoSingleton<GameManager>
     [SerializeField]
     private int size;
 
-    private int _bossNum = 0;
     [field: SerializeField]
     public int BossNum { get; set; }
 
     public int StageNum;
+
+    public bool StageStart;
     public int Width
     {
         get

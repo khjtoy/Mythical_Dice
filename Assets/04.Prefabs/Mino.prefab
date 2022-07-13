@@ -124,7 +124,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 84ba5a8f563a79947b66a91d52a03565, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  StartState: {fileID: 3095817779255461328}
+  StartState: {fileID: 0}
   PositiveCondition: []
   NegativeCondition:
   - {fileID: 0}
@@ -178,7 +178,7 @@ MonoBehaviour:
   PositiveCondition:
   - {fileID: 0}
   NegativeCondition: []
-  goalState: {fileID: 3095817779255461328}
+  goalState: {fileID: 0}
   IsPositiveAnd: 0
   IsNegativeAnd: 0
 --- !u!1 &3095817779255461334
@@ -190,7 +190,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3095817779255461329}
-  - component: {fileID: 3095817779255461328}
   m_Layer: 0
   m_Name: MoveState
   m_TagString: Untagged
@@ -213,22 +212,6 @@ Transform:
   m_Father: {fileID: 3095817778782163518}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &3095817779255461328
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3095817779255461334}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e9374280adcb8234a95c4274eab63154, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  <transitions>k__BackingField:
-  - {fileID: 3095817778921136528}
-  <IsLoop>k__BackingField: 0
-  move: {fileID: 0}
 --- !u!1 &3095817779649229844
 GameObject:
   m_ObjectHideFlags: 0

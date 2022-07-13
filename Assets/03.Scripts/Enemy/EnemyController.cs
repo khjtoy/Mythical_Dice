@@ -28,7 +28,7 @@ public class EnemyController : Character, OnHit
         GameObject obj = PoolManager.Instance.GetPooledObject((int)DefineCS.PooledObject.NumText);
         obj.SetActive(true);
         obj.GetComponent<NumText>().DamageText(damage, this.transform.position);
-        //SoundManager.Instance.SetEnemyEffectClip((int)EnemyEffectEnum.Hit);
+		SoundManager.Instance.SetEnemyEffectClip((int)EnemyEffectEnum.Hit);
 		if (hp <= 0)
         {
             //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿?
@@ -36,6 +36,9 @@ public class EnemyController : Character, OnHit
     }
     protected virtual void Update()
     {
+        if (!GameManager.Instance.StageStart)
+            return;
+
         if (_canDoAgain)
         {
             _currentState.DoAction();
@@ -70,7 +73,7 @@ public class EnemyController : Character, OnHit
             else
             if (transition.IsNegativeAnd)
             {
-                _canMoveNext = true;
+                _canMoveNext &= true;
                 foreach (var conditon in transition.NegativeCondition)
                 {
                     _canMoveNext &= !conditon.Result();
@@ -87,7 +90,7 @@ public class EnemyController : Character, OnHit
 
             if (_canMoveNext)
             {
-                //Debug.Log($"Current State Has Changed To {transition.goalState}");
+                Debug.Log($"Current State Has Changed To {transition.goalState}");
                 _currentState = transition.goalState;
                 _canDoAgain = true;
             }
