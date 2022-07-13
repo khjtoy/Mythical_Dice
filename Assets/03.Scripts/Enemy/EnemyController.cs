@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class EnemyController : Character, OnHit
 {
-	[Header("HP ½½¶óÀÌ´õ")]
+	[Header("HP ï¿½ï¿½ï¿½ï¿½ï¿½Ì´ï¿½")]
 	[SerializeField]
 	Image playerHpSlider;
 	[SerializeField]
@@ -44,7 +44,7 @@ public class EnemyController : Character, OnHit
 		isDamage = true;
 		if (hp <= 0)
 		{
-			//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿?
+			//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½?
 		}
 	}
 

@@ -10,9 +10,18 @@ public class StatueMove : EnemyMove, IEnemyAttack
 	public Vector2Int Pos;
 	public override bool IsFloating { get; set; } = false;
 	public bool isCheck = false;
+
+	private GameObject dice;
+	private Animator diceAni;
+	private SetNumber setNumber;
+	private Coroutine coroutine;
 	private void Start()
 	{
 		EventManager.StartListening("RESETCHECK", OffCheck);
+		dice = GameObject.FindGameObjectWithTag("Dice");
+		diceAni = dice.GetComponent<Animator>();
+		setNumber = dice.transform.GetChild(0).GetComponent<SetNumber>();
+		setNumber.gameObject.SetActive(false);
 	}
 
 	private void OffCheck(EventParam eventParam)
@@ -22,6 +31,14 @@ public class StatueMove : EnemyMove, IEnemyAttack
 	public override void CharacterMovement(Vector2 target)
 	{
 		IsFloating = true;
+		diceAni.SetBool("IsDice", true);
+		//if(setNumber == null) setNumber = dice.transform.GetChild(0).GetComponent<SetNumber>();
+		setNumber.gameObject.SetActive(false);
+		setNumber.isSurple = true;
+		int x = MapController.PosToArray(target.x);
+		int y = MapController.PosToArray(target.y);
+		coroutine = StartCoroutine(ChangeDice(x, y));
+		//StartCoroutine(setNumber.SurpleNumber());
 
 		seq = DOTween.Sequence();
 		seq.Append(transform.DOLocalMoveZ(-3, 0.3f));
@@ -34,6 +51,7 @@ public class StatueMove : EnemyMove, IEnemyAttack
 		{
 			seq.Kill();
 			IsFloating = false;
+			//setNumber.isSurple = false;
 
 			//아이템 생성
 			if (!isCheck)
@@ -62,6 +80,13 @@ public class StatueMove : EnemyMove, IEnemyAttack
 		Time.timeScale = 0.2f;
 	}
 
+	private IEnumerator ChangeDice(int x, int y)
+    {
+		yield return new WaitForSeconds(0.15f);
+		diceAni.SetBool("IsDice", false);
+		setNumber.SettingNumber(MapController.Instance.dices[y][x].randoms - 1);
+		setNumber.gameObject.SetActive(true);
+	}
 	public void DoAttack()
 	{
 		int random = Random.Range(0, 2);

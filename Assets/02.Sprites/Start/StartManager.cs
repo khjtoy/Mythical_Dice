@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class StartManager : MonoBehaviour
@@ -50,6 +51,14 @@ public class StartManager : MonoBehaviour
         _animator.SetTrigger(_startHashStr);
 
         _player.SetActive(true);
+
+        yield return new WaitForSeconds(1.5f);
+        StartStageScene();
+    }
+
+    public void StartStageScene()
+    {
+        SceneManager.LoadScene("Stage");
     }
 
 }
