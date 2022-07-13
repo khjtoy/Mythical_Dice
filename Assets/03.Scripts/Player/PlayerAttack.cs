@@ -149,7 +149,7 @@ public class PlayerAttack : MonoBehaviour
         //Debug.Log($"POS{skillPos}");
         GameObject effect = PoolManager.Instance.GetPooledObject((int)PooledObject.SkillEffect);
         effect.transform.localPosition = skillPos;
-        effect.GetComponent<EnemyCheck>().damage = MapController.Instance.GetIndexCost(x, y); 
+        effect.GetComponent<EnemyCheck>().damage = MapController.Instance.GetIndexCost(x, y) * 2; 
         effect.SetActive(true);
     }
 }
