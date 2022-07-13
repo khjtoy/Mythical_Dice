@@ -23,6 +23,7 @@ public class PlayerDie : MonoBehaviour
         if (!isDie)
         {
             isDie = true;
+            character.Animator.SetBool("IsDie", true);
             character.Animator.SetTrigger("Hit");
             fade.DOFade(1, 1.3f).OnComplete(() =>
             {

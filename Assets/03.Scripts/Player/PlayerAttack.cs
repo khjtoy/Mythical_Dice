@@ -44,9 +44,6 @@ public class PlayerAttack : MonoBehaviour
         {
             timer -= Time.deltaTime;
         }
-            // 1.�����¿� üũ(���� 1���̴� ��ġ�� üũ?)
-            // 2.������ ���?�ؿ� �� ��������
-            // 3. �ش� �� ��ŭ ������
     }
 
     public void CheckPos(GameObject enemy)
@@ -87,7 +84,7 @@ public class PlayerAttack : MonoBehaviour
                     GameObject paritcle = PoolManager.Instance.GetPooledObject((int)PooledObject.AttackParticle);
                     paritcle.transform.position = new Vector3(enemyPos.transform.position.x, enemyPos.transform.position.y + 1f, enemyPos.transform.position.z);
                     paritcle.SetActive(true);
-                    int damage = MapController.Instance.GetIndexCost(x, y);
+                    int damage = MapController.Instance.dices[y][x].randoms;
                     enemyPos.GetComponent<EnemyController>().OnHits(damage);
                     camera.DOShakePosition(0.7f, 0.1f);
                 }

@@ -21,7 +21,7 @@ public class PlayerController : Character, OnHit
 
     public int playerDir; // 0:Right 1:Left 2:Up 3:Down
 
-    [Header("�÷��̾� HP")]
+    [Header("HP")]
     [SerializeField]
     private int originHp = 0;
     [SerializeField]
@@ -29,26 +29,37 @@ public class PlayerController : Character, OnHit
 
     public bool isStop = false;
 
-    [Header("Move ��ȯ")]
+    private Material spriteMaterial;
+
+    [Header("Move")]
     [SerializeField]
     private float deleteMoveTime;
     Queue<int> moveDir;
     public void OnHits(int damage)
     {
+        if (isStop) return;
         hp -= damage;
         float hpPer = (float)hp / originHp;
         _slider.amount = hpPer;
+        Animator.SetTrigger("Hit");
         if (hp <= 0)
 		{
             isStop = true;
             GetComponent<PlayerDie>().DieAction();
             //SceneManager.LoadScene(1);
 		}
+        else
+        {
+            spriteMaterial.EnableKeyword("_SordColor");
+            spriteMaterial.SetFloat("_SordColor", 0f);
+            spriteMaterial.DisableKeyword("_SordColor");
+        }
     }
 
     private void Awake()
     {
         _slider = GameObject.Find("PlayerBar").GetComponent<HPSlider>();
+        spriteMaterial = transform.GetChild(0).GetComponent<SpriteRenderer>().material;
         moveDir = new Queue<int>();
         
         dir[0] = new Vector3(1.5f, 0, 0);
