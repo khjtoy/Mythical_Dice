@@ -104,6 +104,7 @@ public class MapController : MonoSingleton<MapController>
 
 	private void FloorDirect(int x = 0, int y = 0, bool isfirst = false)
 	{
+
 		if (isDown && !isfirst)
 		{
 			y = GameManager.Instance.Height - 1;
@@ -118,19 +119,22 @@ public class MapController : MonoSingleton<MapController>
 			x = GameManager.Instance.Width - 1;
 			condition = new Vector2(0, condition.y);
 		}
-
 		if (!isLeft && !isfirst)
 			condition = new Vector2(GameManager.Instance.Width - 1, condition.y);
 
-
-		if ((y < 0 || y >= GameManager.Instance.Height || x < 0 || x >= GameManager.Instance.Width) && isDual)
+		if (condition.x == x && condition.y == y)
 		{
 			GameManager.Instance.StageStart = true;
 			if (!firstTutorial)
 			{
 				firstTutorial = true;
-				TutorialAction.Instance.TuturialMode();
+				//TutorialAction.Instance.TuturialMode();
 			}
+			return;
+		}
+
+		if ((y < 0 || y >= GameManager.Instance.Height || x < 0 || x >= GameManager.Instance.Width) && isDual)
+		{
 			return;
 		}
 
