@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using DG.Tweening;
 
 public class PlayerController : Character, OnHit
 {
@@ -38,6 +39,7 @@ public class PlayerController : Character, OnHit
         hp -= damage;
         float hpPer = (float)hp / originHp;
         _slider.amount = hpPer;
+        Define.MainCam.transform.DOShakePosition(0.3f);
         if (hp <= 0)
 		{
             isStop = true;
