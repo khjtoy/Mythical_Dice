@@ -3,10 +3,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MinoMove : CharacterMove
+public class MinoDash : EnemyMove
 {
     private Sequence seq;
     public bool IsDashing = false;
+
+    public override bool IsFloating { get; set; } = false;
+
     public override void CharacterMovement(Vector2 target)
     {
         IsDashing = true;

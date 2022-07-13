@@ -13,7 +13,7 @@ public class PlayerAttack : MonoBehaviour
     private float timer;
 
     private Character character;
-
+    
     private PlayerController playerController;
 
     private Transform camera;
@@ -44,9 +44,9 @@ public class PlayerAttack : MonoBehaviour
         {
             timer -= Time.deltaTime;
         }
-            // 1.»óÇÏÁÂ¿ì Ã¼Å©(¸ó½ºÅÍ 1¸íÀÌ´Ï À§Ä¡·Î Ã¼Å©?)
-            // 2.¹üÀ§¿¡ µé¸é ¹Ø¿¡ °ª °¡Á®¿À±â
-            // 3. ÇØ´ç °ª ¸¸Å­ µ¥¹ÌÁö
+            // 1.ï¿½ï¿½ï¿½ï¿½ï¿½Â¿ï¿½ Ã¼Å©(ï¿½ï¿½ï¿½ï¿½ 1ï¿½ï¿½ï¿½Ì´ï¿½ ï¿½ï¿½Ä¡ï¿½ï¿½ Ã¼Å©?)
+            // 2.ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿?ï¿½Ø¿ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+            // 3. ï¿½Ø´ï¿½ ï¿½ï¿½ ï¿½ï¿½Å­ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
     }
 
     public void CheckPos(GameObject enemy)
@@ -79,10 +79,10 @@ public class PlayerAttack : MonoBehaviour
         {
             if (add == 1)
             {
-                Debug.Log($"X:{x}Y:{y}");
+                //Debug.Log($"X:{x}Y:{y}");
 
-                Debug.Log($"Damage");
-                if (!enemyPos.GetComponent<StatueMove>().IsFoating)
+                //Debug.Log($"Damage");
+                if (!enemyPos.GetComponent<EnemyMove>().IsFloating)
                 {
                     GameObject paritcle = PoolManager.Instance.GetPooledObject((int)PooledObject.AttackParticle);
                     paritcle.transform.position = new Vector3(enemyPos.transform.position.x, enemyPos.transform.position.y + 1f, enemyPos.transform.position.z);

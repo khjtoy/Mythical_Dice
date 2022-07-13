@@ -39,7 +39,7 @@ public class CharacterMove : MonoBehaviour
         else if (targetPos.x > transform.localPosition.x)
             transform.localScale = new Vector3(1, 1, 1);
 
-        Debug.Log(target);
+        //Debug.Log(target);
         StartCoroutine(DoMove(targetPos));
     }
 

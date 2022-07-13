@@ -21,7 +21,7 @@ public class PlayerController : Character, OnHit
 
     public int playerDir; // 0:Right 1:Left 2:Up 3:Down
 
-    [Header("ÇÃ·¹ÀÌ¾î HP")]
+    [Header("ï¿½Ã·ï¿½ï¿½Ì¾ï¿½ HP")]
     [SerializeField]
     private int originHp = 0;
     [SerializeField]
@@ -29,6 +29,10 @@ public class PlayerController : Character, OnHit
 
     public bool isStop = false;
 
+    [Header("Move ï¿½ï¿½È¯")]
+    [SerializeField]
+    private float deleteMoveTime;
+    Queue<int> moveDir;
     public void OnHits(int damage)
     {
         hp -= damage;
@@ -45,6 +49,7 @@ public class PlayerController : Character, OnHit
     private void Awake()
     {
         _slider = GameObject.Find("PlayerBar").GetComponent<HPSlider>();
+        moveDir = new Queue<int>();
         
         dir[0] = new Vector3(1.5f, 0, 0);
         dir[1] = new Vector3(-1.5f, 0, 0);
@@ -64,6 +69,9 @@ public class PlayerController : Character, OnHit
     {
         if (isStop) return;
 
+        if (moveDir.Count > 0 && !characterMove.IsMove)
+            PopMove();
+
         PlayerMovement();
         PressAttack();
     }
@@ -71,55 +79,57 @@ public class PlayerController : Character, OnHit
 
     private void PlayerMovement()
     {
-        if (characterMove.IsMove) return;
+        //if (characterMove.IsMove) return;
 
 
         Vector3 targetPos = Vector3.zero;
-        bool isCheck = false;
 
         if (Input.GetKeyDown(KeyCode.RightArrow))
         {
             playerDir = 0;
-            isCheck = true;
+            moveDir.Enqueue(playerDir);
+            Debug.Log("queue");
         }
         else if (Input.GetKeyDown(KeyCode.LeftArrow))
         {
             playerDir = 1;
-            isCheck = true;
+            moveDir.Enqueue(playerDir);
+            Debug.Log("queue");
         }
         else if (Input.GetKeyDown(KeyCode.UpArrow))
         {
             playerDir = 2;
-            isCheck = true;
+            moveDir.Enqueue(playerDir);
+            Debug.Log("queue");
         }
         else if (Input.GetKeyDown(KeyCode.DownArrow))
         {
             playerDir = 3;
-            isCheck = true;
+            moveDir.Enqueue(playerDir);
+            Debug.Log("queue");
         }
+    }
 
-        targetPos = transform.localPosition + dir[playerDir];
-        if (isCheck)
-        {
-            x = MapController.PosToArray(targetPos.x);
-            y = MapController.PosToArray(targetPos.y);
-            //Debug.Log($"Player x:{x}, y:{y}");
-            monsterX = MapController.PosToArray(enemyObject.transform.localPosition.x);
-            monsterY = MapController.PosToArray(enemyObject.transform.localPosition.y);
-            //Debug.Log($"Monster x:{monsterX}, y:{monsterY}");
-
-            if (x < 0 || x >= GameManager.Instance.Width || y < 0 || y >= GameManager.Instance.Height
-                || (x == monsterX && y == monsterY))
+    private void PopMove()
+    {
+        Vector3 targetPos = transform.localPosition + dir[moveDir.Dequeue()];
+        Debug.Log("Dequeue");
+        x = MapController.PosToArray(targetPos.x);
+        y = MapController.PosToArray(targetPos.y);
+        monsterX = MapController.PosToArray(enemyObject.transform.localPosition.x);
+        monsterY = MapController.PosToArray(enemyObject.transform.localPosition.y);
+        if (x < 0 || x >= GameManager.Instance.Width || y < 0 || y >= GameManager.Instance.Height
+            || (x == monsterX && y == monsterY))
                 return;
-            SoundManager.Instance.SetPlayerDashEffectClip((int)PlayerEffectEunm.DASH);
-            characterMove.CharacterMovement(targetPos);
-        }
+        SoundManager.Instance.SetPlayerDashEffectClip((int)PlayerEffectEunm.DASH);
+        characterMove.CharacterMovement(targetPos);
     }
 
     private void PressAttack()
     {
         if(Input.GetKeyDown(KeyCode.Z))
         {
+            moveDir.Clear();
             SoundManager.Instance.SetPlayerAttackEffectClip((int)PlayerEffectEunm.SWORD);
             playerAttack.CheckPos(enemyObject);
         }
