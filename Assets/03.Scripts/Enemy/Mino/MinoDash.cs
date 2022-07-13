@@ -19,7 +19,7 @@ public class MinoDash : EnemyMove
         if (target.x > 0.5f)
         {
             int x = MapController.PosToArray(transform.localPosition.x);
-            for (int i = x; i < GameManager.Instance.Width - x; i++)
+            for (int i = x; i < GameManager.Instance.Width; i++)
             {
                 int n = i;
                 Vector2Int pos = new Vector2Int(MapController.PosToArray(transform.localPosition.x),MapController.PosToArray(transform.localPosition.y));
@@ -50,7 +50,7 @@ public class MinoDash : EnemyMove
                         MapController.Instance.dices[pos.y][n + 1].isDiceDirecting = true;
                     }
                 });
-                seq.Append(transform.DOLocalMoveX(transform.localPosition.x + n * 1.5f, 0.1f));
+                seq.Append(transform.DOLocalMoveX(n * 1.5f - GameManager.Instance.Width / 2 * 1.5f, 0.1f));
                 seq.AppendCallback(() =>
                 {
 
@@ -79,7 +79,8 @@ public class MinoDash : EnemyMove
         if (target.x < -0.5f)
         {
             int x = MapController.PosToArray(transform.localPosition.x);
-            for (int i = x; i >= GameManager.Instance.Width -1 - x; i--)
+
+            for (int i = x; i >= 0; i--)
             {
                 int n = i;
                 Vector2Int pos = new Vector2Int(MapController.PosToArray(transform.localPosition.x),MapController.PosToArray(transform.localPosition.y));
@@ -110,7 +111,8 @@ public class MinoDash : EnemyMove
                         MapController.Instance.dices[pos.y][n - 1].isDiceDirecting = true;
                     }
                 });
-                seq.Append(transform.DOLocalMoveX(-transform.localPosition.x + n * 1.5f, 0.1f));
+                seq.Append(transform.DOLocalMoveX(n * 1.5f - GameManager.Instance.Width / 2 * 1.5f, 0.1f));
+
                 seq.AppendCallback(() =>
                 {
                     if (n > 0)
@@ -139,7 +141,7 @@ public class MinoDash : EnemyMove
         {
             int y = MapController.PosToArray(transform.localPosition.y);
 
-            for (int i = y; i < GameManager.Instance.Height - y; i += targetInt.y)
+            for (int i = y; i < GameManager.Instance.Height; i++)
             {
                 int n = i;
                 Vector2Int pos = new Vector2Int(MapController.PosToArray(transform.localPosition.x),MapController.PosToArray(transform.localPosition.y));
@@ -170,7 +172,7 @@ public class MinoDash : EnemyMove
                         MapController.Instance.dices[n + 1][pos.x].isDiceDirecting = true;
                     }
                 });
-                seq.Append(transform.DOLocalMoveY(transform.localPosition.y + n * 1.5f, 0.1f));
+                seq.Append(transform.DOLocalMoveY(n * 1.5f - GameManager.Instance.Width / 2 * 1.5f, 0.1f));
                 seq.AppendCallback(() =>
                 {
                     if (n < GameManager.Instance.Height - 1)
@@ -200,7 +202,7 @@ public class MinoDash : EnemyMove
         if (target.y < -0.5f)
         {
             int y = MapController.PosToArray(transform.localPosition.y);
-            for (int i = y; i >= GameManager.Instance.Height - 1 - y; i--)
+            for (int i = y; i >= 0; i--)
             {
                 int n = i;
                 Vector2Int pos = new Vector2Int(MapController.PosToArray(transform.localPosition.x),MapController.PosToArray(transform.localPosition.y));
@@ -231,7 +233,7 @@ public class MinoDash : EnemyMove
                         MapController.Instance.dices[n - 1][pos.x].isDiceDirecting = true;
                     }
                 });
-                seq.Append(transform.DOLocalMoveY(-transform.localPosition.y + n * 1.5f, 0.1f));
+                seq.Append(transform.DOLocalMoveY(n * 1.5f - GameManager.Instance.Width / 2 * 1.5f, 0.1f));
                 seq.AppendCallback(() =>
                 {
                     if (n > 0)

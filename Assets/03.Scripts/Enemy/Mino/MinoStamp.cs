@@ -1,3 +1,4 @@
+using DG.Tweening;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -5,16 +6,15 @@ using UnityEngine;
 public class MinoStamp : EnemyMove
 {
     public override bool IsFloating { get; set; } = false;
+    private Sequence seq;
 
-    // Start is called before the first frame update
-    void Start()
+    public override void CharacterMovement(Vector2 target)
     {
-        
-    }
+        IsFloating = true;
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+        seq = DOTween.Sequence();
+        seq.Append(transform.DOLocalMoveZ(-3, 0.3f));
+        seq.Append(transform.DOLocalMove(new Vector3(target.x, target.y, -3), 0.3f));
+        seq.Append(transform.DOLocalMoveZ(-1, 0.1f).SetEase(Ease.InExpo));
     }
 }
