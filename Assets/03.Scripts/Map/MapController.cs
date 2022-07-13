@@ -124,6 +124,7 @@ public class MapController : MonoSingleton<MapController>
 
 		if ((y < 0 || y >= GameManager.Instance.Height || x < 0 || x >= GameManager.Instance.Width) && isDual)
 		{
+			GameManager.Instance.StageStart = true;
 			return;
 		}
 
@@ -182,6 +183,7 @@ public class MapController : MonoSingleton<MapController>
 			if (x == condition.x && y == condition.y)
 			{
 				BoomMap.Instance.Boom();
+				GameManager.Instance.StageStart = true;
 				yield break;
 			}
 

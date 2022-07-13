@@ -1418,7 +1418,7 @@ MonoBehaviour:
   root: {fileID: 458400635}
   distance: 1.5
   wait: 0.1
-  isDual: 0
+  isDual: 1
   XAxis: 0
   isDown: 0
   isLeft: 0
@@ -2559,6 +2559,7 @@ MonoBehaviour:
   size: 5
   <BossNum>k__BackingField: 0
   StageNum: 0
+  StageStart: 0
 --- !u!4 &1689311990
 Transform:
   m_ObjectHideFlags: 0
@@ -2731,6 +2732,10 @@ PrefabInstance:
       propertyPath: move
       value: 
       objectReference: {fileID: 1741167904}
+    - target: {fileID: 228237169, guid: 5cccd9a28e7a3484f9202fb4c7cf0987, type: 3}
+      propertyPath: GoalTime
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 4786685463340195252, guid: 5cccd9a28e7a3484f9202fb4c7cf0987,
         type: 3}
       propertyPath: m_Name

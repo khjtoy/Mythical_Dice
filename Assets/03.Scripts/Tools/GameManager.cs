@@ -16,6 +16,8 @@ public class GameManager : MonoSingleton<GameManager>
     public int BossNum { get; set; }
 
     public int StageNum;
+
+    public bool StageStart;
     public int Width
     {
         get

@@ -36,6 +36,9 @@ public class EnemyController : Character, OnHit
     }
     protected virtual void Update()
     {
+        if (!GameManager.Instance.StageStart)
+            return;
+
         if (_canDoAgain)
         {
             _currentState.DoAction();
