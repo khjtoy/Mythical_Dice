@@ -29,7 +29,7 @@ public class EnemyCheck : MonoBehaviour
     {
         if(other.CompareTag("ENEMY"))
         {
-            if(particleSystem.IsAlive() && !other.GetComponent<StatueMove>().IsFoating)
+            if(particleSystem.IsAlive() && !other.GetComponent<StatueMove>().IsFloating)
             {
                 Debug.Log($"Damage:{damage}");
                 eventParam.boolParam = true;

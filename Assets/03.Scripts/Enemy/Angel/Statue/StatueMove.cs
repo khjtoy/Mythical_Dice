@@ -4,11 +4,11 @@ using UnityEngine;
 using static DefineCS;
 using DG.Tweening;
 
-public class StatueMove : CharacterMove, IEnemyAttack
+public class StatueMove : EnemyMove, IEnemyAttack
 {
 	private Sequence seq;
 	public Vector2Int Pos;
-	public bool IsFoating = false;
+	public override bool IsFloating { get; set; } = false;
 	public bool isCheck = false;
 	private void Start()
 	{
@@ -21,7 +21,7 @@ public class StatueMove : CharacterMove, IEnemyAttack
 	}
 	public override void CharacterMovement(Vector2 target)
 	{
-		IsFoating = true;
+		IsFloating = true;
 
 		seq = DOTween.Sequence();
 		seq.Append(transform.DOLocalMoveZ(-3, 0.3f));
@@ -33,7 +33,7 @@ public class StatueMove : CharacterMove, IEnemyAttack
 		seq.AppendCallback(() =>
 		{
 			seq.Kill();
-			IsFoating = false;
+			IsFloating = false;
 
 			//아이템 생성
 			if (!isCheck)

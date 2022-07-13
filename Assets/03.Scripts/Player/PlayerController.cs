@@ -111,7 +111,7 @@ public class PlayerController : Character, OnHit
             if (x < 0 || x >= GameManager.Instance.Width || y < 0 || y >= GameManager.Instance.Height
                 || (x == monsterX && y == monsterY))
                 return;
-            SoundManager.Instance.SetPlayerDashEffectClip((int)PlayerEffectEunm.DASH);
+            //SoundManager.Instance.SetPlayerDashEffectClip((int)PlayerEffectEunm.DASH);
             characterMove.CharacterMovement(targetPos);
         }
     }
@@ -120,7 +120,7 @@ public class PlayerController : Character, OnHit
     {
         if(Input.GetKeyDown(KeyCode.Z))
         {
-            SoundManager.Instance.SetPlayerAttackEffectClip((int)PlayerEffectEunm.SWORD);
+            //SoundManager.Instance.SetPlayerAttackEffectClip((int)PlayerEffectEunm.SWORD);
             playerAttack.CheckPos(enemyObject);
         }
     }

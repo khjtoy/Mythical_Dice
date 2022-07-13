@@ -82,7 +82,7 @@ public class PlayerAttack : MonoBehaviour
                 Debug.Log($"X:{x}Y:{y}");
 
                 Debug.Log($"Damage");
-                if (!enemyPos.GetComponent<StatueMove>().IsFoating)
+                if (!enemyPos.GetComponent<EnemyMove>().IsFloating)
                 {
                     GameObject paritcle = PoolManager.Instance.GetPooledObject((int)PooledObject.AttackParticle);
                     paritcle.transform.position = new Vector3(enemyPos.transform.position.x, enemyPos.transform.position.y + 1f, enemyPos.transform.position.z);
