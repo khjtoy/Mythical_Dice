@@ -2,17 +2,18 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SwingState : MonoBehaviour
+public class SwingState : AIState
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    [field: SerializeField]
+    public override List<AITransition> transitions { get; set; } = new List<AITransition> ();
+    [field: SerializeField]
+    public override bool IsLoop { get; set; }
 
-    // Update is called once per frame
-    void Update()
+    [SerializeField]
+    private MinoSwing move = null;
+
+    public override void DoAction()
     {
-        
+        move.CharacterMovement(Vector2.zero);
     }
 }
