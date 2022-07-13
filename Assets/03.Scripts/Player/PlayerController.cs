@@ -21,7 +21,7 @@ public class PlayerController : Character, OnHit
 
     public int playerDir; // 0:Right 1:Left 2:Up 3:Down
 
-    [Header("ÇÃ·¹ÀÌ¾î HP")]
+    [Header("ï¿½Ã·ï¿½ï¿½Ì¾ï¿½ HP")]
     [SerializeField]
     private int originHp = 0;
     [SerializeField]
@@ -29,7 +29,7 @@ public class PlayerController : Character, OnHit
 
     public bool isStop = false;
 
-    [Header("Move ¼øÈ¯")]
+    [Header("Move ï¿½ï¿½È¯")]
     [SerializeField]
     private float deleteMoveTime;
     Queue<int> moveDir;

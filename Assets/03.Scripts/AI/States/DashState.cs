@@ -10,7 +10,7 @@ public class DashState : AIState
     public override bool IsLoop { get; set; }
 
     [SerializeField]
-    private MinoMove move;
+    private MinoDash move;
 
     private Vector2 dir;
 
