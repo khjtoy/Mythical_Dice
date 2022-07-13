@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
-
+using UnityEngine.SceneManagement;
 public class PlayerDie : MonoBehaviour
 {
     [SerializeField]
@@ -29,6 +29,11 @@ public class PlayerDie : MonoBehaviour
                 character.Animator.SetTrigger("Die");
             });
         }
+    }
+
+    public void DieScene()
+    {
+        SceneManager.LoadScene("GameOver");
     }
         
 }
