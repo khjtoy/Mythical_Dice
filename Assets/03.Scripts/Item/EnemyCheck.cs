@@ -14,6 +14,8 @@ public class EnemyCheck : MonoBehaviour
 
     private EventParam eventParam;
 
+    private Collider playerCol;
+
     private void OnEnable()
     {
         transform.localScale = new Vector3(1, 1, 1);
@@ -25,20 +27,29 @@ public class EnemyCheck : MonoBehaviour
         camera = Camera.main.transform;
     }
 
+
     private void OnTriggerEnter(Collider other)
     {
         if(other.CompareTag("ENEMY"))
         {
-            if(particleSystem.IsAlive() && !other.GetComponent<StatueMove>().IsFloating)
+            if(particleSystem.IsAlive())
             {
-                Debug.Log($"Damage:{damage}");
-                eventParam.boolParam = true;
-                EventManager.TriggerEvent("CHANGESTOP", eventParam);
-                other.GetComponent<EnemyController>().OnHits(damage);
-                camera.DOShakePosition(0.7f, 0.1f);
-                transform.DOScale(1.5f, 0.2f);
-                Time.timeScale = 0.1f;
-                Invoke("OriginTime", 0.06f);
+                StatueMove statueMove = other?.GetComponent<StatueMove>();
+                MinoStamp minoStamp = other?.GetComponent<MinoStamp>();
+                if ((statueMove != null && !other.GetComponent<StatueMove>().IsFloating) || (minoStamp != null && !other.GetComponent<MinoStamp>().IsFloating))
+                    {
+                    Invoke("OriginCol", 2f);
+                    Debug.Log($"Damage:{damage}");
+                    eventParam.boolParam = true;
+                    EventManager.TriggerEvent("CHANGESTOP", eventParam);
+                    other.GetComponent<EnemyController>().OnHits(damage);
+                    camera.DOShakePosition(0.7f, 0.1f);
+                    transform.DOScale(1.5f, 0.2f);
+                    other.enabled = false;
+                    playerCol = other;
+                    Time.timeScale = 0.1f;
+                    Invoke("OriginTime", 0.06f);
+                }
             }
         }
     }
@@ -49,4 +60,9 @@ public class EnemyCheck : MonoBehaviour
         eventParam.boolParam = false;
         EventManager.TriggerEvent("CHANGESTOP", eventParam);
     }
+
+    private void OriginCol()
+    {
+        playerCol.enabled = true;
+    }    
 }

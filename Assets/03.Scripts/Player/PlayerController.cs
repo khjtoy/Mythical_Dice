@@ -55,6 +55,7 @@ public class PlayerController : Character, OnHit
 	public void OnHits(int damage)
 	{
 		if (isStop) return;
+		if (!hasStart) return;
 		hp -= damage;
 		float hpPer = (float)hp / originHp;
 		_slider.UpdateAmount(hpPer);

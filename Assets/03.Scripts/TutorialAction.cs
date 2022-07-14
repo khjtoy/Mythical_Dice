@@ -25,7 +25,7 @@ public class TutorialAction : MonoSingleton<TutorialAction>
 
     private void Start()
     {
-       // PlayerPrefs.SetInt("TUTORIAL", 0);
+       //PlayerPrefs.SetInt("TUTORIAL", 0);
     }
 
     protected override void Init()
