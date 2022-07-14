@@ -6,6 +6,10 @@ using UnityEngine;
 
 public class DataManager : MonoBehaviour
 {
+    private void Awake()
+    {
+        CreateJsonFile(Application.dataPath, "sound", ObjectToJson(new Sound(0.5f, 0.5f, 0.5f)));
+    }
     public static string ObjectToJson(object obj)
     { 
         return JsonUtility.ToJson(obj);
