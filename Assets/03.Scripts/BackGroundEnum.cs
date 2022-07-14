@@ -32,4 +32,5 @@ public enum EnemyEffectEnum
 	MINOSTAOMP,
 	MINOJUMP,
 	MINOSLASH,
+	SlimeJump
 }
