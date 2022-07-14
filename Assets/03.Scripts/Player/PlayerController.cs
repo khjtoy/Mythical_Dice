@@ -138,6 +138,7 @@ public class PlayerController : Character, OnHit
 	{
 		//if (characterMove.IsMove) return;
 
+		if (moveDir.Count > 3) return;
 
 		Vector3 targetPos = Vector3.zero;
 

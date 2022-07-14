@@ -54,3 +54,6 @@ TagManager:
   - name: Impact
     uniqueID: 440267213
     locked: 0
+  - name: FADE
+    uniqueID: 3403182447
+    locked: 0

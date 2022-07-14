@@ -31,6 +31,7 @@ public class MinoStamp : EnemyMove
 
     private IEnumerator StapCoroutine()
     {
+        yield return new WaitForSeconds(0.2f);
         CharacterAnimation.PlayAnimator("Idle");
         Vector2Int pos = new Vector2Int(MapController.PosToArray(transform.localPosition.x), MapController.PosToArray(transform.localPosition.y));
         GameManager.Instance.BossNum = 3;

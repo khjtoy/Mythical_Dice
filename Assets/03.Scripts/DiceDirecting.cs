@@ -90,4 +90,9 @@ public class DiceDirecting : MonoBehaviour
 		//	Define.Controller.gameObject.GetComponent<OnHit>().OnHits(thisNum);
 		//}
 	}
+
+    public void OnDestroy()
+    {
+		StopAllCoroutines();
+    }
 }

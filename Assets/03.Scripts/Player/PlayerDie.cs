@@ -22,6 +22,8 @@ public class PlayerDie : MonoBehaviour
     {
         if (!isDie)
         {
+            DOTween.KillAll(true);
+            Define.MainCam.transform.position = new Vector3(Define.MainCam.transform.position.x, Define.MainCam.transform.position.y, -10);
             isDie = true;
             character.Animator.SetBool("IsDie", true);
             character.Animator.SetTrigger("Hit");
@@ -34,7 +36,7 @@ public class PlayerDie : MonoBehaviour
 
     public void DieScene()
     {
-        SceneManager.LoadScene("GameOver");
+        SceneManager.LoadScene("GamePlay 6");
     }
         
 }

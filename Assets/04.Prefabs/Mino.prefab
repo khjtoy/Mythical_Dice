@@ -80,7 +80,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1575275777
 Transform:
   m_ObjectHideFlags: 0
@@ -130,7 +130,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1877788474
 Transform:
   m_ObjectHideFlags: 0
@@ -273,7 +273,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <transitions>k__BackingField:
-  - {fileID: 1877788476}
   - {fileID: 3095817779132986253}
   - {fileID: 3095817780479045870}
   <IsLoop>k__BackingField: 1
@@ -340,7 +339,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8a8309d90cf9f7546961571ff32b6578, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GoalTime: 1.5
+  GoalTime: 1.2
 --- !u!1 &3095817779132986258
 GameObject:
   m_ObjectHideFlags: 0
@@ -353,6 +352,7 @@ GameObject:
   - component: {fileID: 3095817779132986253}
   - component: {fileID: 577256964}
   - component: {fileID: 577256965}
+  - component: {fileID: 7299210347099424294}
   m_Layer: 0
   m_Name: IdleToStamp
   m_TagString: Untagged
@@ -391,6 +391,7 @@ MonoBehaviour:
   - {fileID: 577256965}
   NegativeCondition:
   - {fileID: 577256964}
+  - {fileID: 7299210347099424294}
   goalState: {fileID: 177742804}
   IsPositiveAnd: 1
   IsNegativeAnd: 1
@@ -420,7 +421,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8a8309d90cf9f7546961571ff32b6578, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GoalTime: 3
+  GoalTime: 1.5
+--- !u!114 &7299210347099424294
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3095817779132986258}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5b7a6e352924f945bab287b5612ad91, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  controller: {fileID: 3095817779775664604}
 --- !u!1 &3095817779255461334
 GameObject:
   m_ObjectHideFlags: 0
@@ -529,7 +543,7 @@ GameObject:
   - component: {fileID: 3095817780479045870}
   - component: {fileID: 3095817780479045871}
   - component: {fileID: 3095817780479045869}
-  - component: {fileID: 561740265}
+  - component: {fileID: 8711256681698444770}
   m_Layer: 0
   m_Name: IdleToDash
   m_TagString: Untagged
@@ -568,7 +582,7 @@ MonoBehaviour:
   - {fileID: 3095817780479045871}
   - {fileID: 3095817780479045869}
   NegativeCondition:
-  - {fileID: 561740265}
+  - {fileID: 8711256681698444770}
   goalState: {fileID: 3095817779649229834}
   IsPositiveAnd: 1
   IsNegativeAnd: 1
@@ -599,7 +613,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   GoalTime: 0.5
---- !u!114 &561740265
+--- !u!114 &8711256681698444770
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -608,11 +622,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 3095817780479045865}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2d86cd635c58deb4aa905ac56fabd52d, type: 3}
+  m_Script: {fileID: 11500000, guid: d5b7a6e352924f945bab287b5612ad91, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  range: 1
-  _basePos: {fileID: 7537676466322862410}
+  controller: {fileID: 3095817779775664604}
 --- !u!1 &3095817780622994185
 GameObject:
   m_ObjectHideFlags: 0
@@ -624,6 +637,7 @@ GameObject:
   - component: {fileID: 3095817780622994184}
   - component: {fileID: 3095817780622994191}
   - component: {fileID: 3095817780622994190}
+  - component: {fileID: 8389917635225905401}
   m_Layer: 0
   m_Name: DashToIdle
   m_TagString: Untagged
@@ -658,7 +672,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   StartState: {fileID: 3095817779649229834}
-  PositiveCondition: []
+  PositiveCondition:
+  - {fileID: 8389917635225905401}
   NegativeCondition:
   - {fileID: 3095817780622994190}
   goalState: {fileID: 3095817778827568163}
@@ -677,6 +692,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _mino: {fileID: 7537676466322862408}
+--- !u!114 &8389917635225905401
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3095817780622994185}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8a8309d90cf9f7546961571ff32b6578, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  GoalTime: 0.5
 --- !u!1 &7537676465473386621
 GameObject:
   m_ObjectHideFlags: 0
@@ -880,6 +908,7 @@ MonoBehaviour:
   originHp: 50
   hp: 50
   isDamage: 0
+  isDeath: 0
 --- !u!114 &1489100023
 MonoBehaviour:
   m_ObjectHideFlags: 0
