@@ -44,7 +44,6 @@ public class StageManager : MonoBehaviour
     private void InitStage()
     {
         
-        
         Sequence seq = DOTween.Sequence();
         for (int i = 0; i < currentStage; i++)
         {

@@ -53,6 +53,7 @@ public class EnemyController : Character, OnHit
 			Animator.SetTrigger("Broken");
 			EventManager.TriggerEvent("KILLENEMY", eventParam);
 			Define.Controller.hasStart = false;
+			UIManager.Instance.IsInGame = false;
 			isDeath = true;
 			Time.timeScale = 0.15f;
 			if(PlayerPrefs.GetInt("STAGE")+1>PlayerPrefs.GetInt("CLEAR"))

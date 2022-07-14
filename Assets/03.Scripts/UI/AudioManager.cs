@@ -10,11 +10,6 @@ public class AudioManager : MonoSingleton<AudioManager>
     public Slider MasterSlider;
     public Slider MusicSlider;
     public Slider EffectSlider;
-    protected override void Init()
-    {
-        
-    }
-
     private void Start()
     {
         Sound temp = DataManager.LoadJsonFile<Sound>(Application.dataPath, "sound");

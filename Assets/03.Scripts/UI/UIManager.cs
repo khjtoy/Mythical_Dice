@@ -11,21 +11,19 @@ public class UIManager : MonoSingleton<UIManager>
 	private GameObject InGameCanvas;
 	private GameObject PausePanel;
 	private GameObject OptionPanel;
-	private int uiOpen = 1;
-
+	private int uiOpen = 1;	
+	private int uiClose = -1;
     protected override void Init()
     {
-        
-    }
-    private void Awake()
-	{
+        base.Init();
 		InGameCanvas = GameObject.Find("InGameCanvas");
+		DontDestroyOnLoad(InGameCanvas);
 		PausePanel = InGameCanvas.transform.GetChild(1).gameObject;
 		OptionPanel = InGameCanvas.transform.GetChild(2).gameObject;
 		InGameCanvas.SetActive(false);
 	}
 
-	private void Update()
+    private void Update()
 	{
 		if (IsInGame)
 		{
@@ -34,6 +32,15 @@ public class UIManager : MonoSingleton<UIManager>
 				TogglePanel(InGameCanvas);
 				PausePanel.SetActive(true);
 				OptionPanel.SetActive(false);
+			}
+		}
+        else
+        {
+			if (Input.GetKeyDown(KeyCode.Escape))
+			{
+				TogglePanel(InGameCanvas);
+				PausePanel.SetActive(false);
+				OptionPanel.SetActive(true);
 			}
 		}
 	}
@@ -50,7 +57,8 @@ public class UIManager : MonoSingleton<UIManager>
 		SceneManager.LoadScene("Stage");
 		DOTween.KillAll();
 		Time.timeScale = 1;
-    }
+		IsInGame = false;
+	}
 
 	public void QuitGame()
 	{

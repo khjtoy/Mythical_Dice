@@ -55,6 +55,7 @@ public class GameManager : MonoSingleton<GameManager>
     {
         DOTween.KillAll();
         fade.Fade(InitMap);
+        UIManager.Instance.IsInGame = true;
         //PlayerPrefs.SetInt("STAGE", 0);
         
     }
