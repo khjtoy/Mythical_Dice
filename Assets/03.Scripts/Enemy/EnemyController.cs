@@ -26,6 +26,9 @@ public class EnemyController : Character, OnHit
 	private int hp = 0;
 
 	public bool isDamage = false;
+	public bool isDeath = false;
+
+	private EventParam eventParam;
 
 	private void Awake()
 	{
@@ -36,6 +39,7 @@ public class EnemyController : Character, OnHit
 
 	public void OnHits(int damage)
 	{
+
 		hp -= damage;
 		float hpPer = (float)hp / originHp;
 		_slider.UpdateAmount(hpPer);
@@ -46,7 +50,10 @@ public class EnemyController : Character, OnHit
 		isDamage = true;
 		if (hp <= 0)
 		{
-			//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿?
+			Animator.SetTrigger("Broken");
+			EventManager.TriggerEvent("KILLENEMY", eventParam);
+			isDeath = true;
+			Time.timeScale = 0.15f;
 		}
 	}
 

@@ -5,6 +5,10 @@ using UnityEngine.Audio;
 
 public class AudioManager : MonoSingleton<AudioManager>
 {
+    protected override void Init()
+    {
+        
+    }
     public AudioMixer _mixer = null;
     public void SetAudioVolume(string key, float value)
     {

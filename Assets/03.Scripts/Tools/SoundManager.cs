@@ -8,8 +8,13 @@ public class SoundManager : MonoSingleton<SoundManager>
 	[SerializeField]
 	private AudioMixerGroup pitchBendGroup;
 
-	#region 클립
-	[Header("플레이어 효과음 클립")]
+    protected override void Init()
+    {
+        
+    }
+
+    #region 클립
+    [Header("플레이어 효과음 클립")]
 	public AudioClip[] PlayerEffectClip;
 	[Header("적 효과음 클립")]
 	public AudioClip[] EnemyEffectClip;
