@@ -55,8 +55,6 @@ public class EnemyController : Character, OnHit
 		if (isDamage)
 		{
 			whiteSlider.transform.localScale = Vector3.Lerp(whiteSlider.transform.localScale, playerHpSlider.transform.localScale, Time.deltaTime * sliderSpeed);
-			Debug.Log(whiteSlider.transform.localScale);
-			Debug.Log(playerHpSlider.transform.localScale);
 			if (playerHpSlider.transform.localScale.x >= whiteSlider.transform.localScale.x - 0.01f)
 			{
 				isDamage = false;

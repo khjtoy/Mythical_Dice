@@ -2191,7 +2191,7 @@ MonoBehaviour:
   root: {fileID: 992869885}
   distance: 1.5
   wait: 0.1
-  isDual: 0
+  isDual: 1
   XAxis: 0
   isDown: 0
   isLeft: 0
@@ -3354,7 +3354,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerHpSlider: {fileID: 2009774731}
   whiteSlider: {fileID: 1197752842}
-  sliderSpeed: 0
+  sliderSpeed: 5
   isDamage: 1
   playerDir: 0
   originHp: 20
