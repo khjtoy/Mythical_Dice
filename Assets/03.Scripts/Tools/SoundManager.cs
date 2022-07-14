@@ -49,6 +49,7 @@ public class SoundManager : MonoSingleton<SoundManager>
 	private void Start()
 	{
 		SetBackgroundClip(0);
+		EnemyEffectSource = GameObject.FindGameObjectWithTag("ENEMY").GetComponent<AudioSource>();
 	}
 
 	public void SetBackgroundClip(int index)

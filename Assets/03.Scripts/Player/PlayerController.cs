@@ -7,7 +7,7 @@ using DG.Tweening;
 
 public class PlayerController : Character, OnHit
 {
-	[Header("HP 슬라이더")]
+	[Header("HP ?�라?�더")]
 	[SerializeField]
 	Image playerHpSlider;
 	[SerializeField]

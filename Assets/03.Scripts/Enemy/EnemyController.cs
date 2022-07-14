@@ -30,6 +30,8 @@ public class EnemyController : Character, OnHit
 	private void Awake()
 	{
 		_slider = GameObject.Find("BossBar").GetComponent<HPSlider>();
+		playerHpSlider = GameObject.Find("Canvas/BossBar/Enemy/Red").GetComponent<Image>();
+		whiteSlider = GameObject.Find("Canvas/BossBar/Enemy/White").GetComponent<Image>();
 	}
 
 	public void OnHits(int damage)
@@ -44,7 +46,7 @@ public class EnemyController : Character, OnHit
 		isDamage = true;
 		if (hp <= 0)
 		{
-			//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½?
+			//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿?
 		}
 	}
 

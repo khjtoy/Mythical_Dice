@@ -48,7 +48,8 @@ public class GameManager : MonoSingleton<GameManager>
     private void Awake()
     {
         GameObject BossObject = null;
-        switch (PlayerPrefs.GetInt("STAGE"))
+        PlayerPrefs.SetInt("STAGE", 0);
+        switch (PlayerPrefs.GetInt("STAGE", 0))
         {
             case 0:
                 {
