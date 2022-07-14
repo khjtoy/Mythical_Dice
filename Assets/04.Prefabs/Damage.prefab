@@ -215,7 +215,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   num: {fileID: 287274015983843320}
-  Power: 1
+  Power: 3
   PowerSpeed: 0.3
   Down: -5
   DownSpeed: 0.5
