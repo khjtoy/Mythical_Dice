@@ -3634,8 +3634,8 @@ MonoBehaviour:
   sliderSpeed: 5
   isDamage: 1
   playerDir: 0
-  originHp: 20
-  hp: 20
+  originHp: 100
+  hp: 100
   isStop: 0
   deleteMoveTime: 0
   image: {fileID: 456065029}

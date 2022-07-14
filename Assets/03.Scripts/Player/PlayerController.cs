@@ -59,7 +59,7 @@ public class PlayerController : Character, OnHit
 		float hpPer = (float)hp / originHp;
 		_slider.UpdateAmount(hpPer);
 		isDamage = true;
-		BloodFade();
+		BloodFade(damage);
 		Animator.SetTrigger("Hit");
 		spriteMaterial.EnableKeyword("_SordColor");
 		spriteMaterial.SetFloat("_SordColor", 0f);
@@ -81,9 +81,10 @@ public class PlayerController : Character, OnHit
 		}
 	}
 
-	private void BloodFade()
+	private void BloodFade(int damage)
 	{
-		blood.DOFade(0.5f, 0.5f).OnComplete(() => blood.DOFade(0, 0.5f));
+		float percent = (float)damage / 6 * 100;
+		blood.DOFade(0.7f * (percent/100), 1f).OnComplete(() => blood.DOFade(0, 0.5f));
 	}
 
 	void UpdateSlider()
