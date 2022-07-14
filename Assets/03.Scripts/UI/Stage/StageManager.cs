@@ -19,7 +19,7 @@ public class StageManager : MonoBehaviour
     private void Awake()
     {
         Time.timeScale = 1;
-        PlayerPrefs.SetInt("CLEAR", 2);
+        PlayerPrefs.SetInt("CLEAR", 0);
         currentStage = PlayerPrefs.GetInt("CLEAR");
     }
 
@@ -39,7 +39,7 @@ public class StageManager : MonoBehaviour
     {
         Debug.Log("asd");
         Sequence seq = DOTween.Sequence();
-        for (int i = 0;i<currentStage-1;i++)
+        for (int i = 0;i<currentStage;i++)
         {
             Debug.Log(i);
             seq.Append(stageList[i].transform.DOShakePosition(1, 10, 10));

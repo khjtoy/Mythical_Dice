@@ -22,6 +22,8 @@ public class StartManager : MonoBehaviour
 
     private Animator _animator;
 
+    private bool _isStart = false;
+
     private readonly int _startHashStr = Animator.StringToHash("Start");
 
     private void Awake()
@@ -31,7 +33,12 @@ public class StartManager : MonoBehaviour
 
     public void StartInGame()
     {
-        StartCoroutine(StartCoroutine());
+        if(_isStart == false)
+        {
+            _isStart = true;
+            StartCoroutine(StartCoroutine());
+        }
+        
     }
 
     private IEnumerator StartCoroutine()

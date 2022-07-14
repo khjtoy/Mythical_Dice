@@ -55,6 +55,10 @@ public class EnemyController : Character, OnHit
 			Define.Controller.hasStart = false;
 			isDeath = true;
 			Time.timeScale = 0.15f;
+			if(PlayerPrefs.GetInt("STAGE")+1>PlayerPrefs.GetInt("CLEAR"))
+            {
+				PlayerPrefs.SetInt("CLEAR", PlayerPrefs.GetInt("STAGE")+1);
+            }
 		}
 	}
 
