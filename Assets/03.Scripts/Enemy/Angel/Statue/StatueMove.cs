@@ -20,6 +20,7 @@ public class StatueMove : EnemyMove, IEnemyAttack
 	private void Start()
 	{
 		EventManager.StartListening("RESETCHECK", OffCheck);
+		EventManager.StartListening("KILLENEMY", KillEnemy);
 		dice = GameObject.FindGameObjectWithTag("Dice");
 		diceAni = dice.GetComponent<Animator>();
 		setNumber = dice.transform.GetChild(0).GetComponent<SetNumber>();
@@ -76,6 +77,13 @@ public class StatueMove : EnemyMove, IEnemyAttack
 			DoAttack();
 		});
 	}
+
+	public void KillEnemy(EventParam eventParam)
+    {
+		seq.Kill();
+		seq = DOTween.Sequence();
+		seq.Append(transform.DOLocalMoveZ(-1, 0.1f).SetEase(Ease.InExpo));
+    }
 
 	private void ChangeTime()
 	{

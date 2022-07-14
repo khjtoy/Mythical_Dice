@@ -187,6 +187,7 @@ GameObject:
   - component: {fileID: 228237170}
   - component: {fileID: 228237168}
   - component: {fileID: 228237169}
+  - component: {fileID: 9037078230675285890}
   m_Layer: 0
   m_Name: IdleToMove
   m_TagString: Untagged
@@ -223,10 +224,11 @@ MonoBehaviour:
   StartState: {fileID: 1062127838}
   PositiveCondition:
   - {fileID: 228237169}
-  NegativeCondition: []
+  NegativeCondition:
+  - {fileID: 9037078230675285890}
   goalState: {fileID: 113879341}
-  IsPositiveAnd: 0
-  IsNegativeAnd: 0
+  IsPositiveAnd: 1
+  IsNegativeAnd: 1
 --- !u!114 &228237169
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -240,6 +242,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   GoalTime: 2
+--- !u!114 &9037078230675285890
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 228237167}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5b7a6e352924f945bab287b5612ad91, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  controller: {fileID: 1741167905}
 --- !u!1 &855313770
 GameObject:
   m_ObjectHideFlags: 0
@@ -393,6 +408,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4786685462557824131}
   - component: {fileID: 4786685462557824130}
+  - component: {fileID: 2924383124261781818}
   m_Layer: 0
   m_Name: Player_Idle (1)
   m_TagString: Untagged
@@ -465,6 +481,25 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!95 &2924383124261781818
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4786685462557824128}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 89aecab268d32e549af82dac24c3c7f2, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &4786685463340195252
 GameObject:
   m_ObjectHideFlags: 0
@@ -554,6 +589,7 @@ MonoBehaviour:
   originHp: 50
   hp: 50
   isDamage: 0
+  isDeath: 0
 --- !u!65 &1533892366
 BoxCollider:
   m_ObjectHideFlags: 0

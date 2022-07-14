@@ -687,6 +687,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7537676465473386622}
   - component: {fileID: 7537676465473386623}
+  - component: {fileID: 7306377976901012720}
   m_Layer: 0
   m_Name: Player_Idle (1)
   m_TagString: Untagged
@@ -759,6 +760,25 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!95 &7306377976901012720
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7537676465473386621}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 89aecab268d32e549af82dac24c3c7f2, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &7537676466322862409
 GameObject:
   m_ObjectHideFlags: 0
@@ -839,9 +859,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3d0b079f4bfae6040b1f4251bd4f12d3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerHpSlider: {fileID: 0}
+  whiteSlider: {fileID: 0}
+  sliderSpeed: 0
   _currentState: {fileID: 3095817778827568163}
   originHp: 50
   hp: 50
+  isDamage: 0
 --- !u!114 &1489100023
 MonoBehaviour:
   m_ObjectHideFlags: 0
