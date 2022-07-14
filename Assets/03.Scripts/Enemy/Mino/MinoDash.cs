@@ -10,6 +10,11 @@ public class MinoDash : EnemyMove
 
     public override bool IsFloating { get; set; } = false;
 
+    private void Awake()
+    {
+        EventManager.StartListening("KILLENEMY", KillEnemy);
+    }
+
     public override void CharacterMovement(Vector2 target)
     {
         SoundManager.Instance.SetEnemyEffectClip((int)EnemyEffectEnum.MINORUN);
@@ -20,6 +25,7 @@ public class MinoDash : EnemyMove
         Vector2Int targetInt = new Vector2Int(Mathf.RoundToInt(target.x), Mathf.RoundToInt(target.y));
         if (target.x > 0.5f)
         {
+            transform.localScale = new Vector3(-1, 1, 1);
             int x = MapController.PosToArray(transform.localPosition.x);
             for (int i = x; i < GameManager.Instance.Width; i++)
             {
@@ -80,6 +86,8 @@ public class MinoDash : EnemyMove
         }
         if (target.x < -0.5f)
         {
+            transform.localScale = new Vector3(1, 1, 1);
+
             int x = MapController.PosToArray(transform.localPosition.x);
 
             for (int i = x; i >= 0; i--)
@@ -270,5 +278,11 @@ public class MinoDash : EnemyMove
             BoomMap.Instance.Boom();
             IsDashing = false;
         });
+    }
+    public void KillEnemy(EventParam eventParam)
+    {
+        seq.Kill();
+        seq = DOTween.Sequence();
+        seq.Append(transform.DOLocalMoveZ(-1, 0.1f).SetEase(Ease.InExpo));
     }
 }

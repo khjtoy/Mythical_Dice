@@ -28,7 +28,16 @@ public class MinoStamp : EnemyMove
             IsFloating = false;
         });
     }
-
+    private void Awake()
+    {
+        EventManager.StartListening("KILLENEMY", KillEnemy);
+    }
+    public void KillEnemy(EventParam eventParam)
+    {
+        seq.Kill();
+        seq = DOTween.Sequence();
+        seq.Append(transform.DOLocalMoveZ(-1, 0.1f).SetEase(Ease.InExpo));
+    }
     private IEnumerator StapCoroutine()
     {
         yield return new WaitForSeconds(0.2f);

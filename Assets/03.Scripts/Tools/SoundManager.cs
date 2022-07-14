@@ -51,7 +51,7 @@ public class SoundManager : MonoSingleton<SoundManager>
 	private AudioSource PlayerAttackEffectSource;
 	#endregion
 
-	private void Start()
+	public void InitMap()
 	{
 		SetBackgroundClip(0);
 		EnemyEffectSource = GameObject.FindGameObjectWithTag("ENEMY").GetComponent<AudioSource>();
