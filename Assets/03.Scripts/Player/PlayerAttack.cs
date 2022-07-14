@@ -82,7 +82,7 @@ public class PlayerAttack : MonoBehaviour
                 if (!enemyPos.GetComponent<EnemyMove>().IsFloating)
                 {
                     GameObject paritcle = PoolManager.Instance.GetPooledObject((int)PooledObject.AttackParticle);
-                    paritcle.transform.position = new Vector3(enemyPos.transform.position.x, enemyPos.transform.position.y + PlayerPrefs.GetInt("STAGE") > 0 ? 1 : 0, enemyPos.transform.position.z);
+                    paritcle.transform.position = new Vector3(enemyPos.transform.position.x, enemyPos.transform.position.y + 0, enemyPos.transform.position.z);
                     paritcle.SetActive(true);
                     int damage = MapController.Instance.dices[y][x].randoms;
                     enemyPos.GetComponent<EnemyController>().OnHits(damage);
