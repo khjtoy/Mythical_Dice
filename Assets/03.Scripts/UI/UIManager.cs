@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using DG.Tweening;
 
 public class UIManager : MonoSingleton<UIManager>
 {
@@ -47,6 +48,7 @@ public class UIManager : MonoSingleton<UIManager>
 	public void StageSelect()
     {
 		SceneManager.LoadScene("Stage");
+		DOTween.KillAll();
 		Time.timeScale = 1;
     }
 }

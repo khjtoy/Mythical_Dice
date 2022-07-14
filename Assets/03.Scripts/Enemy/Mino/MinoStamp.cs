@@ -55,6 +55,17 @@ public class MinoStamp : EnemyMove
         setNumber.gameObject.SetActive(true);
     }
 
+    private void Awake()
+    {
+        EventManager.StartListening("KILLENEMY", KillEnemy);
+    }
+    public void KillEnemy(EventParam eventParam)
+    {
+        seq.Kill();
+        seq = DOTween.Sequence();
+        seq.Append(transform.DOLocalMoveZ(-1, 0.1f).SetEase(Ease.InExpo));
+    }
+    
     private IEnumerator StapCoroutine()
     {
         yield return new WaitForSeconds(0.2f);
@@ -82,5 +93,14 @@ public class MinoStamp : EnemyMove
             yield return new WaitForSeconds(0.5f);
         }
 
+    }
+    private void OnDestroy()
+    {
+        EventManager.StopListening("KILLENEMY", KillEnemy);
+    }
+
+    private void OnApplicationQuit()
+    {
+        EventManager.StopListening("KILLENEMY", KillEnemy);
     }
 }

@@ -21,6 +21,10 @@ public class MinoDash : EnemyMove
         setNumber = dice.transform.GetChild(0).GetComponent<SetNumber>();
         setNumber.gameObject.SetActive(false);
     }
+    private void Awake()
+    {
+        EventManager.StartListening("KILLENEMY", KillEnemy);
+    }
 
     public override void CharacterMovement(Vector2 target)
     {
@@ -39,6 +43,7 @@ public class MinoDash : EnemyMove
         Vector2Int targetInt = new Vector2Int(Mathf.RoundToInt(target.x), Mathf.RoundToInt(target.y));
         if (target.x > 0.5f)
         {
+            transform.localScale = new Vector3(-1, 1, 1);
             int x = MapController.PosToArray(transform.localPosition.x);
             for (int i = x; i < GameManager.Instance.Width; i++)
             {
@@ -99,6 +104,8 @@ public class MinoDash : EnemyMove
         }
         if (target.x < -0.5f)
         {
+            transform.localScale = new Vector3(1, 1, 1);
+
             int x = MapController.PosToArray(transform.localPosition.x);
 
             for (int i = x; i >= 0; i--)
@@ -297,5 +304,19 @@ public class MinoDash : EnemyMove
         diceAni.SetBool("IsDice", false);
         setNumber.SettingNumber(MapController.Instance.dices[y][x].randoms - 1);
         setNumber.gameObject.SetActive(true);
+    }
+    public void KillEnemy(EventParam eventParam)
+    {
+        seq.Kill();
+    }
+
+    private void OnDestroy()
+    {
+        EventManager.StopListening("KILLENEMY", KillEnemy);
+    }
+
+    private void OnApplicationQuit()
+    {
+        EventManager.StopListening("KILLENEMY", KillEnemy);
     }
 }

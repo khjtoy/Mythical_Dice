@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using DG.Tweening;
 
 public class StartManager : MonoBehaviour
 {
@@ -15,6 +16,9 @@ public class StartManager : MonoBehaviour
     private GameObject _titlePanel;
     [SerializeField]
     private GameObject _player;
+
+    [SerializeField]
+    private RectTransform _fadePanel;
 
     private Animator _animator;
 
@@ -53,7 +57,9 @@ public class StartManager : MonoBehaviour
         _player.SetActive(true);
 
         yield return new WaitForSeconds(1.5f);
-        StartStageScene();
+        Sequence seq = DOTween.Sequence();
+        seq.Append(_fadePanel.DOAnchorPos3DY(0, 1f));
+        seq.AppendCallback(StartStageScene);
     }
 
     public void StartStageScene()

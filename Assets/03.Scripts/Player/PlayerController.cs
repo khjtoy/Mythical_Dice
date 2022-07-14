@@ -50,6 +50,8 @@ public class PlayerController : Character, OnHit
 
 	private EnemyController enemyController;
 
+	public bool hasStart = false;
+
 	public void OnHits(int damage)
 	{
 		if (isStop) return;
@@ -107,14 +109,22 @@ public class PlayerController : Character, OnHit
 	protected override void Start()
 	{
 		base.Start();
-		enemyObject = GameObject.FindGameObjectWithTag("ENEMY");
 		characterMove = GetComponent<CharacterMove>();
 		playerAttack = GetComponent<PlayerAttack>();
-		enemyController = enemyObject.GetComponent<EnemyController>();
 	}
 
-	private void Update()
+    public void Init()
+    {
+		enemyObject = GameObject.FindGameObjectWithTag("ENEMY");
+		enemyController = enemyObject.GetComponent<EnemyController>();
+		hasStart = true;
+	}
+
+    private void Update()
 	{
+
+		if (!hasStart)
+			return;
 		if (isStop) return;
 
 		if (moveDir.Count > 0 && !characterMove.IsMove && !enemyController.isDeath)

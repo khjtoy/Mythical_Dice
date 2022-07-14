@@ -14,6 +14,8 @@ public class CharacterMove : MonoBehaviour
 
     public bool IsMove { get; private set; }
     public Vector2 PlayerPos = Vector2.zero;
+    [SerializeField]
+    private ParticleSystem moveParticle = null;
 
     private void Start()
     {
@@ -26,6 +28,8 @@ public class CharacterMove : MonoBehaviour
     public virtual void CharacterMovement(Vector2 target)
     {
         if (IsMove) return;
+        moveParticle.transform.localScale = transform.localScale;
+        moveParticle.Play();
         IsMove = true;
 
         PlayerPos = new Vector2(transform.localPosition.x, transform.localPosition.y);
