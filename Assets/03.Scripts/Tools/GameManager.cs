@@ -55,16 +55,24 @@ public class GameManager : MonoSingleton<GameManager>
     {
         DOTween.KillAll();
         fade.Fade(InitMap);
-        //PlayerPrefs.SetInt("STAGE", 1);
+        //PlayerPrefs.SetInt("STAGE", 0);
         
     }
 
     private void InitMap()
     {
         GameObject BossObject = null;
-        switch (PlayerPrefs.GetInt("STAGE", 1))
+        switch (PlayerPrefs.GetInt("STAGE", 0))
         {
             case 0:
+                { 
+                    width = 3;
+                    height = 3;
+                    size = 3;
+                    BossObject = PoolManager.Instance.GetPooledObject((int)PooledObject.Slime);
+                    break;
+                }
+            case 1:
                 {
                     width = 5;
                     height = 5;
@@ -72,7 +80,7 @@ public class GameManager : MonoSingleton<GameManager>
                     BossObject = PoolManager.Instance.GetPooledObject((int)PooledObject.Statue);
                     break;
                 }
-            case 1:
+            case 2:
                 {
                     width = 7;
                     height = 7;
@@ -86,6 +94,7 @@ public class GameManager : MonoSingleton<GameManager>
 
         BossObject.transform.SetParent(MapController.Instance.Root);
         BossObject.transform.localPosition = MapController.ArrayToPos(width - 1, height - 1) - Vector3.forward;
+        Define.Controller.transform.localPosition = -MapController.ArrayToPos(width - 1, height - 1) - Vector3.forward;
         BossObject.transform.localRotation = Quaternion.Euler(0, 0, 0);
         SoundManager.Instance.InitMap();
         mapController.InitMap();
