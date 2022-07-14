@@ -80,7 +80,7 @@ public class SoundManager : MonoSingleton<SoundManager>
 	{
 		BackgroundSource.outputAudioMixerGroup = pitchBendGroup;
 		BackgroundSource.pitch = speed;
-		pitchBendGroup.audioMixer.SetFloat("Pitch Shifter", 1/speed);
+		pitchBendGroup.audioMixer.SetFloat("Pitch Shifter", speed);
 	}
 	public void SetEffectClip(int index)
 	{
