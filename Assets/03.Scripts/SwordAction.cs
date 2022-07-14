@@ -18,8 +18,13 @@ public class SwordAction : MonoBehaviour
         animator.SetBool("isEffect", eventParam.boolParam);
     }
 
-	private void OnDestroy()
-	{
+    private void OnDestroy()
+    {
         EventManager.StopListening("CHANGESWORD", ChangeSword);
-	}
+    }
+
+    private void OnApplicationQuit()
+    {
+        EventManager.StopListening("CHANGESWORD", ChangeSword);
+    }
 }

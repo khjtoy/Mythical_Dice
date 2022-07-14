@@ -52,8 +52,13 @@ public class PlayerController : Character, OnHit
 
 	private EnemyController enemyController;
 
-	public void OnHits(int damage)
+	public bool hasStart = false;
+    private bool isDeath = false;
+
+    public void OnHits(int damage)
 	{
+		if (isDeath) return;
+
 		if (isStop) return;
 		hp -= damage;
 		float hpPer = (float)hp / originHp;
@@ -68,6 +73,7 @@ public class PlayerController : Character, OnHit
 		if (hp <= 0)
 		{
 			isStop = true;
+			isDeath = true;
 			GetComponent<PlayerDie>().DieAction();
 			//SceneManager.LoadScene(1);
 		}
@@ -119,14 +125,22 @@ public class PlayerController : Character, OnHit
 	protected override void Start()
 	{
 		base.Start();
-		enemyObject = GameObject.FindGameObjectWithTag("ENEMY");
 		characterMove = GetComponent<CharacterMove>();
 		playerAttack = GetComponent<PlayerAttack>();
-		enemyController = enemyObject.GetComponent<EnemyController>();
 	}
 
-	private void Update()
+    public void Init()
+    {
+		enemyObject = GameObject.FindGameObjectWithTag("ENEMY");
+		enemyController = enemyObject.GetComponent<EnemyController>();
+		hasStart = true;
+	}
+
+    private void Update()
 	{
+
+		if (!hasStart)
+			return;
 		if (isStop) return;
 
 		if (moveDir.Count > 0 && !characterMove.IsMove && !enemyController.isDeath)

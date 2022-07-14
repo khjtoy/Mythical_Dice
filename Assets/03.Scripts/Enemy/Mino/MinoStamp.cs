@@ -8,9 +8,27 @@ public class MinoStamp : EnemyMove
     public override bool IsFloating { get; set; } = false;
     private Sequence seq;
 
+    private GameObject dice;
+    private Animator diceAni;
+    private SetNumber setNumber;
+
+    private void Start()
+    {
+        dice = GameObject.FindGameObjectWithTag("Dice");
+        diceAni = dice.GetComponent<Animator>();
+        setNumber = dice.transform.GetChild(0).GetComponent<SetNumber>();
+        setNumber.gameObject.SetActive(false);
+    }
+
     public override void CharacterMovement(Vector2 target)
     {
         IsFloating = true;
+        diceAni.SetBool("IsDice", true);
+        setNumber.gameObject.SetActive(false);
+        setNumber.isSurple = true;
+        int x = MapController.PosToArray(target.x);
+        int y = MapController.PosToArray(target.y);
+        StartCoroutine(ChangeDice(x, y));
 
         seq = DOTween.Sequence();
         CharacterAnimation.PlayAnimator("jump");
@@ -23,12 +41,33 @@ public class MinoStamp : EnemyMove
         
         seq.AppendCallback(() =>
         {
+            Define.MainCam.orthographic = !Define.MainCam.orthographic;
+            Define.MainCam.transform.DOShakePosition(0.3f);
             StartCoroutine(StapCoroutine());
             seq.Kill();
             IsFloating = false;
         });
     }
 
+    private IEnumerator ChangeDice(int x, int y)
+    {
+        yield return new WaitForSeconds(0.15f);
+        diceAni.SetBool("IsDice", false);
+        setNumber.SettingNumber(3 - 1);
+        setNumber.gameObject.SetActive(true);
+    }
+
+    private void Awake()
+    {
+        EventManager.StartListening("KILLENEMY", KillEnemy);
+    }
+    public void KillEnemy(EventParam eventParam)
+    {
+        seq.Kill();
+        seq = DOTween.Sequence();
+        seq.Append(transform.DOLocalMoveZ(-1, 0.1f).SetEase(Ease.InExpo));
+    }
+    
     private IEnumerator StapCoroutine()
     {
         yield return new WaitForSeconds(0.2f);
@@ -56,5 +95,14 @@ public class MinoStamp : EnemyMove
             yield return new WaitForSeconds(0.5f);
         }
 
+    }
+    private void OnDestroy()
+    {
+        EventManager.StopListening("KILLENEMY", KillEnemy);
+    }
+
+    private void OnApplicationQuit()
+    {
+        EventManager.StopListening("KILLENEMY", KillEnemy);
     }
 }

@@ -61,7 +61,7 @@ public class StatueMove : EnemyMove, IEnemyAttack
 			}
 			//setNumber.isSurple = false;
 
-			//¾ÆÀÌÅÛ »ý¼º
+			//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 			if (!isCheck)
 			{
 				int random = Random.Range(0, 5);
@@ -194,5 +194,10 @@ public class StatueMove : EnemyMove, IEnemyAttack
 	{
 		EventManager.StopListening("KILLENEMY", KillEnemy);
 		EventManager.StopListening("RESETCHECK", OffCheck);
+	}
+
+	private void OnApplicationQuit()
+	{
+		EventManager.StopListening("KILLENEMY", KillEnemy);
 	}
 }

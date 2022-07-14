@@ -7,6 +7,7 @@ public static class DefineCS
         Item,
         SkillEffect,
         NumText,
+        Slime,
         Statue,
         Mino
     }
