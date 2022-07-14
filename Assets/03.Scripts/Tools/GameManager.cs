@@ -89,6 +89,14 @@ public class GameManager : MonoSingleton<GameManager>
                     BossObject = PoolManager.Instance.GetPooledObject((int)PooledObject.Mino);
                     break;
                 }
+            case 3:
+                {
+                    width = 7;
+                    height = 7;
+                    size = 7;
+                    BossObject = PoolManager.Instance.GetPooledObject((int)PooledObject.MinoHard);
+                    break;
+                }
         };
 
         BossObject.SetActive(true);

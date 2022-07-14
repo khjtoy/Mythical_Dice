@@ -9,6 +9,7 @@ public static class DefineCS
         NumText,
         Slime,
         Statue,
-        Mino
+        Mino,
+        MinoHard
     }
 }
