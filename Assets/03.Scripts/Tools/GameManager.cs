@@ -1,3 +1,4 @@
+using DG.Tweening;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -48,6 +49,7 @@ public class GameManager : MonoSingleton<GameManager>
     private void Awake()
     {
         GameObject BossObject = null;
+        DOTween.KillAll();
         //PlayerPrefs.SetInt("STAGE", 1);
         switch (PlayerPrefs.GetInt("STAGE", 1))
         {
