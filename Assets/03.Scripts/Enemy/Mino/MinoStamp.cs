@@ -8,9 +8,27 @@ public class MinoStamp : EnemyMove
     public override bool IsFloating { get; set; } = false;
     private Sequence seq;
 
+    private GameObject dice;
+    private Animator diceAni;
+    private SetNumber setNumber;
+
+    private void Start()
+    {
+        dice = GameObject.FindGameObjectWithTag("Dice");
+        diceAni = dice.GetComponent<Animator>();
+        setNumber = dice.transform.GetChild(0).GetComponent<SetNumber>();
+        setNumber.gameObject.SetActive(false);
+    }
+
     public override void CharacterMovement(Vector2 target)
     {
         IsFloating = true;
+        diceAni.SetBool("IsDice", true);
+        setNumber.gameObject.SetActive(false);
+        setNumber.isSurple = true;
+        int x = MapController.PosToArray(target.x);
+        int y = MapController.PosToArray(target.y);
+        StartCoroutine(ChangeDice(x, y));
 
         seq = DOTween.Sequence();
         CharacterAnimation.PlayAnimator("jump");
@@ -27,6 +45,14 @@ public class MinoStamp : EnemyMove
             seq.Kill();
             IsFloating = false;
         });
+    }
+
+    private IEnumerator ChangeDice(int x, int y)
+    {
+        yield return new WaitForSeconds(0.15f);
+        diceAni.SetBool("IsDice", false);
+        setNumber.SettingNumber(3 - 1);
+        setNumber.gameObject.SetActive(true);
     }
 
     private IEnumerator StapCoroutine()

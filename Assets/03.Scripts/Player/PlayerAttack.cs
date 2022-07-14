@@ -103,12 +103,14 @@ public class PlayerAttack : MonoBehaviour
     {
         int x = MapController.PosToArray(transform.localPosition.x);
         int y = MapController.PosToArray(transform.localPosition.y);
+        int damage = MapController.Instance.dices[y][x].randoms;
+        Debug.Log($"X:{x} Y:{y} Damage:{damage}");
         isKill = true;
         if (dir == 0)
         {
             for (int i = x + 1; i < GameManager.Instance.Width; i++)
             {
-                SkillAction(i,y);
+                SkillAction(i,y,damage);
                 yield return new WaitForSeconds(0.2f);
             }
         }
@@ -116,7 +118,7 @@ public class PlayerAttack : MonoBehaviour
         {
             for(int i = x - 1; i >= 0; i--)
             {
-                SkillAction(i,y);
+                SkillAction(i,y,damage);
                 yield return new WaitForSeconds(0.2f);
             }
         }
@@ -124,7 +126,7 @@ public class PlayerAttack : MonoBehaviour
         {
             for(int i = y + 1; i < GameManager.Instance.Height; i++)
             {
-                SkillAction(x, i);
+                SkillAction(x, i, damage);
                 yield return new WaitForSeconds(0.2f);
             }
         }
@@ -132,7 +134,7 @@ public class PlayerAttack : MonoBehaviour
         {
             for (int i = y - 1; i >= 0; i--)
             {
-                SkillAction(x, i);
+                SkillAction(x, i, damage);
                 yield return new WaitForSeconds(0.2f);
             }
         }
@@ -142,14 +144,14 @@ public class PlayerAttack : MonoBehaviour
         yield return null;
     }
 
-    private void SkillAction(int x, int y)
+    private void SkillAction(int x, int y, int damage)
     {
         Vector3 skillPos = MapController.ArrayToPos(x, y);
         skillPos.y += 1f;
         //Debug.Log($"POS{skillPos}");
         GameObject effect = PoolManager.Instance.GetPooledObject((int)PooledObject.SkillEffect);
         effect.transform.localPosition = skillPos;
-        effect.GetComponent<EnemyCheck>().damage = MapController.Instance.GetIndexCost(x, y) * 2; 
+        effect.GetComponent<EnemyCheck>().damage = damage * 2; 
         effect.SetActive(true);
     }
 }

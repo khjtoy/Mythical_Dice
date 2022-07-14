@@ -11,9 +11,6 @@ public class TutorialAction : MonoSingleton<TutorialAction>
     private List<Sprite> show2 = new List<Sprite>();
     [SerializeField]
     private List<Sprite> show3 = new List<Sprite>();
-
-    [SerializeField]
-    private GameObject panel;
     [SerializeField]
     private Image image;
     [SerializeField]
@@ -24,28 +21,40 @@ public class TutorialAction : MonoSingleton<TutorialAction>
     int currentShow = 0;
     int index = 0;
 
+    private bool isTutorial = false;
+
     protected override void Init()
     {
         // Destoryed
     }
 
+    private void Update()
+    {
+        if (isTutorial && Time.timeScale > 0) Time.timeScale = 1;
+    }
+
     public void TuturialMode()
     {
+        if (PlayerPrefs.GetInt("TUTORIAL", 0) == 1) return;
         Time.timeScale = 0;
+        isTutorial = true;
 
         if (currentShow == 0) image.sprite = show1[index];
         else if (currentShow == 1) image.sprite = show2[index];
         else if (currentShow == 2) image.sprite = show3[index];
         prevButton.SetActive(false);
-        panel.SetActive(true);
+        image.gameObject.SetActive(true);
     }
 
     public void OffTutorial()
     {
-        panel.SetActive(false);
+        image.gameObject.SetActive(false);
         currentShow++;
         index = 0;
         Time.timeScale = 1;
+        isTutorial = false;
+
+        if (currentShow >= 3) PlayerPrefs.SetInt("TUTORIAL", 1);
     }
 
     public void PrevImage()
