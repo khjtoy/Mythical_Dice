@@ -45,6 +45,8 @@ public class PlayerController : Character, OnHit
 
 	[SerializeField]
 	private Image image;
+	[SerializeField]
+	private Image blood;
 
 	private Material spriteMaterial;
 
@@ -57,6 +59,7 @@ public class PlayerController : Character, OnHit
 		float hpPer = (float)hp / originHp;
 		_slider.UpdateAmount(hpPer);
 		isDamage = true;
+		BloodFade();
 		Animator.SetTrigger("Hit");
 		spriteMaterial.EnableKeyword("_SordColor");
 		spriteMaterial.SetFloat("_SordColor", 0f);
@@ -76,6 +79,11 @@ public class PlayerController : Character, OnHit
 			a.a = 0.5f - (0.5f * ((float)((float)hp / originHp * 100) / 100));
 			image.color = a;
 		}
+	}
+
+	private void BloodFade()
+	{
+		blood.DOFade(0.5f, 0.5f).OnComplete(() => blood.DOFade(0, 0.5f));
 	}
 
 	void UpdateSlider()

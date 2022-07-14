@@ -23,5 +23,8 @@ public class FadeHandler : MonoBehaviour
         rectTransform.DOAnchorPos3DY(0, 0.1f);
     }
 
-   
+	private void OnDestroy()
+	{
+        EventManager.StopListening("KILLENEMY", ShowFade);
+	}
 }

@@ -152,4 +152,9 @@ public class PlayerAttack : MonoBehaviour
         effect.GetComponent<EnemyCheck>().damage = MapController.Instance.GetIndexCost(x, y) * 2; 
         effect.SetActive(true);
     }
+
+	public void OnDestroy()
+	{
+        EventManager.StopListening("CHANGESTOP", ChangeStop);
+    }
 }
