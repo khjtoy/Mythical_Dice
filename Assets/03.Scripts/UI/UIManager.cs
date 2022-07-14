@@ -51,4 +51,9 @@ public class UIManager : MonoSingleton<UIManager>
 		DOTween.KillAll();
 		Time.timeScale = 1;
     }
+
+	public void QuitGame()
+	{
+		Application.Quit();
+	}
 }
