@@ -73,5 +73,9 @@ public class StartManager : MonoBehaviour
     {
         SceneManager.LoadScene("Stage");
     }
+    public void ExitGame()
+    {
+        Application.Quit();
+    }
 
 }
