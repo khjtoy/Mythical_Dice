@@ -48,7 +48,7 @@ public class GameManager : MonoSingleton<GameManager>
     private void Awake()
     {
         GameObject BossObject = null;
-        PlayerPrefs.SetInt("STAGE", 1);
+        //PlayerPrefs.SetInt("STAGE", 1);
         switch (PlayerPrefs.GetInt("STAGE", 1))
         {
             case 0:
@@ -74,5 +74,9 @@ public class GameManager : MonoSingleton<GameManager>
         BossObject.transform.SetParent(MapController.Instance.Root);
         BossObject.transform.localPosition = MapController.ArrayToPos(width - 1, height - 1) - Vector3.forward;
         BossObject.transform.localRotation = Quaternion.Euler(0, 0, 0);
+    }
+
+    protected override void Init()
+    {
     }
 }

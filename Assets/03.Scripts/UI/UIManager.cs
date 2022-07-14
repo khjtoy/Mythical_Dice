@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class UIManager : MonoSingleton<UIManager>
 {
@@ -10,11 +11,16 @@ public class UIManager : MonoSingleton<UIManager>
 	private GameObject PausePanel;
 	private GameObject OptionPanel;
 	private int uiOpen = 1;
-	private void Awake()
+
+    protected override void Init()
+    {
+        
+    }
+    private void Awake()
 	{
 		InGameCanvas = GameObject.Find("InGameCanvas");
-		PausePanel = InGameCanvas.transform.GetChild(0).gameObject;
-		OptionPanel = InGameCanvas.transform.GetChild(1).gameObject;
+		PausePanel = InGameCanvas.transform.GetChild(1).gameObject;
+		OptionPanel = InGameCanvas.transform.GetChild(2).gameObject;
 		InGameCanvas.SetActive(false);
 	}
 
@@ -37,4 +43,10 @@ public class UIManager : MonoSingleton<UIManager>
 		uiOpen++;
 		Time.timeScale = (uiOpen %= 2);
 	}
+
+	public void StageSelect()
+    {
+		SceneManager.LoadScene("Stage");
+		Time.timeScale = 1;
+    }
 }
