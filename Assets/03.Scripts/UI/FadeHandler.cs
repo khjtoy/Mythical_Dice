@@ -22,7 +22,8 @@ public class FadeHandler : MonoBehaviour
 
     private void DoPos()
     {
-        rectTransform.DOAnchorPos3DY(-1684.5f, 1f).onComplete += () =>
+        Time.timeScale = 1;
+        rectTransform.DOAnchorPos3DY(-1684.5f, 2f).onComplete += () =>
         {
             SceneManager.LoadScene("Stage");
         };
