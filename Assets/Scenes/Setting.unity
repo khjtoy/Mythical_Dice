@@ -436,6 +436,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8d0bbd803531d3e4fb7b386ad1215051, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  MasterSlider: {fileID: 1499847252}
+  MusicSlider: {fileID: 1702792253}
+  EffectSlider: {fileID: 312382635}
   _mixer: {fileID: 24100000, guid: e8dd32c7dc77e674ebe752d1594a55e4, type: 2}
 --- !u!1 &183720785
 GameObject:
@@ -3312,7 +3315,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &2002718792
 RectTransform:
   m_ObjectHideFlags: 0
