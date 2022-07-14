@@ -54,11 +54,6 @@ public class StatueMove : EnemyMove, IEnemyAttack
 		{
 			seq.Kill();
 			IsFloating = false;
-			if(!twoTutorial)
-            {
-				twoTutorial = true;
-				TutorialAction.Instance.TuturialMode();
-			}
 			//setNumber.isSurple = false;
 
 			//������ ����

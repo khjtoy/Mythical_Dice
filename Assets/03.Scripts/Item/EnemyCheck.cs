@@ -36,7 +36,9 @@ public class EnemyCheck : MonoBehaviour
             {
                 StatueMove statueMove = other?.GetComponent<StatueMove>();
                 MinoStamp minoStamp = other?.GetComponent<MinoStamp>();
-                if ((statueMove != null && !other.GetComponent<StatueMove>().IsFloating) || (minoStamp != null && !other.GetComponent<MinoStamp>().IsFloating))
+                SlimeMove slimeMove = other?.GetComponent<SlimeMove>();
+
+                if ((statueMove != null && !other.GetComponent<StatueMove>().IsFloating) || (minoStamp != null && !other.GetComponent<MinoStamp>().IsFloating) || (slimeMove != null && !slimeMove.IsFloating))
                     {
                     Invoke("OriginCol", 2f);
                     Debug.Log($"Damage:{damage}");
@@ -45,7 +47,9 @@ public class EnemyCheck : MonoBehaviour
                     other.GetComponent<EnemyController>().OnHits(damage);
                     camera.DOShakePosition(0.7f, 0.1f);
                     transform.DOScale(1.5f, 0.2f);
-                    other.enabled = false;
+                    if(PlayerPrefs.GetInt("STAGE", 1) > 1)
+                        other.enabled = false;
+
                     playerCol = other;
                     Time.timeScale = 0.1f;
                     Invoke("OriginTime", 0.06f);

@@ -470,7 +470,7 @@ SpriteRenderer:
   m_SortingLayerID: -1838813401
   m_SortingLayer: 1
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 0436f742e5a19954d97b6e8259aea53a, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 8a5d6674afe83934a908d2275e12dad0, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -570,6 +570,7 @@ MonoBehaviour:
   PlayerPos: {x: 0, y: 0}
   moveParticle: {fileID: 0}
   Pos: {x: 0, y: 0}
+  isCheck: 0
 --- !u!114 &2252794801959991236
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -601,8 +602,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 1.1684172, z: 0.8801149}
-  m_Center: {x: 0, y: 0.08420831, z: -0.16828352}
+  m_Size: {x: 1, y: 0.97403723, z: 0.8801149}
+  m_Center: {x: 0, y: -0.012981435, z: -0.16828352}
 --- !u!82 &3193296265216259671
 AudioSource:
   m_ObjectHideFlags: 0
