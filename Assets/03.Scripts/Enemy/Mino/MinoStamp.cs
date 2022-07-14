@@ -2,6 +2,7 @@ using DG.Tweening;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static DefineCS;
 
 public class MinoStamp : EnemyMove
 {
@@ -12,12 +13,20 @@ public class MinoStamp : EnemyMove
     private Animator diceAni;
     private SetNumber setNumber;
 
+    public bool isCheck = false;
+
     private void Start()
     {
+        EventManager.StartListening("RESETCHECK", OffCheck);
         dice = GameObject.FindGameObjectWithTag("Dice");
         diceAni = dice.GetComponent<Animator>();
         setNumber = dice.transform.GetChild(0).GetComponent<SetNumber>();
         setNumber.gameObject.SetActive(false);
+    }
+
+    private void OffCheck(EventParam eventParam)
+    {
+        isCheck = false;
     }
 
     public override void CharacterMovement(Vector2 target)
@@ -46,6 +55,19 @@ public class MinoStamp : EnemyMove
             StartCoroutine(StapCoroutine());
             seq.Kill();
             IsFloating = false;
+
+            //아이템 생성
+            if (!isCheck)
+            {
+                int random = Random.Range(0, 5);
+                if (random == 0)
+                {
+                    GameObject item = PoolManager.Instance.GetPooledObject((int)PooledObject.Item);
+                    item.transform.localPosition = new Vector3(transform.localPosition.x, transform.localPosition.y, -1);
+                    item.SetActive(true);
+                    isCheck = true;
+                }
+            }
         });
     }
 

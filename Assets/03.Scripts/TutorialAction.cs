@@ -23,6 +23,11 @@ public class TutorialAction : MonoSingleton<TutorialAction>
 
     private bool isTutorial = false;
 
+    private void Start()
+    {
+       //PlayerPrefs.SetInt("TUTORIAL", 0);
+    }
+
     protected override void Init()
     {
         // Destoryed
