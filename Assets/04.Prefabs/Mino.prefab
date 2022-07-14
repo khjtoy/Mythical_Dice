@@ -839,9 +839,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3d0b079f4bfae6040b1f4251bd4f12d3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerHpSlider: {fileID: 0}
+  whiteSlider: {fileID: 0}
+  sliderSpeed: 5
   _currentState: {fileID: 3095817778827568163}
   originHp: 50
   hp: 50
+  isDamage: 0
 --- !u!114 &1489100023
 MonoBehaviour:
   m_ObjectHideFlags: 0

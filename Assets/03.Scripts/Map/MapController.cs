@@ -124,17 +124,6 @@ public class MapController : MonoSingleton<MapController>
 		if (!isLeft && !isfirst)
 			condition = new Vector2(GameManager.Instance.Width - 1, condition.y);
 
-		if (condition.x == x && condition.y == y)
-		{
-			GameManager.Instance.StageStart = true;
-			if (!firstTutorial)
-			{
-				firstTutorial = true;
-				//TutorialAction.Instance.TuturialMode();
-			}
-			return;
-		}
-
 		if ((y < 0 || y >= GameManager.Instance.Height || x < 0 || x >= GameManager.Instance.Width) && isDual)
 		{
 			return;
@@ -212,6 +201,17 @@ public class MapController : MonoSingleton<MapController>
 		}
 		else
 		{
+			if (condition.x == x && condition.y == y)
+			{
+				GameManager.Instance.StageStart = true;
+				if (!firstTutorial)
+				{
+					firstTutorial = true;
+					TutorialAction.Instance.TuturialMode();
+				}
+				yield break;
+			}
+
 			if (isLeft)
 				FloorDirect(x - 1, y, isfirst);
 			else
