@@ -8,18 +8,42 @@ public class MinoDash : EnemyMove
     private Sequence seq;
     public bool IsDashing = false;
 
+    private GameObject dice;
+    private Animator diceAni;
+    private SetNumber setNumber;
+
     public override bool IsFloating { get; set; } = false;
+
+    private void Start()
+    {
+        dice = GameObject.FindGameObjectWithTag("Dice");
+        diceAni = dice.GetComponent<Animator>();
+        setNumber = dice.transform.GetChild(0).GetComponent<SetNumber>();
+        setNumber.gameObject.SetActive(false);
+    }
+    private void Awake()
+    {
+        EventManager.StartListening("KILLENEMY", KillEnemy);
+    }
 
     public override void CharacterMovement(Vector2 target)
     {
         SoundManager.Instance.SetEnemyEffectClip((int)EnemyEffectEnum.MINORUN);
         IsDashing = true;
         CharacterAnimation.PlayAnimator("dash");
+        diceAni.SetBool("IsDice", true);
+        setNumber.gameObject.SetActive(false);
+        setNumber.isSurple = true;
+        int _x = MapController.PosToArray(transform.position.x);
+        int _y = MapController.PosToArray(transform.position.y);
+        StartCoroutine(ChangeDice(_x, _y));
+
         seq = DOTween.Sequence();
         GameManager.Instance.BossNum = MapController.Instance.dices[MapController.PosToArray(transform.localPosition.y)][MapController.PosToArray(transform.localPosition.x)].randoms;
         Vector2Int targetInt = new Vector2Int(Mathf.RoundToInt(target.x), Mathf.RoundToInt(target.y));
         if (target.x > 0.5f)
         {
+            transform.localScale = new Vector3(-1, 1, 1);
             int x = MapController.PosToArray(transform.localPosition.x);
             for (int i = x; i < GameManager.Instance.Width; i++)
             {
@@ -80,6 +104,8 @@ public class MinoDash : EnemyMove
         }
         if (target.x < -0.5f)
         {
+            transform.localScale = new Vector3(1, 1, 1);
+
             int x = MapController.PosToArray(transform.localPosition.x);
 
             for (int i = x; i >= 0; i--)
@@ -270,5 +296,27 @@ public class MinoDash : EnemyMove
             BoomMap.Instance.Boom();
             IsDashing = false;
         });
+    }
+
+    private IEnumerator ChangeDice(int x, int y)
+    {
+        yield return new WaitForSeconds(0.15f);
+        diceAni.SetBool("IsDice", false);
+        setNumber.SettingNumber(MapController.Instance.dices[y][x].randoms - 1);
+        setNumber.gameObject.SetActive(true);
+    }
+    public void KillEnemy(EventParam eventParam)
+    {
+        seq.Kill();
+    }
+
+    private void OnDestroy()
+    {
+        EventManager.StopListening("KILLENEMY", KillEnemy);
+    }
+
+    private void OnApplicationQuit()
+    {
+        EventManager.StopListening("KILLENEMY", KillEnemy);
     }
 }

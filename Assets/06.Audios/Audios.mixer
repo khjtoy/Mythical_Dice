@@ -59,7 +59,7 @@ AudioMixerController:
   - guid: 0c4e8e1f7db29c641afdaed0da935648
     name: Music
   - guid: 8bc135eea17884f4f99a7baf9266680b
-    name: MyExposedParam
+    name: Pitch Shifter
   m_AudioMixerGroupViews:
   - guids:
     - 895d1f0ee8b1f584f9c2c214d91edd54

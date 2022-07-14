@@ -18,6 +18,7 @@ public class StageManager : MonoBehaviour
 
     private void Awake()
     {
+        Time.timeScale = 1;
         PlayerPrefs.SetInt("CLEAR", 2);
         currentStage = PlayerPrefs.GetInt("CLEAR");
     }
@@ -28,22 +29,22 @@ public class StageManager : MonoBehaviour
         Sequence seq = DOTween.Sequence();
         seq.AppendInterval(1);
         seq.Append(_fadePanel.DOAnchorPos3DY(1080, 1f));
-
-        foreach (GameObject gb in stageList)
-        {
-            gb.SetActive(false);
-        }
-        InitStage();
-
-
+        seq.AppendCallback(()=> {
+            seq.Kill();
+            InitStage();
+        });
     }
 
     private void InitStage()
     {
-        
-        for(int i = 0;i<currentStage;i++)
+        Debug.Log("asd");
+        Sequence seq = DOTween.Sequence();
+        for (int i = 0;i<currentStage-1;i++)
         {
-            stageList[i].SetActive(true);
+            Debug.Log(i);
+            seq.Append(stageList[i].transform.DOShakePosition(1, 10, 10));
+            int n = i;
+            seq.AppendCallback(() => stageList[n].SetActive(false));
         }
 
     }

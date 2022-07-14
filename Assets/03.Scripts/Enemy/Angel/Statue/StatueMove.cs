@@ -190,9 +190,13 @@ public class StatueMove : EnemyMove, IEnemyAttack
 
 	}
 
-	public void OnDestroy()
+	private void OnDestroy()
 	{
 		EventManager.StopListening("KILLENEMY", KillEnemy);
-		EventManager.StopListening("RESETCHECK", OffCheck);
+	}
+
+	private void OnApplicationQuit()
+	{
+		EventManager.StopListening("KILLENEMY", KillEnemy);
 	}
 }

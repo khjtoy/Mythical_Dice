@@ -37,19 +37,18 @@ public class MapController : MonoSingleton<MapController>
     {
        //DONDESTORY
     }
-    private void Start()
+    private void Awake()
     {
 		gameManager = GameManager.Instance;
 
+		
+	}
+    public void InitMap()
+    {
 		min = new Vector2(GameManager.Instance.Size / 2, GameManager.Instance.Size / 2) * -1.5f;
 		map = new GameObject[gameManager.Height][];
 		dices = new DiceDirecting[gameManager.Height][];
 		mapCost = new int[gameManager.Height][];
-
-		SpawnMap();
-	}
-    public void InitMap()
-    {
 		SpawnMap();
 	}
 
