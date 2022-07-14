@@ -51,9 +51,12 @@ public class PlayerController : Character, OnHit
 	private EnemyController enemyController;
 
 	public bool hasStart = false;
+    private bool isDeath = false;
 
-	public void OnHits(int damage)
+    public void OnHits(int damage)
 	{
+		if (isDeath) return;
+
 		if (isStop) return;
 		hp -= damage;
 		float hpPer = (float)hp / originHp;
@@ -67,6 +70,7 @@ public class PlayerController : Character, OnHit
 		if (hp <= 0)
 		{
 			isStop = true;
+			isDeath = true;
 			GetComponent<PlayerDie>().DieAction();
 			//SceneManager.LoadScene(1);
 		}
