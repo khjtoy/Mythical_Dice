@@ -9,7 +9,7 @@ public class FadeHandler : MonoBehaviour
 {
     private RectTransform rectTransform;
 
-    private void Awake()
+    private void Start()
     {
         rectTransform = GetComponent<RectTransform>();
         EventManager.StartListening("KILLENEMY", ShowFade);
@@ -22,7 +22,7 @@ public class FadeHandler : MonoBehaviour
 
     private void DoPos()
     {
-        rectTransform.DOAnchorPos3DY(0, 0.1f).onComplete += () =>
+        rectTransform.DOAnchorPos3DY(-1684.5f, 1f).onComplete += () =>
         {
             SceneManager.LoadScene("Stage");
         };
@@ -30,6 +30,17 @@ public class FadeHandler : MonoBehaviour
 
     public void Fade(Action callBack = null)
     {
-        rectTransform.DOAnchorPos3DY(0f, 2f).OnComplete(() => callBack?.Invoke());
+        callBack?.Invoke();
+        rectTransform.DOAnchorPos3DY(0f, 2f);
+    }
+
+    private void OnDestroy()
+    {
+        EventManager.StopListening("KILLENEMY", ShowFade);
+    }
+
+    private void OnApplicationQuit()
+    {
+        EventManager.StopListening("KILLENEMY", ShowFade);
     }
 }

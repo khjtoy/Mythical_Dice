@@ -282,7 +282,15 @@ public class MinoDash : EnemyMove
     public void KillEnemy(EventParam eventParam)
     {
         seq.Kill();
-        seq = DOTween.Sequence();
-        seq.Append(transform.DOLocalMoveZ(-1, 0.1f).SetEase(Ease.InExpo));
+    }
+
+    private void OnDestroy()
+    {
+        EventManager.StopListening("KILLENEMY", KillEnemy);
+    }
+
+    private void OnApplicationQuit()
+    {
+        EventManager.StopListening("KILLENEMY", KillEnemy);
     }
 }

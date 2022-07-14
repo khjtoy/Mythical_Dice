@@ -189,4 +189,14 @@ public class StatueMove : EnemyMove, IEnemyAttack
 		}
 
 	}
+
+	private void OnDestroy()
+	{
+		EventManager.StopListening("KILLENEMY", KillEnemy);
+	}
+
+	private void OnApplicationQuit()
+	{
+		EventManager.StopListening("KILLENEMY", KillEnemy);
+	}
 }

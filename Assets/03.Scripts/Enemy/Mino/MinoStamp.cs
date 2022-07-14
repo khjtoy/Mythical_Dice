@@ -66,4 +66,13 @@ public class MinoStamp : EnemyMove
         }
 
     }
+    private void OnDestroy()
+    {
+        EventManager.StopListening("KILLENEMY", KillEnemy);
+    }
+
+    private void OnApplicationQuit()
+    {
+        EventManager.StopListening("KILLENEMY", KillEnemy);
+    }
 }

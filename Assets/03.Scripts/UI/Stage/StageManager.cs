@@ -18,6 +18,7 @@ public class StageManager : MonoBehaviour
 
     private void Awake()
     {
+        Time.timeScale = 1;
         PlayerPrefs.SetInt("CLEAR", 2);
         currentStage = PlayerPrefs.GetInt("CLEAR");
     }
@@ -42,7 +43,8 @@ public class StageManager : MonoBehaviour
         {
             Debug.Log(i);
             seq.Append(stageList[i].transform.DOShakePosition(1, 10, 10));
-            seq.AppendCallback(() => stageList[i].SetActive(false));
+            int n = i;
+            seq.AppendCallback(() => stageList[n].SetActive(false));
         }
 
     }
