@@ -9,7 +9,8 @@ public class MinoSwing : EnemyMove
     private int range = 0;
     public override void CharacterMovement(Vector2 target)
     {
-        Vector2Int basePos = new Vector2Int(MapController.PosToArray(transform.localPosition.x), MapController.PosToArray(transform.localPosition.y));
+		SoundManager.Instance.SetEnemyEffectClip((int)EnemyEffectEnum.MINOJUMP);
+		Vector2Int basePos = new Vector2Int(MapController.PosToArray(transform.localPosition.x), MapController.PosToArray(transform.localPosition.y));
         for (int i = -range; i <= range; i++)
         {
             for (int j = -range; j <= range; j++)

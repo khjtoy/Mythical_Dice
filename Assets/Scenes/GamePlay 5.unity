@@ -1678,6 +1678,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 03ffbc46c88be0b4d9f35cea708bcbc7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerHpSlider: {fileID: 0}
+  whiteSlider: {fileID: 0}
+  sliderSpeed: 0
+  isDamage: 1
   playerDir: 0
   originHp: 20
   hp: 20
@@ -2216,7 +2220,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 8
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &1489100019 stripped
 Transform:
@@ -2469,9 +2473,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c73df4d9057ca24dad2b18447556bc8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  pitchBendGroup: {fileID: 4603418646749562965, guid: e8dd32c7dc77e674ebe752d1594a55e4,
+    type: 2}
   PlayerEffectClip:
   - {fileID: 8300000, guid: bc353aed0a7b25640bc7d8e370eccba2, type: 3}
-  - {fileID: 8300000, guid: 67b62458a29aaf948b9bb6f7e418f3ed, type: 3}
+  - {fileID: 8300000, guid: c48ed50f4e220244f91e4ed8eee37b0e, type: 3}
   EnemyEffectClip:
   - {fileID: 8300000, guid: 381493e4e2aebdd448e50d4f0db1ec5b, type: 3}
   BackgroundClips:
@@ -2483,12 +2489,16 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 0d28acb02282c2f42a2dbc6647d9ffd1, type: 3}
   - {fileID: 8300000, guid: 5566e7236e4e49240bfb2b7faa508aa0, type: 3}
   - {fileID: 8300000, guid: d78088a8dc03d5240ae4a838a327d724, type: 3}
-  BackgroundSource: {fileID: 1689311987}
-  EffectSource: {fileID: 1322475273}
+  - {fileID: 8300000, guid: bd46e197841aa644ab623737a7e6a4ca, type: 3}
+  - {fileID: 8300000, guid: 6d9f5679abe876b46b9a669c69822c30, type: 3}
+  - {fileID: 8300000, guid: 26d71b07f0f331540828787040497eee, type: 3}
+  - {fileID: 8300000, guid: f912c2f856bdbee4eb85f8c1a05eee86, type: 3}
+  BackgroundSource: {fileID: 0}
+  EffectSource: {fileID: 0}
   PlayerEffectSource: {fileID: 0}
   EnemyEffectSource: {fileID: 0}
-  PlayerDashEffectSource: {fileID: 1697157428}
-  PlayerAttackEffectSource: {fileID: 1293676196}
+  PlayerDashEffectSource: {fileID: 0}
+  PlayerAttackEffectSource: {fileID: 0}
 --- !u!114 &1689311989
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2507,6 +2517,7 @@ MonoBehaviour:
   <BossNum>k__BackingField: 10
   StageNum: 0
   StageStart: 0
+  thirdTutorial: 0
 --- !u!4 &1689311990
 Transform:
   m_ObjectHideFlags: 0
@@ -3138,7 +3149,7 @@ RectTransform:
   - {fileID: 101963665}
   - {fileID: 272946898}
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}

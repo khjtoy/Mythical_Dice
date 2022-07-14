@@ -12,6 +12,7 @@ public class MinoDash : EnemyMove
 
     public override void CharacterMovement(Vector2 target)
     {
+        SoundManager.Instance.SetEnemyEffectClip((int)EnemyEffectEnum.MINORUN);
         IsDashing = true;
         seq = DOTween.Sequence();
         GameManager.Instance.BossNum = MapController.Instance.dices[MapController.PosToArray(transform.localPosition.y)][MapController.PosToArray(transform.localPosition.x)].randoms;
