@@ -339,7 +339,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8a8309d90cf9f7546961571ff32b6578, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GoalTime: 1.2
+  GoalTime: 1.5
 --- !u!1 &3095817779132986258
 GameObject:
   m_ObjectHideFlags: 0
@@ -888,6 +888,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveTime: 0.1
   PlayerPos: {x: -3, y: -3}
+  moveParticle: {fileID: 0}
   IsDashing: 0
 --- !u!114 &3095817779775664604
 MonoBehaviour:
@@ -923,6 +924,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveTime: 0.1
   PlayerPos: {x: 0, y: 0}
+  moveParticle: {fileID: 0}
 --- !u!114 &1489100024
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -937,6 +939,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveTime: 0.1
   PlayerPos: {x: 0, y: 0}
+  moveParticle: {fileID: 0}
   range: 1
 --- !u!82 &1417817649
 AudioSource:

@@ -39,7 +39,7 @@ public class EnemyController : Character, OnHit
 
 	public void OnHits(int damage)
 	{
-
+		if (isDeath) return;
 		hp -= damage;
 		float hpPer = (float)hp / originHp;
 		_slider.UpdateAmount(hpPer);

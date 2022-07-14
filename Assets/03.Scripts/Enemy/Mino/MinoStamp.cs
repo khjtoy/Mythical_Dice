@@ -41,6 +41,8 @@ public class MinoStamp : EnemyMove
         
         seq.AppendCallback(() =>
         {
+            Define.MainCam.orthographic = !Define.MainCam.orthographic;
+            Define.MainCam.transform.DOShakePosition(0.3f);
             StartCoroutine(StapCoroutine());
             seq.Kill();
             IsFloating = false;
