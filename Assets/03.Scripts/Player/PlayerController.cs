@@ -83,8 +83,11 @@ public class PlayerController : Character, OnHit
 
 	private void BloodFade(int damage)
 	{
+		float d = 0f;
 		float percent = (float)damage / 6 * 100;
-		blood.DOFade(0.7f * (percent/100), 1f).OnComplete(() => blood.DOFade(0, 0.5f));
+		if (percent == 16.67)
+			d = 0.2f;
+		blood.DOFade(0.7f * (percent/100) + d, 0.5f).OnComplete(() => blood.DOFade(0, 0.5f));
 	}
 
 	void UpdateSlider()

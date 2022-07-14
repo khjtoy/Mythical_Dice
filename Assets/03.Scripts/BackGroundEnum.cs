@@ -5,6 +5,8 @@ using UnityEngine;
 public enum BackGroundEnum
 {
 	BASIC,
+	INTRO,
+	START
 }
 
 public enum EffectEnum

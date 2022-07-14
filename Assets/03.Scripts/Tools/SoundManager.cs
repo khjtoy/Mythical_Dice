@@ -2,19 +2,19 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Audio;
-
+using UnityEngine.SceneManagement;
 public class SoundManager : MonoSingleton<SoundManager>
 {
 	[SerializeField]
 	private AudioMixerGroup pitchBendGroup;
 
-    protected override void Init()
-    {
-        
-    }
+	protected override void Init()
+	{
 
-    #region 클립
-    [Header("플레이어 효과음 클립")]
+	}
+
+	#region 클립
+	[Header("플레이어 효과음 클립")]
 	public AudioClip[] PlayerEffectClip;
 	[Header("적 효과음 클립")]
 	public AudioClip[] EnemyEffectClip;
@@ -34,10 +34,6 @@ public class SoundManager : MonoSingleton<SoundManager>
 	[SerializeField]
 	private AudioSource EffectSource;
 
-	[Header("플레이어 오디오 소스")]
-	[SerializeField]
-	private AudioSource PlayerEffectSource;
-
 	[Header("적 오디오 소스")]
 	[SerializeField]
 	private AudioSource EnemyEffectSource;
@@ -53,8 +49,21 @@ public class SoundManager : MonoSingleton<SoundManager>
 
 	private void Start()
 	{
-		SetBackgroundClip(0);
-		EnemyEffectSource = GameObject.FindGameObjectWithTag("ENEMY").GetComponent<AudioSource>();
+		if (SceneManager.GetActiveScene().name == "GamePlay 6")
+		{
+			SetBackgroundClip((int)BackGroundEnum.BASIC);
+			EnemyEffectSource = GameObject.FindGameObjectWithTag("ENEMY").GetComponent<AudioSource>();
+		    PlayerDashEffectSource = GameObject.Find("PlayerDashEffect").GetComponent<AudioSource>();
+			PlayerAttackEffectSource = GameObject.Find("PlayerAttackEffect").GetComponent<AudioSource>();
+		}
+		else if(SceneManager.GetActiveScene().name == "Intro")
+		{
+			SetBackgroundClip((int)BackGroundEnum.INTRO);
+		}
+		else if (SceneManager.GetActiveScene().name == "Start")
+		{
+			SetBackgroundClip((int)BackGroundEnum.START);
+		}
 	}
 
 	public void SetBackgroundClip(int index)
