@@ -584,7 +584,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerHpSlider: {fileID: 0}
   whiteSlider: {fileID: 0}
-  sliderSpeed: 0
+  sliderSpeed: 5
   _currentState: {fileID: 1062127838}
   originHp: 50
   hp: 50

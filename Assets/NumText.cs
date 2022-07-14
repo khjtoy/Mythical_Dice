@@ -26,6 +26,7 @@ public class NumText : MonoBehaviour
 
 	public void DamageText(int text, Vector3 pos)
 	{
+		num.alpha = 1;
 		Vector2 vec = Random.insideUnitCircle;
 		transform.position = new Vector3(Random.Range(pos.x - 1f, pos.x + 1f), Random.Range(pos.y, pos.y + 1f), pos.z);
 		transform.localEulerAngles = new Vector3(transform.rotation.x - 45, transform.rotation.y, transform.rotation.z);

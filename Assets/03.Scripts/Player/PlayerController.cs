@@ -71,7 +71,7 @@ public class PlayerController : Character, OnHit
 		else if ((float)hp / originHp * 100 <= 50)
 		{
 			if ((float)hp / originHp * 100 <= 30)
-				SoundManager.Instance.SetBackgroundSpeed(1.2f);
+				SoundManager.Instance.SetBackgroundSpeed(1.5f);
 			Color a = image.color;
 			a.a = 0.5f - (0.5f * ((float)((float)hp / originHp * 100) / 100));
 			image.color = a;
@@ -127,6 +127,11 @@ public class PlayerController : Character, OnHit
 		PlayerMovement();
 		PressAttack();
 	}
+
+	//private void LateUpdate()
+	//{
+	//	UpdateSlider();
+	//}
 
 
 	private void PlayerMovement()

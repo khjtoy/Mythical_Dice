@@ -12,7 +12,9 @@ public class MinoDash : EnemyMove
 
     public override void CharacterMovement(Vector2 target)
     {
+        SoundManager.Instance.SetEnemyEffectClip((int)EnemyEffectEnum.MINORUN);
         IsDashing = true;
+        CharacterAnimation.PlayAnimator("dash");
         seq = DOTween.Sequence();
         GameManager.Instance.BossNum = MapController.Instance.dices[MapController.PosToArray(transform.localPosition.y)][MapController.PosToArray(transform.localPosition.x)].randoms;
         Vector2Int targetInt = new Vector2Int(Mathf.RoundToInt(target.x), Mathf.RoundToInt(target.y));
@@ -264,7 +266,8 @@ public class MinoDash : EnemyMove
         seq.AppendCallback(() =>
         {
             seq.Kill();
-                        BoomMap.Instance.Boom();
+            CharacterAnimation.PlayAnimator("Idle");
+            BoomMap.Instance.Boom();
             IsDashing = false;
         });
     }

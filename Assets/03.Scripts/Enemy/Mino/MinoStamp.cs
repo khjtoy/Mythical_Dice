@@ -13,9 +13,11 @@ public class MinoStamp : EnemyMove
         IsFloating = true;
 
         seq = DOTween.Sequence();
+        CharacterAnimation.PlayAnimator("jump");
         seq.Append(transform.DOLocalMoveZ(-3, 0.3f));
         seq.Append(transform.DOLocalMove(new Vector3(target.x, target.y, -3), 0.3f));
         seq.Append(transform.DOLocalMoveZ(-1, 0.1f).SetEase(Ease.InExpo));
+        seq.AppendCallback(() => CharacterAnimation.PlayAnimator("stamp"));
 
 
         
@@ -29,8 +31,10 @@ public class MinoStamp : EnemyMove
 
     private IEnumerator StapCoroutine()
     {
+        CharacterAnimation.PlayAnimator("Idle");
         Vector2Int pos = new Vector2Int(MapController.PosToArray(transform.localPosition.x), MapController.PosToArray(transform.localPosition.y));
         GameManager.Instance.BossNum = 3;
+        SoundManager.Instance.SetEnemyEffectClip((int)EnemyEffectEnum.MINOSTAOMP);
         for (int i = 1; i <=  GameManager.Instance.Size; i++)
         {
             for (int j = -i; j <= i; j++)
@@ -50,5 +54,6 @@ public class MinoStamp : EnemyMove
             }
             yield return new WaitForSeconds(0.5f);
         }
+
     }
 }
