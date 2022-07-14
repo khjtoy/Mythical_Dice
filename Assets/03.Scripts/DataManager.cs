@@ -8,7 +8,6 @@ public class DataManager : MonoBehaviour
 {
     private void Awake()
     {
-        CreateJsonFile(Application.dataPath, "sound", ObjectToJson(new Sound(0.5f, 0.5f, 0.5f)));
     }
     public static string ObjectToJson(object obj)
     { 
@@ -26,6 +25,10 @@ public class DataManager : MonoBehaviour
     }
     public static T LoadJsonFile<T>(string loadPath, string fileName)
     { 
+        if(!File.Exists(loadPath + '/' + fileName))
+        {
+            CreateJsonFile(Application.dataPath, "sound", ObjectToJson(new Sound(0.5f, 0.5f, 0.5f)));
+        }
         FileStream fileStream = new FileStream(string.Format("{0}/{1}.json", loadPath, fileName), FileMode.Open);
         byte[] data = new byte[fileStream.Length]; fileStream.Read(data, 0, data.Length); 
         fileStream.Close(); 
