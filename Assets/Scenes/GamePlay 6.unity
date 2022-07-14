@@ -7435,6 +7435,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: da4d916475b47164f8b290e5df15293d, type: 3}
   - {fileID: 8300000, guid: d2a791a7aefc7e746bb4a91f82d63cc1, type: 3}
   - {fileID: 8300000, guid: 5183a8a49c4a45b43a14680d6598391b, type: 3}
+  - {fileID: 8300000, guid: a004699db9ee8a743a4443747b36d25c, type: 3}
   BackgroundClips:
   - {fileID: 8300000, guid: 5e9609cf85071f54aba46c8911e4462b, type: 3}
   - {fileID: 8300000, guid: 37061d426ea5ebc40877d5987772db24, type: 3}

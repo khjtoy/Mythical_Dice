@@ -12,6 +12,7 @@ public class SlimeMove : EnemyMove
 
 	public override void CharacterMovement(Vector2 target)
     {
+		SoundManager.Instance.SetEnemyEffectClip((int)EnemyEffectEnum.JumpSlime);
 		seq = DOTween.Sequence();
 		seq.Append(transform.DOLocalMoveZ(-3, 0.3f));
 		seq.Append(transform.DOLocalMove(new Vector3(target.x, target.y, -3), 0.3f));
