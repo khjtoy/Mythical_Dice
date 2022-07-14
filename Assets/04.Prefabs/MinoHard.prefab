@@ -908,8 +908,8 @@ MonoBehaviour:
   whiteSlider: {fileID: 0}
   sliderSpeed: 5
   _currentState: {fileID: 3095817778827568163}
-  originHp: 50
-  hp: 50
+  originHp: 70
+  hp: 70
   isDamage: 0
   isDeath: 0
 --- !u!114 &1489100023

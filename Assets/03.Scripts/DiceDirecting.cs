@@ -67,6 +67,7 @@ public class DiceDirecting : MonoBehaviour
 	public IEnumerator BasicDiceNumSelect()
 	{
 		yield return new WaitForSeconds(wait);
+		
 		playerIndex = new Vector2Int(MapController.PosToArray(Define.Player.x), MapController.PosToArray(Define.Player.y));
 		if(playerIndex == Pos)
         {
