@@ -96,8 +96,8 @@ public class GameManager : MonoSingleton<GameManager>
         BossObject.transform.localPosition = MapController.ArrayToPos(width - 1, height - 1) - Vector3.forward;
         Define.Controller.transform.localPosition = -MapController.ArrayToPos(width - 1, height - 1) - Vector3.forward;
         BossObject.transform.localRotation = Quaternion.Euler(0, 0, 0);
-        SoundManager.Instance.InitMap();
-        mapController.InitMap();
+		SoundManager.Instance.InitMap();
+		mapController.InitMap();
         Define.Controller.Init();
     }
 

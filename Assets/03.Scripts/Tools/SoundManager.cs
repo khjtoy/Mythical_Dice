@@ -47,6 +47,18 @@ public class SoundManager : MonoSingleton<SoundManager>
 	private AudioSource PlayerAttackEffectSource;
 	#endregion
 
+	private void Start()
+	{
+		if (SceneManager.GetActiveScene().name == "Intro")
+		{
+			SetBackgroundClip((int)BackGroundEnum.INTRO);
+		}
+		else if (SceneManager.GetActiveScene().name == "Start")
+		{
+			SetBackgroundClip((int)BackGroundEnum.START);
+		}
+	}
+
 	public void InitMap()
 	{
 		if (SceneManager.GetActiveScene().name == "GamePlay 6")
@@ -55,14 +67,6 @@ public class SoundManager : MonoSingleton<SoundManager>
 			EnemyEffectSource = GameObject.FindGameObjectWithTag("ENEMY").GetComponent<AudioSource>();
 		    PlayerDashEffectSource = GameObject.Find("PlayerDashEffect").GetComponent<AudioSource>();
 			PlayerAttackEffectSource = GameObject.Find("PlayerAttackEffect").GetComponent<AudioSource>();
-		}
-		else if(SceneManager.GetActiveScene().name == "Intro")
-		{
-			SetBackgroundClip((int)BackGroundEnum.INTRO);
-		}
-		else if (SceneManager.GetActiveScene().name == "Start")
-		{
-			SetBackgroundClip((int)BackGroundEnum.START);
 		}
 	}
 
