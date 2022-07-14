@@ -45,12 +45,22 @@ public class PlayerController : Character, OnHit
 
 	[SerializeField]
 	private Image image;
+
+	private Material spriteMaterial;
+
+	private EnemyController enemyController;
+
 	public void OnHits(int damage)
 	{
+		if (isStop) return;
 		hp -= damage;
 		float hpPer = (float)hp / originHp;
 		_slider.UpdateAmount(hpPer);
 		isDamage = true;
+		Animator.SetTrigger("Hit");
+		spriteMaterial.EnableKeyword("_SordColor");
+		spriteMaterial.SetFloat("_SordColor", 0f);
+		spriteMaterial.DisableKeyword("_SordColor");
 		Define.MainCam.transform.DOShakePosition(0.3f);
 		if (hp <= 0)
 		{
@@ -85,6 +95,7 @@ public class PlayerController : Character, OnHit
 	private void Awake()
 	{
 		_slider = GameObject.Find("PlayerBar").GetComponent<HPSlider>();
+		spriteMaterial = transform.GetChild(0).GetComponent<SpriteRenderer>().material;
 		moveDir = new Queue<int>();
 
 		dir[0] = new Vector3(1.5f, 0, 0);
@@ -99,16 +110,19 @@ public class PlayerController : Character, OnHit
 		enemyObject = GameObject.FindGameObjectWithTag("ENEMY");
 		characterMove = GetComponent<CharacterMove>();
 		playerAttack = GetComponent<PlayerAttack>();
+		enemyController = enemyObject.GetComponent<EnemyController>();
 	}
 
 	private void Update()
 	{
 		if (isStop) return;
 
-		if (moveDir.Count > 0 && !characterMove.IsMove)
+		if (moveDir.Count > 0 && !characterMove.IsMove && !enemyController.isDeath)
 			PopMove();
 
 		UpdateSlider();
+
+		if (enemyController.isDeath) return;
 
 		PlayerMovement();
 		PressAttack();

@@ -25,5 +25,9 @@ public enum PlayerEffectEunm
 
 public enum EnemyEffectEnum
 {
-	Hit
+	Hit,
+	MINORUN,
+	MINOSTAOMP,
+	MINOJUMP,
+	MINOSLASH,
 }

@@ -12,6 +12,7 @@ public class MinoDash : EnemyMove
 
     public override void CharacterMovement(Vector2 target)
     {
+        SoundManager.Instance.SetEnemyEffectClip((int)EnemyEffectEnum.MINORUN);
         IsDashing = true;
         CharacterAnimation.PlayAnimator("dash");
         seq = DOTween.Sequence();
