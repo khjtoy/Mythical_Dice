@@ -62,7 +62,7 @@ public class SlimeMove : EnemyMove
 			StartCoroutine(MoveCoroutine());
 
 
-			//¾ÆÀÌÅÛ »ý¼º
+			//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 			if (!isCheck)
 			{
 				int random = Random.Range(0, 5);

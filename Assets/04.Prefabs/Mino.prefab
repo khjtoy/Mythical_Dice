@@ -339,7 +339,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8a8309d90cf9f7546961571ff32b6578, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GoalTime: 1.5
+  GoalTime: 1
 --- !u!1 &3095817779132986258
 GameObject:
   m_ObjectHideFlags: 0
@@ -421,7 +421,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8a8309d90cf9f7546961571ff32b6578, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GoalTime: 1.5
+  GoalTime: 1
 --- !u!114 &7299210347099424294
 MonoBehaviour:
   m_ObjectHideFlags: 0
