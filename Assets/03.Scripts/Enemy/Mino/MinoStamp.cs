@@ -4,9 +4,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using static DefineCS;
 
-public class MinoStamp : EnemyMove
+public class MinoStamp : EnemyMove, IEnemyAttack
 {
     public override bool IsFloating { get; set; } = false;
+    public bool IsAttacking { get; set; } = false;
+    public Animator animator { get; set; } = null;
+
     private Sequence seq;
 
     private GameObject dice;
@@ -40,35 +43,13 @@ public class MinoStamp : EnemyMove
         StartCoroutine(ChangeDice(x, y));
 
         seq = DOTween.Sequence();
-        CharacterAnimation.PlayAnimator("jump");
+        CharacterAnimation.PlayAnimator(animator, "jump");
         seq.Append(transform.DOLocalMoveZ(-3, 0.3f));
         seq.Append(transform.DOLocalMove(new Vector3(target.x, target.y, -3), 0.3f));
         seq.Append(transform.DOLocalMoveZ(-1, 0.1f).SetEase(Ease.InExpo));
-        seq.AppendCallback(() => CharacterAnimation.PlayAnimator("stamp"));
+        seq.AppendCallback(() => CharacterAnimation.SetTriggerAnimator(animator,"stamp"));
 
-
-        
-        seq.AppendCallback(() =>
-        {
-            Define.MainCam.orthographic = !Define.MainCam.orthographic;
-            Define.MainCam.transform.DOShakePosition(0.3f);
-            StartCoroutine(StapCoroutine());
-            seq.Kill();
-            IsFloating = false;
-
-            //아이템 생성
-            if (!isCheck)
-            {
-                int random = Random.Range(0, 5);
-                if (random == 0)
-                {
-                    GameObject item = PoolManager.Instance.GetPooledObject((int)PooledObject.Item);
-                    item.transform.localPosition = new Vector3(transform.localPosition.x, transform.localPosition.y, -1);
-                    item.SetActive(true);
-                    isCheck = true;
-                }
-            }
-        });
+        DoAttack();
     }
 
     private IEnumerator ChangeDice(int x, int y)
@@ -82,6 +63,7 @@ public class MinoStamp : EnemyMove
     private void Awake()
     {
         EventManager.StartListening("KILLENEMY", KillEnemy);
+        animator = transform.GetChild(0).GetComponent<Animator>();
     }
     public void KillEnemy(EventParam eventParam)
     {
@@ -90,10 +72,10 @@ public class MinoStamp : EnemyMove
         seq.Append(transform.DOLocalMoveZ(-1, 0.1f).SetEase(Ease.InExpo));
     }
     
-    private IEnumerator StapCoroutine()
+    private IEnumerator StampCoroutine()
     {
         yield return new WaitForSeconds(0.2f);
-        CharacterAnimation.PlayAnimator("Idle");
+        CharacterAnimation.PlayAnimator(animator, "Idle");
         Vector2Int pos = new Vector2Int(MapController.PosToArray(transform.localPosition.x), MapController.PosToArray(transform.localPosition.y));
         GameManager.Instance.BossNum = 3;
         SoundManager.Instance.SetEnemyEffectClip((int)EnemyEffectEnum.MINOSTAOMP);
@@ -126,5 +108,32 @@ public class MinoStamp : EnemyMove
     private void OnApplicationQuit()
     {
         EventManager.StopListening("KILLENEMY", KillEnemy);
+    }
+
+    public void DoAttack()
+    {
+        IsAttacking = true;
+        seq.AppendCallback(() =>
+        {
+            Define.MainCam.orthographic = !Define.MainCam.orthographic;
+            Define.MainCam.transform.DOShakePosition(0.3f);
+            StartCoroutine(StampCoroutine());
+            seq.Kill();
+            IsFloating = false;
+            IsAttacking = false;
+
+            //아이템 생성
+            if (!isCheck)
+            {
+                int random = Random.Range(0, 5);
+                if (random == 0)
+                {
+                    GameObject item = PoolManager.Instance.GetPooledObject((int)PooledObject.Item);
+                    item.transform.localPosition = new Vector3(transform.localPosition.x, transform.localPosition.y, -1);
+                    item.SetActive(true);
+                    isCheck = true;
+                }
+            }
+        });
     }
 }

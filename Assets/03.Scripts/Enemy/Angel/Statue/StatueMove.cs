@@ -9,7 +9,10 @@ public class StatueMove : EnemyMove, IEnemyAttack
 	private Sequence seq;
 	public Vector2Int Pos;
 	public override bool IsFloating { get; set; } = false;
-	public bool isCheck = false;
+	public bool IsAttacking { get; set; } = false;
+	public Animator animator { get; set; } = null;
+
+    public bool isCheck = false;
 
 	private bool twoTutorial = false;
 
@@ -33,6 +36,7 @@ public class StatueMove : EnemyMove, IEnemyAttack
 	}
 	public override void CharacterMovement(Vector2 target)
 	{
+		IsAttacking = true;
 		IsFloating = true;
 		diceAni.SetBool("IsDice", true);
 		//if(setNumber == null) setNumber = dice.transform.GetChild(0).GetComponent<SetNumber>();
@@ -182,7 +186,7 @@ public class StatueMove : EnemyMove, IEnemyAttack
 				BoomMap.Instance.Boom();
 				break;
 		}
-
+		IsAttacking = false;
 	}
 
 	public void OnDestroy()

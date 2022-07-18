@@ -4,15 +4,13 @@ using UnityEngine;
 
 public class CharacterAnimation : MonoBehaviour
 {
-    private static Animator animator;
-
-    private void Awake()
-    {
-        animator = GetComponent<Animator>();
-    }
-
-    public static void PlayAnimator(string key)
+    public static void PlayAnimator(Animator animator, string key)
     {
         animator.Play(key);
+    }
+
+    public static void SetTriggerAnimator(Animator animator, string key)
+    {
+        animator.SetTrigger(key);
     }
 }

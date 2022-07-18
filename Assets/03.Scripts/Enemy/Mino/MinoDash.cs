@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MinoDash : EnemyMove
+public class MinoDash : EnemyMove, IEnemyAttack
 {
     private Sequence seq;
     public bool IsDashing = false;
@@ -11,8 +11,11 @@ public class MinoDash : EnemyMove
     private GameObject dice;
     private Animator diceAni;
     private SetNumber setNumber;
+    private Vector2 Target = Vector2.zero;
 
     public override bool IsFloating { get; set; } = false;
+    public bool IsAttacking { get; set; } = false;
+    public Animator animator { get; set; } = null;
 
     private void Start()
     {
@@ -24,31 +27,60 @@ public class MinoDash : EnemyMove
     private void Awake()
     {
         EventManager.StartListening("KILLENEMY", KillEnemy);
+        animator = transform.GetChild(0).GetComponent<Animator>();
     }
 
     public override void CharacterMovement(Vector2 target)
     {
+        IsAttacking = true;
         SoundManager.Instance.SetEnemyEffectClip((int)EnemyEffectEnum.MINORUN);
         IsDashing = true;
-        CharacterAnimation.PlayAnimator("dash");
+        CharacterAnimation.PlayAnimator(animator, "dash");
         diceAni.SetBool("IsDice", true);
         setNumber.gameObject.SetActive(false);
         setNumber.isSurple = true;
         int _x = MapController.PosToArray(transform.position.x);
         int _y = MapController.PosToArray(transform.position.y);
         StartCoroutine(ChangeDice(_x, _y));
+        Target = target;
+        DoAttack();
+    }
 
+    private IEnumerator ChangeDice(int x, int y)
+    {
+        yield return new WaitForSeconds(0.15f);
+        diceAni.SetBool("IsDice", false);
+        setNumber.SettingNumber(MapController.Instance.dices[y][x].randoms - 1);
+        setNumber.gameObject.SetActive(true);
+    }
+    public void KillEnemy(EventParam eventParam)
+    {
+        seq.Kill();
+    }
+
+    private void OnDestroy()
+    {
+        EventManager.StopListening("KILLENEMY", KillEnemy);
+    }
+
+    private void OnApplicationQuit()
+    {
+        EventManager.StopListening("KILLENEMY", KillEnemy);
+    }
+
+    public void DoAttack()
+    {
         seq = DOTween.Sequence();
         GameManager.Instance.BossNum = MapController.Instance.dices[MapController.PosToArray(transform.localPosition.y)][MapController.PosToArray(transform.localPosition.x)].randoms;
-        Vector2Int targetInt = new Vector2Int(Mathf.RoundToInt(target.x), Mathf.RoundToInt(target.y));
-        if (target.x > 0.5f)
+        Vector2Int targetInt = new Vector2Int(Mathf.RoundToInt(Target.x), Mathf.RoundToInt(Target.y));
+        if (Target.x > 0.5f)
         {
             transform.localScale = new Vector3(-1, 1, 1);
             int x = MapController.PosToArray(transform.localPosition.x);
             for (int i = x; i < GameManager.Instance.Width; i++)
             {
                 int n = i;
-                Vector2Int pos = new Vector2Int(MapController.PosToArray(transform.localPosition.x),MapController.PosToArray(transform.localPosition.y));
+                Vector2Int pos = new Vector2Int(MapController.PosToArray(transform.localPosition.x), MapController.PosToArray(transform.localPosition.y));
                 seq.AppendCallback(() =>
                 {
                     if (n < GameManager.Instance.Width - 1)
@@ -102,7 +134,7 @@ public class MinoDash : EnemyMove
                 });
             }
         }
-        if (target.x < -0.5f)
+        if (Target.x < -0.5f)
         {
             transform.localScale = new Vector3(1, 1, 1);
 
@@ -111,7 +143,7 @@ public class MinoDash : EnemyMove
             for (int i = x; i >= 0; i--)
             {
                 int n = i;
-                Vector2Int pos = new Vector2Int(MapController.PosToArray(transform.localPosition.x),MapController.PosToArray(transform.localPosition.y));
+                Vector2Int pos = new Vector2Int(MapController.PosToArray(transform.localPosition.x), MapController.PosToArray(transform.localPosition.y));
                 seq.AppendCallback(() =>
                 {
                     if (n > 0)
@@ -165,14 +197,14 @@ public class MinoDash : EnemyMove
                 });
             }
         }
-        if (target.y > 0.5f)
+        if (Target.y > 0.5f)
         {
             int y = MapController.PosToArray(transform.localPosition.y);
 
             for (int i = y; i < GameManager.Instance.Height; i++)
             {
                 int n = i;
-                Vector2Int pos = new Vector2Int(MapController.PosToArray(transform.localPosition.x),MapController.PosToArray(transform.localPosition.y));
+                Vector2Int pos = new Vector2Int(MapController.PosToArray(transform.localPosition.x), MapController.PosToArray(transform.localPosition.y));
                 seq.AppendCallback(() =>
                 {
                     if (n < GameManager.Instance.Height - 1)
@@ -227,16 +259,16 @@ public class MinoDash : EnemyMove
                 });
             }
         }
-        if (target.y < -0.5f)
+        if (Target.y < -0.5f)
         {
             int y = MapController.PosToArray(transform.localPosition.y);
             for (int i = y; i >= 0; i--)
             {
                 int n = i;
-                Vector2Int pos = new Vector2Int(MapController.PosToArray(transform.localPosition.x),MapController.PosToArray(transform.localPosition.y));
+                Vector2Int pos = new Vector2Int(MapController.PosToArray(transform.localPosition.x), MapController.PosToArray(transform.localPosition.y));
                 seq.AppendCallback(() =>
                 {
-                    if(n > 0)
+                    if (n > 0)
                     {
                         if (pos.x + 1 < GameManager.Instance.Height)
                         {
@@ -249,7 +281,7 @@ public class MinoDash : EnemyMove
                         }
                         if (pos.x - 1 >= 0)
                         {
-                            MapController.Instance.dices[n -  1][pos.x - 1].transform.DOLocalMoveZ(1f, 0.1f);
+                            MapController.Instance.dices[n - 1][pos.x - 1].transform.DOLocalMoveZ(1f, 0.1f);
                             MapController.Instance.dices[n][pos.x - 1].transform.DOLocalMoveZ(1f, 0.1f);
                             MapController.Instance.dices[n - 1][pos.x - 1].transform.rotation = Quaternion.Euler(0, 0, 0);
                             MapController.Instance.dices[n - 1][pos.x - 1].isDiceDirecting = true;
@@ -292,31 +324,10 @@ public class MinoDash : EnemyMove
         seq.AppendCallback(() =>
         {
             seq.Kill();
-            CharacterAnimation.PlayAnimator("Idle");
+            CharacterAnimation.PlayAnimator(animator,"Idle");
             BoomMap.Instance.Boom();
             IsDashing = false;
+            IsAttacking = false;
         });
-    }
-
-    private IEnumerator ChangeDice(int x, int y)
-    {
-        yield return new WaitForSeconds(0.15f);
-        diceAni.SetBool("IsDice", false);
-        setNumber.SettingNumber(MapController.Instance.dices[y][x].randoms - 1);
-        setNumber.gameObject.SetActive(true);
-    }
-    public void KillEnemy(EventParam eventParam)
-    {
-        seq.Kill();
-    }
-
-    private void OnDestroy()
-    {
-        EventManager.StopListening("KILLENEMY", KillEnemy);
-    }
-
-    private void OnApplicationQuit()
-    {
-        EventManager.StopListening("KILLENEMY", KillEnemy);
     }
 }

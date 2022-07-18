@@ -2,9 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MinoSwing : EnemyMove
+public class MinoSwing : EnemyMove, IEnemyAttack
 {
     public override bool IsFloating { get; set; } = false;
+    public bool IsAttacking { get; set; } = false;
+    public Animator animator { get => throw new System.NotImplementedException(); set => throw new System.NotImplementedException(); }
+
     [SerializeField]
     private int range = 0;
     public override void CharacterMovement(Vector2 target)
@@ -29,5 +32,10 @@ public class MinoSwing : EnemyMove
 
             }
         }
+    }
+
+    public void DoAttack()
+    {
+
     }
 }

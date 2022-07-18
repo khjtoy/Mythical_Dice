@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using static DefineCS;
 
-public class SlimeMove : EnemyMove
+public class SlimeMove : EnemyMove, IEnemyAttack
 {
 	private Sequence seq;
 
@@ -18,6 +18,8 @@ public class SlimeMove : EnemyMove
 	private bool isStart = false;
 	private bool twoTutorial = false;
 	public override bool IsFloating { get; set; } = false;
+    public bool IsAttacking { get; set; }
+	public Animator animator { get; set; } = null;
 
     private void Start()
     {
@@ -49,34 +51,7 @@ public class SlimeMove : EnemyMove
 		seq.Append(transform.DOLocalMoveZ(-3, 0.3f));
 		seq.Append(transform.DOLocalMove(new Vector3(target.x, target.y, -3), 0.3f));
 		seq.Append(transform.DOLocalMoveZ(-1, 0.1f).SetEase(Ease.InExpo));
-		seq.AppendCallback(() =>
-        {
-			if (!twoTutorial)
-			{
-				twoTutorial = true;
-				TutorialAction.Instance.TuturialMode();
-			}
-			int bossNum = MapController.Instance.dices[MapController.PosToArray(transform.localPosition.y)][MapController.PosToArray(transform.localPosition.x)].randoms;
-			GameManager.Instance.BossNum = bossNum;
-
-			StartCoroutine(MoveCoroutine());
-
-
-			//������ ����
-			if (!isCheck)
-			{
-				int random = Random.Range(0, 5);
-				if (random == 0 || (PlayerPrefs.GetInt("TUTORIAL", 0) == 0 && isStart == false))
-				{
-					GameObject item = PoolManager.Instance.GetPooledObject((int)PooledObject.Item);
-					item.transform.localPosition = new Vector3(transform.localPosition.x, transform.localPosition.y, -1);
-					item.SetActive(true);
-					isCheck = true;
-					isStart = true;
-				}
-			}
-
-		});
+		DoAttack();
     }
 
 	private IEnumerator ChangeDice(int x, int y)
@@ -122,5 +97,37 @@ public class SlimeMove : EnemyMove
 
 			}
 		}
+	}
+
+    public void DoAttack()
+    {
+		seq.AppendCallback(() =>
+		{
+			if (!twoTutorial)
+			{
+				twoTutorial = true;
+				TutorialAction.Instance.TuturialMode();
+			}
+			int bossNum = MapController.Instance.dices[MapController.PosToArray(transform.localPosition.y)][MapController.PosToArray(transform.localPosition.x)].randoms;
+			GameManager.Instance.BossNum = bossNum;
+
+			StartCoroutine(MoveCoroutine());
+
+
+			//������ ����
+			if (!isCheck)
+			{
+				int random = Random.Range(0, 5);
+				if (random == 0 || (PlayerPrefs.GetInt("TUTORIAL", 0) == 0 && isStart == false))
+				{
+					GameObject item = PoolManager.Instance.GetPooledObject((int)PooledObject.Item);
+					item.transform.localPosition = new Vector3(transform.localPosition.x, transform.localPosition.y, -1);
+					item.SetActive(true);
+					isCheck = true;
+					isStart = true;
+				}
+			}
+
+		});
 	}
 }

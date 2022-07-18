@@ -287,6 +287,7 @@ GameObject:
   - component: {fileID: 3095817778921136534}
   - component: {fileID: 3095817778921136528}
   - component: {fileID: 124806629}
+  - component: {fileID: 390604239312847500}
   m_Layer: 0
   m_Name: StampToIdle
   m_TagString: Untagged
@@ -323,9 +324,10 @@ MonoBehaviour:
   StartState: {fileID: 177742804}
   PositiveCondition:
   - {fileID: 124806629}
+  - {fileID: 390604239312847500}
   NegativeCondition: []
   goalState: {fileID: 3095817778827568163}
-  IsPositiveAnd: 0
+  IsPositiveAnd: 1
   IsNegativeAnd: 0
 --- !u!114 &124806629
 MonoBehaviour:
@@ -340,6 +342,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   GoalTime: 1
+--- !u!114 &390604239312847500
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3095817778921136535}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bc8f3cfe0fe0f554b8938b20c40fe73c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _enemyMove: {fileID: 1489100023}
 --- !u!1 &3095817779132986258
 GameObject:
   m_ObjectHideFlags: 0
@@ -638,6 +653,7 @@ GameObject:
   - component: {fileID: 3095817780622994191}
   - component: {fileID: 3095817780622994190}
   - component: {fileID: 8389917635225905401}
+  - component: {fileID: 4877554230534270659}
   m_Layer: 0
   m_Name: DashToIdle
   m_TagString: Untagged
@@ -674,6 +690,7 @@ MonoBehaviour:
   StartState: {fileID: 3095817779649229834}
   PositiveCondition:
   - {fileID: 8389917635225905401}
+  - {fileID: 4877554230534270659}
   NegativeCondition:
   - {fileID: 3095817780622994190}
   goalState: {fileID: 3095817778827568163}
@@ -705,6 +722,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   GoalTime: 0.5
+--- !u!114 &4877554230534270659
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3095817780622994185}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bc8f3cfe0fe0f554b8938b20c40fe73c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _enemyMove: {fileID: 7537676466322862408}
 --- !u!1 &7537676465473386621
 GameObject:
   m_ObjectHideFlags: 0
@@ -831,9 +861,9 @@ GameObject:
   m_Component:
   - component: {fileID: 7537676466322862410}
   - component: {fileID: 3095817779775664607}
+  - component: {fileID: 1489100023}
   - component: {fileID: 7537676466322862408}
   - component: {fileID: 3095817779775664604}
-  - component: {fileID: 1489100023}
   - component: {fileID: 1489100024}
   - component: {fileID: 1417817649}
   - component: {fileID: 6806835271651038339}
@@ -876,6 +906,22 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &1489100023
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7537676466322862409}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ddb15aa472e6ca44f82f61f2df236ec4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  moveTime: 0.1
+  PlayerPos: {x: 0, y: 0}
+  moveParticle: {fileID: 0}
+  isCheck: 0
 --- !u!114 &7537676466322862408
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -912,22 +958,6 @@ MonoBehaviour:
   hp: 50
   isDamage: 0
   isDeath: 0
---- !u!114 &1489100023
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7537676466322862409}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ddb15aa472e6ca44f82f61f2df236ec4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  moveTime: 0.1
-  PlayerPos: {x: 0, y: 0}
-  moveParticle: {fileID: 0}
-  isCheck: 0
 --- !u!114 &1489100024
 MonoBehaviour:
   m_ObjectHideFlags: 0
