@@ -56,7 +56,7 @@ public class GameManager : MonoSingleton<GameManager>
         DOTween.KillAll();
         fade.Fade(InitMap);
         UIManager.Instance.IsInGame = true;
-        //PlayerPrefs.SetInt("STAGE", 0);
+        PlayerPrefs.SetInt("STAGE", 4);
         
     }
 
@@ -95,6 +95,14 @@ public class GameManager : MonoSingleton<GameManager>
                     height = 7;
                     size = 7;
                     BossObject = PoolManager.Instance.GetPooledObject((int)PooledObject.MinoHard);
+                    break;
+                }
+            case 4:
+                {
+                    width = 6;
+                    height = 6;
+                    size = 6;
+                    BossObject = PoolManager.Instance.GetPooledObject((int)PooledObject.Siren);
                     break;
                 }
         };

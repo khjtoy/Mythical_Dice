@@ -1408,6 +1408,10 @@ MonoBehaviour:
       type: 3}
     amountToPool: 2
     shouldExpand: 0
+  - objectToPool: {fileID: 4786685463340195252, guid: 25c22c32adc8bd046b5324a5c8238065,
+      type: 3}
+    amountToPool: 2
+    shouldExpand: 0
   pooledObjects: []
 --- !u!4 &594439788
 Transform:

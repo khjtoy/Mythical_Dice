@@ -10,6 +10,7 @@ public static class DefineCS
         Slime,
         Statue,
         Mino,
-        MinoHard
+        MinoHard,
+        Siren
     }
 }
