@@ -172,33 +172,28 @@ public class PlayerController : Character, OnHit
 		if (Input.GetKeyDown(KeyCode.RightArrow))
 		{
 			playerDir = 0;
-			moveDir.Enqueue(playerDir);
-			Debug.Log("queue");
+			moveDir.Enqueue(playerDir);	
 		}
 		else if (Input.GetKeyDown(KeyCode.LeftArrow))
 		{
 			playerDir = 1;
-			moveDir.Enqueue(playerDir);
-			Debug.Log("queue");
+			moveDir.Enqueue(playerDir);	
 		}
 		else if (Input.GetKeyDown(KeyCode.UpArrow))
 		{
 			playerDir = 2;
-			moveDir.Enqueue(playerDir);
-			Debug.Log("queue");
+			moveDir.Enqueue(playerDir);	
 		}
 		else if (Input.GetKeyDown(KeyCode.DownArrow))
 		{
 			playerDir = 3;
-			moveDir.Enqueue(playerDir);
-			Debug.Log("queue");
+			moveDir.Enqueue(playerDir);	
 		}
 	}
 
 	private void PopMove()
 	{
 		Vector3 targetPos = transform.localPosition + dir[moveDir.Dequeue()];
-		Debug.Log("Dequeue");
 		x = MapController.PosToArray(targetPos.x);
 		y = MapController.PosToArray(targetPos.y);
 		monsterX = MapController.PosToArray(enemyObject.transform.localPosition.x);

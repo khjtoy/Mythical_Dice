@@ -8,8 +8,7 @@ public class SirenSwim : EnemyMove, IEnemyAttack
 {
     public bool IsAttacking { get; set; }
     public Animator animator { get; set; }
-    public override bool IsFloating { get; set; }
-
+	public override bool IsFloating { get; set; } = false;
 
 	private Sequence seq;
 	private GameObject dice;
@@ -19,7 +18,7 @@ public class SirenSwim : EnemyMove, IEnemyAttack
 	public bool isCheck = false;
 	private Coroutine coroutine;
 
-
+	int value;
 	private void Start()
 	{
 		dice = GameObject.FindGameObjectWithTag("Dice");
@@ -37,9 +36,15 @@ public class SirenSwim : EnemyMove, IEnemyAttack
     {
 		yield return new WaitForSeconds(0.2f);
 		Vector2Int pos = new Vector2Int(MapController.PosToArray(transform.localPosition.x), MapController.PosToArray(transform.localPosition.y));
-		GameManager.Instance.BossNum = 3;
+		GameManager.Instance.BossNum = value;
 		SoundManager.Instance.SetEnemyEffectClip((int)EnemyEffectEnum.MINOSTAOMP);
-		for (int i = 1; i <= GameManager.Instance.Size; i++)
+		int range = 0;
+		if (IsFloating)
+			range = 2;
+		else
+			range = GameManager.Instance.Size;
+			
+		for (int i = 1; i <= range; i++)
 		{
 			for(int j = -i; j <= i ; j++)
             {
@@ -50,8 +55,8 @@ public class SirenSwim : EnemyMove, IEnemyAttack
 						continue;
 					if ((Mathf.Abs(k) == i && j == 0) || (Mathf.Abs(j) == i && k == 0))
                     {
-
-						MapController.Instance.dices[pos.y + j][pos.x + k].DiceNumSelect(3);
+						
+						MapController.Instance.dices[pos.y + j][pos.x + k].DiceNumSelect(value);
 						BoomMap.Instance.Boom(pos.x + k, pos.y + j);
 					}
 
@@ -67,7 +72,7 @@ public class SirenSwim : EnemyMove, IEnemyAttack
 
 						continue;
                     {
-						MapController.Instance.dices[pos.y + j][pos.x + k].DiceNumSelect(3);
+						MapController.Instance.dices[pos.y + j][pos.x + k].DiceNumSelect(value);
 
 						BoomMap.Instance.Boom(pos.x + k, pos.y + j);
 					}
@@ -84,7 +89,7 @@ public class SirenSwim : EnemyMove, IEnemyAttack
 
 						continue;
 					{
-						MapController.Instance.dices[pos.y + j][pos.x + k].DiceNumSelect(3);
+						MapController.Instance.dices[pos.y + j][pos.x + k].DiceNumSelect(value);
 
 						BoomMap.Instance.Boom(pos.x + k, pos.y + j);
 					}
@@ -100,7 +105,7 @@ public class SirenSwim : EnemyMove, IEnemyAttack
 
 						continue;
 					{
-						MapController.Instance.dices[pos.y + j][pos.x + k].DiceNumSelect(3);
+						MapController.Instance.dices[pos.y + j][pos.x + k].DiceNumSelect(value);
 
 						BoomMap.Instance.Boom(pos.x + k, pos.y + j);
 					}
@@ -116,7 +121,7 @@ public class SirenSwim : EnemyMove, IEnemyAttack
 
 						continue;
 					{
-						MapController.Instance.dices[pos.y + j][pos.x + k].DiceNumSelect(3);
+						MapController.Instance.dices[pos.y + j][pos.x + k].DiceNumSelect(value);
 
 						BoomMap.Instance.Boom(pos.x + k, pos.y + j);
 					}
@@ -130,7 +135,6 @@ public class SirenSwim : EnemyMove, IEnemyAttack
 	public override void CharacterMovement(Vector2 target)
     {
 		IsAttacking = true;
-		IsFloating = true;
 		diceAni.SetBool("IsDice", true);
 		//if(setNumber == null) setNumber = dice.transform.GetChild(0).GetComponent<SetNumber>();
 		setNumber.gameObject.SetActive(false);
@@ -138,19 +142,26 @@ public class SirenSwim : EnemyMove, IEnemyAttack
 		int x = MapController.PosToArray(target.x);
 		int y = MapController.PosToArray(target.y);
 		coroutine = StartCoroutine(ChangeDice(x, y));
+		value = MapController.Instance.GetIndexCost(x, y);
+
 		//StartCoroutine(setNumber.SurpleNumber());
 
 		seq = DOTween.Sequence();
-		seq.Append(transform.DOLocalMoveZ(-3, 0.3f));
-		seq.Append(transform.DOLocalMove(new Vector3(target.x, target.y, -3), 0.3f));
-		seq.Append(transform.DOLocalMoveZ(-1, 0.1f).SetEase(Ease.InExpo));
+        if (IsFloating)
+        {
+			seq.Append(transform.DOLocalMoveZ(-3, 0.3f));
+			seq.Append(transform.DOLocalMove(new Vector3(target.x, target.y, -3), 0.3f));
+			seq.Append(transform.DOLocalMoveZ(-1, 0.1f).SetEase(Ease.InExpo));
+		}
+		else
+			seq.Append(transform.DOLocalMove(new Vector3(target.x, target.y, -1), 0.3f));
+			
 		//Debug.Log(1);
 		Invoke("ZeroTime", 0.6f);
 		Invoke("ChangeTime", 0.62f);
 		seq.AppendCallback(() =>
 		{
 			seq.Kill();
-			IsFloating = false;
 			//setNumber.isSurple = false;
 
 			//������ ����

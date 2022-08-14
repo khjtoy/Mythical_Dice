@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SwimState : AIState
+public class SwimOutState : AIState
 {
     [field : SerializeField]
     public override List<AITransition> transitions { get; set; }
@@ -13,6 +13,7 @@ public class SwimState : AIState
     private SirenSwim _swim = null;
     public override void DoAction()
     {
+        _swim.IsFloating = false;
         _swim.CharacterMovement(Define.Player);
     }
 }
