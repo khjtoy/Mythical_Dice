@@ -147,18 +147,12 @@ public class SirenSwim : EnemyMove, IEnemyAttack
 		//StartCoroutine(setNumber.SurpleNumber());
 
 		seq = DOTween.Sequence();
+		seq.Append(transform.DOLocalMove(new Vector3(target.x, target.y, -1), 0.3f));
         if (IsFloating)
         {
 			seq.Append(transform.DOLocalMoveZ(-3, 0.3f));
-			seq.Append(transform.DOLocalMove(new Vector3(target.x, target.y, -3), 0.3f));
-			seq.Append(transform.DOLocalMoveZ(-1, 0.1f).SetEase(Ease.InExpo));
+			seq.Append(transform.DOLocalMoveZ(-1, 0.1f).SetEase(Ease.OutExpo));
 		}
-		else
-			seq.Append(transform.DOLocalMove(new Vector3(target.x, target.y, -1), 0.3f));
-			
-		//Debug.Log(1);
-		Invoke("ZeroTime", 0.6f);
-		Invoke("ChangeTime", 0.62f);
 		seq.AppendCallback(() =>
 		{
 			seq.Kill();
