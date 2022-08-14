@@ -41,19 +41,85 @@ public class SirenSwim : EnemyMove, IEnemyAttack
 		SoundManager.Instance.SetEnemyEffectClip((int)EnemyEffectEnum.MINOSTAOMP);
 		for (int i = 1; i <= GameManager.Instance.Size; i++)
 		{
-			for (int j = -i; j <= i; j++)
-			{
-				for (int k = -i; k <= i; k++)
-				{
+			for(int j = -i; j <= i ; j++)
+            {
+				for(int k = -i; k <= i ; k++)
+                {
 					if (pos.y + j < 0 || pos.y + j >= GameManager.Instance.Size || pos.x + k < 0 || pos.x + k >= GameManager.Instance.Size)
+
 						continue;
-					if (pos.y + j == pos.y + i || pos.y + j == pos.y - i
-						|| pos.x + k == pos.x + i || pos.x + k == pos.x - i)
-					{
+					if ((Mathf.Abs(k) == i && j == 0) || (Mathf.Abs(j) == i && k == 0))
+                    {
+
 						MapController.Instance.dices[pos.y + j][pos.x + k].DiceNumSelect(3);
 						BoomMap.Instance.Boom(pos.x + k, pos.y + j);
 					}
 
+				}
+			}
+			for (int j = 1; j <= i; j++)
+			{
+				for (int k = -i + j; k < 0; k++)
+                {
+					if (k != -i + j)
+						continue;
+					if (pos.y + j < 0 || pos.y + j >= GameManager.Instance.Size || pos.x + k < 0 || pos.x + k >= GameManager.Instance.Size)
+
+						continue;
+                    {
+						MapController.Instance.dices[pos.y + j][pos.x + k].DiceNumSelect(3);
+
+						BoomMap.Instance.Boom(pos.x + k, pos.y + j);
+					}
+				}
+			}
+
+			for (int j = 1; j <= i; j++)
+			{
+				for (int k = 1; k <= i - j; k++)
+				{
+					if (k != i - j)
+						continue;
+					if (pos.y + j < 0 || pos.y + j >= GameManager.Instance.Size || pos.x + k < 0 || pos.x + k >= GameManager.Instance.Size)
+
+						continue;
+					{
+						MapController.Instance.dices[pos.y + j][pos.x + k].DiceNumSelect(3);
+
+						BoomMap.Instance.Boom(pos.x + k, pos.y + j);
+					}
+				}
+			}
+			for (int j = -i; j <= -1; j++)
+			{
+				for (int k = 1; k <= i + j; k++)
+				{
+					if (k != i + j)
+						continue;
+					if (pos.y + j < 0 || pos.y + j >= GameManager.Instance.Size || pos.x + k < 0 || pos.x + k >= GameManager.Instance.Size)
+
+						continue;
+					{
+						MapController.Instance.dices[pos.y + j][pos.x + k].DiceNumSelect(3);
+
+						BoomMap.Instance.Boom(pos.x + k, pos.y + j);
+					}
+				}
+			}
+			for (int j = -i; j <= -1; j++)
+			{
+				for (int k = -i - j; k <= -1; k++)
+				{
+					if (k != -i - j)
+						continue;
+					if (pos.y + j < 0 || pos.y + j >= GameManager.Instance.Size || pos.x + k < 0 || pos.x + k >= GameManager.Instance.Size)
+
+						continue;
+					{
+						MapController.Instance.dices[pos.y + j][pos.x + k].DiceNumSelect(3);
+
+						BoomMap.Instance.Boom(pos.x + k, pos.y + j);
+					}
 				}
 			}
 			yield return new WaitForSeconds(0.5f);
