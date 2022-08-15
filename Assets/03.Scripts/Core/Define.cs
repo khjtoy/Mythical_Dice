@@ -26,6 +26,16 @@ public class Define
         }
     }
 
+    public static GameObject PlayerObj
+    {
+        get
+        {
+            if (_player == null)
+                _player = GameObject.Find("Player").GetComponent<CharacterMove>();
+            return _player.gameObject;
+        }
+    }
+
     private static PlayerController _controller = null;
 
     public static PlayerController Controller

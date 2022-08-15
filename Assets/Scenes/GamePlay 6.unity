@@ -8332,6 +8332,7 @@ GameObject:
   - component: {fileID: 1805231695}
   - component: {fileID: 1805231694}
   - component: {fileID: 1805231693}
+  - component: {fileID: 1805231698}
   - component: {fileID: 1805231692}
   m_Layer: 0
   m_Name: Player
@@ -8453,6 +8454,19 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &1805231698
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1805231690}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fd8b77f316cab684f8ae00694700c3b2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enemys: []
 --- !u!1 &1822901137
 GameObject:
   m_ObjectHideFlags: 0
@@ -8543,7 +8557,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -1838813401
   m_SortingLayer: 1
-  m_SortingOrder: 11
+  m_SortingOrder: 1
   m_Sprite: {fileID: 3204480812468917802, guid: 6a17ae2fbb8886a4ba96c2767d419db4,
     type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}

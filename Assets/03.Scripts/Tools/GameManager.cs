@@ -108,7 +108,7 @@ public class GameManager : MonoSingleton<GameManager>
         };
 
         BossObject.SetActive(true);
-
+        Define.PlayerObj.GetComponent<PlayerLayer>().SetEnemys();
         BossObject.transform.SetParent(MapController.Instance.Root);
         BossObject.transform.localPosition = MapController.ArrayToPos(width - 1, height - 1) - Vector3.forward;
         Define.Controller.transform.localPosition = -MapController.ArrayToPos(width - 1, height - 1) - Vector3.forward;
