@@ -45,9 +45,17 @@ public class SirenWildWave : EnemyMove, IEnemyAttack
 		targetPos = target;
 		IsAttacking = true;
 		IsFloating = true;
-		
 
-        switch (_moveCnt)
+
+		Debug.Log(_moveCnt);
+		if (_moveCnt > 3)
+		{
+			IsAttacking = false;
+			_moveCnt = 0;
+			return;
+		}
+
+		switch (_moveCnt)
         {
 			case 0:
 				targetPos = new Vector3(3, 0, -1);
@@ -64,15 +72,15 @@ public class SirenWildWave : EnemyMove, IEnemyAttack
 
         }
 
-		seq.Append(transform.DOLocalMove(targetPos, 0));
+		seq.Append(transform.DOLocalMove(targetPos, 1f));
 
 		//Debug.Log(1);
 		Invoke("ZeroTime", 0.6f);
 		Invoke("ChangeTime", 0.62f);
 		seq.AppendCallback(() =>
 		{
-			DoAttack();
 			seq.Kill();
+			DoAttack();
 			IsFloating = false;
 
 		});
@@ -104,10 +112,12 @@ public class SirenWildWave : EnemyMove, IEnemyAttack
 	}
 	public void DoAttack()
 	{
-		StartCoroutine(AttackCoroutine());
+		StartCoroutine(AttackCoroutine(_moveCnt));
+		_moveCnt++;
+		StartCoroutine(MoveCoroutine(1f));
 	}
 
-	private IEnumerator AttackCoroutine()
+	private IEnumerator AttackCoroutine(int cnt)
 	{
 		Vector2Int pos = new Vector2Int(MapController.PosToArray(transform.localPosition.x), MapController.PosToArray(transform.localPosition.y));
 		diceAni.SetBool("IsDice", true);
@@ -117,22 +127,41 @@ public class SirenWildWave : EnemyMove, IEnemyAttack
 		coroutine = StartCoroutine(ChangeDice(pos.x, pos.y));
 		int value = MapController.Instance.GetIndexCost(pos.x, pos.y);
 		GameManager.Instance.BossNum = value;
-		for(int i = 0; i < GameManager.Instance.Size; i++)
+
+		for (int i = 0; i < GameManager.Instance.Size; i++)
         {
 			for (int j = 0; j < GameManager.Instance.Size; j++)
             {
-				switch (_moveCnt)
+				switch (cnt)
 				{
 					case 0:
 						MapController.Instance.dices[j][GameManager.Instance.Size - 1 - i].DiceNumSelect(value);
 						BoomMap.Instance.Boom(GameManager.Instance.Size - 1 - i, j);
 						break;
+					case 1:
+						MapController.Instance.dices[j][i].DiceNumSelect(value);
+						BoomMap.Instance.Boom(i, j);
+						break;
+					case 2:
+						MapController.Instance.dices[GameManager.Instance.Size - 1 - i][j].DiceNumSelect(value);
+						BoomMap.Instance.Boom(j, GameManager.Instance.Size - 1 - i);
+						break;
+					case 3:
+						MapController.Instance.dices[i][j].DiceNumSelect(value);
+						BoomMap.Instance.Boom(j, i);
+						break;
 				}
 			}
 
-			yield return new WaitForSeconds(1);
+			yield return new WaitForSeconds(0.5f);
         }
 	}
+
+	private IEnumerator MoveCoroutine(float delay)
+    {
+		yield return new WaitForSeconds(delay);
+		CharacterMovement(Vector2.zero);
+    }
 
 	public void OnDestroy()
 	{

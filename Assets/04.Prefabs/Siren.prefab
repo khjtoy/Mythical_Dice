@@ -1007,6 +1007,7 @@ GameObject:
   - component: {fileID: 8580227644368694550}
   - component: {fileID: 3403627505774181435}
   - component: {fileID: 3736765760299276840}
+  - component: {fileID: 9060770099836951218}
   m_Layer: 0
   m_Name: WildWaveToIdle
   m_TagString: Untagged
@@ -1043,6 +1044,7 @@ MonoBehaviour:
   StartState: {fileID: 2440601171078619621}
   PositiveCondition:
   - {fileID: 3736765760299276840}
+  - {fileID: 9060770099836951218}
   NegativeCondition: []
   goalState: {fileID: 1062127838}
   IsPositiveAnd: 1
@@ -1060,3 +1062,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _enemyMove: {fileID: 4217149279887216634}
+--- !u!114 &9060770099836951218
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7593039413213650539}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8a8309d90cf9f7546961571ff32b6578, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  GoalTime: 2
