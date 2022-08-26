@@ -25,7 +25,7 @@ public class DataManager : MonoBehaviour
     }
     public static T LoadJsonFile<T>(string loadPath, string fileName)
     { 
-        if(!File.Exists(loadPath + '/' + fileName))
+        if(!File.Exists(string.Format("{0}/{1}.json", loadPath, fileName)))
         {
             CreateJsonFile(Application.dataPath, "sound", ObjectToJson(new Sound(0.5f, 0.5f, 0.5f)));
         }
