@@ -37,7 +37,7 @@ public class SlimeMove : EnemyMove, IEnemyAttack
 
 	public override void CharacterMovement(Vector2 target)
     {
-		SoundManager.Instance.SetEnemyEffectClip((int)EnemyEffectEnum.JumpSlime);
+		SoundManager.Instance.SetEnemyEffectClip(EnemyEffectEnum.SLIMEJUMP);
 
 		diceAni.SetBool("IsDice", true);
 		setNumber.gameObject.SetActive(false);

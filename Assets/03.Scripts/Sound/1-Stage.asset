@@ -1,0 +1,17 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a956035494830dc4abb9769eda22bc41, type: 3}
+  m_Name: 1-Stage
+  m_EditorClassIdentifier: 
+  EnemyEffectClip:
+  - {fileID: 8300000, guid: a004699db9ee8a743a4443747b36d25c, type: 3}
+  BackgroundClips: {fileID: 8300000, guid: 5e9609cf85071f54aba46c8911e4462b, type: 3}

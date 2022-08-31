@@ -15,12 +15,9 @@ public class SoundManager : MonoSingleton<SoundManager>
 
 	#region 클립
 	[Header("플레이어 효과음 클립")]
+	public SoundSetData[] SoundSetDatas;
+	[Header("플레이어 효과음 클립")]
 	public AudioClip[] PlayerEffectClip;
-	[Header("적 효과음 클립")]
-	public AudioClip[] EnemyEffectClip;
-
-	[Header("배경음 클립")]
-	public AudioClip[] BackgroundClips;
 	[Header("효과음 클립")]
 	public AudioClip[] EffectClips;
 	#endregion
@@ -49,32 +46,26 @@ public class SoundManager : MonoSingleton<SoundManager>
 
 	private void Start()
 	{
-		if (SceneManager.GetActiveScene().name == "Intro")
-		{
-			SetBackgroundClip((int)BackGroundEnum.INTRO);
-		}
-		else if (SceneManager.GetActiveScene().name == "Start")
-		{
-			SetBackgroundClip((int)BackGroundEnum.START);
-		}
+		//if (SceneManager.GetActiveScene().name == "Intro")
+		//{
+		//	SetBackgroundClip((int)BackGroundEnum.INTRO);
+		//}
+		//else if (SceneManager.GetActiveScene().name == "Start")
+		//{
+		//	SetBackgroundClip((int)BackGroundEnum.START);
+		//}
 	}
 
 	public void InitMap()
 	{
 		if (SceneManager.GetActiveScene().name == "GamePlay 6")
 		{
-			SetBackgroundClip((int)BackGroundEnum.BASIC);
+			BackgroundSource.clip = SoundSetDatas[PlayerPrefs.GetInt("STAGE")].BackgroundClips;
+			BackgroundSource.Play();
 			EnemyEffectSource = GameObject.FindGameObjectWithTag("ENEMY").GetComponent<AudioSource>();
 		    PlayerDashEffectSource = GameObject.Find("PlayerDashEffect").GetComponent<AudioSource>();
 			PlayerAttackEffectSource = GameObject.Find("PlayerAttackEffect").GetComponent<AudioSource>();
 		}
-	}
-
-	public void SetBackgroundClip(int index)
-	{
-		BackgroundSource.Stop();
-		BackgroundSource.clip = BackgroundClips[index];
-		BackgroundSource.Play();
 	}
 	public void SetBackgroundSpeed(float speed)
 	{
@@ -100,10 +91,10 @@ public class SoundManager : MonoSingleton<SoundManager>
 		PlayerDashEffectSource.clip = PlayerEffectClip[index];
 		PlayerDashEffectSource.Play();
 	}
-	public void SetEnemyEffectClip(int index)
+	public void SetEnemyEffectClip(EnemyEffectEnum index)
 	{
 		EnemyEffectSource.Stop();
-		EnemyEffectSource.clip = EnemyEffectClip[index];
+		EnemyEffectSource.clip = SoundSetDatas[PlayerPrefs.GetInt("STAGE")].EnemyEffectClip[(int)index];
 		EnemyEffectSource.Play();
 	}
 }

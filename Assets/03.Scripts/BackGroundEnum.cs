@@ -16,7 +16,8 @@ public enum EffectEnum
 	SLOT,
 	SNAP,
 	STONESHOWER,
-	BOOM
+	BOOM,
+	HIT
 }
 
 public enum PlayerEffectEunm
@@ -27,10 +28,10 @@ public enum PlayerEffectEunm
 
 public enum EnemyEffectEnum
 {
-	Hit,
-	MINORUN,
-	MINOSTAOMP,
+	SLIMEJUMP = 0,
+
+	MINODASH = 0,
 	MINOJUMP,
-	MINOSLASH,
-	JumpSlime
+	MINOSWING,
+	MINOSTAMP,
 }

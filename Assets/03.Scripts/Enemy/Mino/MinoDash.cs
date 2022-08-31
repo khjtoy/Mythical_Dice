@@ -33,7 +33,7 @@ public class MinoDash : EnemyMove, IEnemyAttack
     public override void CharacterMovement(Vector2 target)
     {
         IsAttacking = true;
-        SoundManager.Instance.SetEnemyEffectClip((int)EnemyEffectEnum.MINORUN);
+        SoundManager.Instance.SetEnemyEffectClip(EnemyEffectEnum.MINODASH);
         IsDashing = true;
         CharacterAnimation.PlayAnimator(animator, "dash");
         diceAni.SetBool("IsDice", true);

@@ -37,7 +37,7 @@ public class SirenSwim : EnemyMove, IEnemyAttack
 		yield return new WaitForSeconds(0.2f);
 		Vector2Int pos = new Vector2Int(MapController.PosToArray(transform.localPosition.x), MapController.PosToArray(transform.localPosition.y));
 		GameManager.Instance.BossNum = value;
-		SoundManager.Instance.SetEnemyEffectClip((int)EnemyEffectEnum.MINOSTAOMP);
+		//SoundManager.Instance.SetEnemyEffectClip((int)EnemyEffectEnum.EnemeyEffect3);
 		int range = 0;
 		if (IsFloating)
 			range = 2;

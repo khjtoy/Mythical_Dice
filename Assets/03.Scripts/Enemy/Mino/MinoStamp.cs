@@ -78,7 +78,7 @@ public class MinoStamp : EnemyMove, IEnemyAttack
         CharacterAnimation.PlayAnimator(animator, "Idle");
         Vector2Int pos = new Vector2Int(MapController.PosToArray(transform.localPosition.x), MapController.PosToArray(transform.localPosition.y));
         GameManager.Instance.BossNum = 3;
-        SoundManager.Instance.SetEnemyEffectClip((int)EnemyEffectEnum.MINOSTAOMP);
+        SoundManager.Instance.SetEnemyEffectClip(EnemyEffectEnum.MINOSTAMP);
         for (int i = 1; i <=  GameManager.Instance.Size; i++)
         {
             for (int j = -i; j <= i; j++)

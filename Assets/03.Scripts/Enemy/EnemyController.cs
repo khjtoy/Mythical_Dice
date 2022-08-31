@@ -46,7 +46,7 @@ public class EnemyController : Character, OnHit
 		GameObject obj = PoolManager.Instance.GetPooledObject((int)DefineCS.PooledObject.NumText);
 		obj.SetActive(true);
 		obj.GetComponent<NumText>().DamageText(damage, this.transform.position);
-		SoundManager.Instance.SetEnemyEffectClip((int)EnemyEffectEnum.Hit);
+		SoundManager.Instance.SetEffectClip((int)EffectEnum.HIT);
 		isDamage = true;
 		if (hp <= 0)
 		{
