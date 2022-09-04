@@ -566,7 +566,7 @@ namespace DG.Tweening
         {
             TargetType newTargetType = TypeToDOTargetType(target.GetType());
             if (newTargetType != targetType) {
-                Debug.LogError("DOTweenAnimation ► SetAnimationTarget: the new target is of a different type from the one set in the Inspector");
+                Debug.LogError("DOTweenAnimation ??SetAnimationTarget: the new target is of a different type from the one set in the Inspector");
                 return;
             }
             target = tweenTarget;

@@ -5,6 +5,7 @@ using UnityEngine;
 public class Define
 {
     private static Camera _mainCam = null;
+    private static Vector3 originCam;
     public static Camera MainCam
     {
         get
@@ -12,6 +13,18 @@ public class Define
             if (_mainCam == null)
                 _mainCam = Camera.main;
             return _mainCam;
+        }
+    }
+
+    public static Vector3 OrginCam
+    {
+        get
+        {
+            return originCam;
+        }
+        set
+        {
+            originCam = value;
         }
     }
 
