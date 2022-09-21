@@ -79,9 +79,9 @@ public class SirenWildWave : EnemyMove, IEnemyAttack
 		Invoke("ChangeTime", 0.62f);
 		seq.AppendCallback(() =>
 		{
-			seq.Kill();
 			DoAttack();
 			IsFloating = false;
+			seq.Kill();
 
 		});
 	}

@@ -14,7 +14,6 @@ public class DoneSkillCondition : AICondition
     }
     public override bool Result()
     {
-        Debug.Log(!_enemyAttack.IsAttacking);
         return !_enemyAttack.IsAttacking;
     }
 }
