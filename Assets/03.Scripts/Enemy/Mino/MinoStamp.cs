@@ -115,6 +115,7 @@ public class MinoStamp : EnemyMove, IEnemyAttack
         IsAttacking = true;
         seq.AppendCallback(() =>
         {
+            Define.MainCam.transform.position = Define.OrginCam;
             Define.MainCam.orthographic = !Define.MainCam.orthographic;
             Define.MainCam.transform.DOShakePosition(0.3f);
             StartCoroutine(StampCoroutine());
