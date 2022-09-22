@@ -20,6 +20,8 @@ public class SoundManager : MonoSingleton<SoundManager>
 	public AudioClip[] PlayerEffectClip;
 	[Header("효과음 클립")]
 	public AudioClip[] EffectClips;
+	[Header("백그라운드 클립")]
+	public AudioClip[] BackGroundCliips;
 	#endregion
 
 	#region 오디오 소스
@@ -46,14 +48,18 @@ public class SoundManager : MonoSingleton<SoundManager>
 
 	private void Start()
 	{
-		//if (SceneManager.GetActiveScene().name == "Intro")
-		//{
-		//	SetBackgroundClip((int)BackGroundEnum.INTRO);
-		//}
-		//else if (SceneManager.GetActiveScene().name == "Start")
-		//{
-		//	SetBackgroundClip((int)BackGroundEnum.START);
-		//}
+		if (SceneManager.GetActiveScene().name == "Intro")
+		{
+			BackgroundSource.Stop();
+			BackgroundSource.clip = BackGroundCliips[(int)BackGroundEnum.INTRO];
+			BackgroundSource.Play();
+		}
+		else if (SceneManager.GetActiveScene().name == "Start")
+		{
+			BackgroundSource.Stop();
+			BackgroundSource.clip = BackGroundCliips[(int)BackGroundEnum.START];
+			BackgroundSource.Play();
+		}
 	}
 
 	public void InitMap()
@@ -63,7 +69,7 @@ public class SoundManager : MonoSingleton<SoundManager>
 			BackgroundSource.clip = SoundSetDatas[PlayerPrefs.GetInt("STAGE")].BackgroundClips;
 			BackgroundSource.Play();
 			EnemyEffectSource = GameObject.FindGameObjectWithTag("ENEMY").GetComponent<AudioSource>();
-		    PlayerDashEffectSource = GameObject.Find("PlayerDashEffect").GetComponent<AudioSource>();
+			PlayerDashEffectSource = GameObject.Find("PlayerDashEffect").GetComponent<AudioSource>();
 			PlayerAttackEffectSource = GameObject.Find("PlayerAttackEffect").GetComponent<AudioSource>();
 		}
 	}

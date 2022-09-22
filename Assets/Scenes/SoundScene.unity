@@ -170,19 +170,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pitchBendGroup: {fileID: 4603418646749562965, guid: e8dd32c7dc77e674ebe752d1594a55e4,
     type: 2}
+  SoundSetDatas: []
   PlayerEffectClip:
   - {fileID: 8300000, guid: bc353aed0a7b25640bc7d8e370eccba2, type: 3}
   - {fileID: 8300000, guid: c48ed50f4e220244f91e4ed8eee37b0e, type: 3}
-  EnemyEffectClip:
-  - {fileID: 8300000, guid: 381493e4e2aebdd448e50d4f0db1ec5b, type: 3}
-  - {fileID: 8300000, guid: 0c782d79979862e4c942251098e56440, type: 3}
-  - {fileID: 8300000, guid: da4d916475b47164f8b290e5df15293d, type: 3}
-  - {fileID: 8300000, guid: d2a791a7aefc7e746bb4a91f82d63cc1, type: 3}
-  - {fileID: 8300000, guid: 5183a8a49c4a45b43a14680d6598391b, type: 3}
-  BackgroundClips:
-  - {fileID: 8300000, guid: 5e9609cf85071f54aba46c8911e4462b, type: 3}
-  - {fileID: 8300000, guid: 37061d426ea5ebc40877d5987772db24, type: 3}
-  - {fileID: 8300000, guid: 9966aef0a16b9ef4281ead840702389a, type: 3}
   EffectClips:
   - {fileID: 8300000, guid: 76ca1dddfdf4e9f469e04239f7b57996, type: 3}
   - {fileID: 8300000, guid: 09c2a0a551148cb4f96062435a0841fd, type: 3}
@@ -190,6 +181,9 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 0d28acb02282c2f42a2dbc6647d9ffd1, type: 3}
   - {fileID: 8300000, guid: 5566e7236e4e49240bfb2b7faa508aa0, type: 3}
   - {fileID: 8300000, guid: d78088a8dc03d5240ae4a838a327d724, type: 3}
+  BackGroundCliips:
+  - {fileID: 8300000, guid: 37061d426ea5ebc40877d5987772db24, type: 3}
+  - {fileID: 8300000, guid: 9966aef0a16b9ef4281ead840702389a, type: 3}
   BackgroundSource: {fileID: 370746476}
   EffectSource: {fileID: 478942680}
   EnemyEffectSource: {fileID: 0}
